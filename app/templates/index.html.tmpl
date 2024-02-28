@@ -3,12 +3,15 @@
 <head>
     <title>Census Data</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
 
-    ##IF(data)##
+    ##IF(squirrel_count == 0)##
+
+    <div>No data available. <a href="#">Follow the tutorial instructions</a>.</div>
+
+    ##ELSE
 
     <h1>Census Data</h1>
 
@@ -17,12 +20,13 @@
 
         ##VALUE(squirrel_count)##
 
+        <form action="/">
         <select name="age" id="age">
             <option value="Adult">Adult</option>
             <option value="Juvenile">Juvenile</option>
         </select>
 
-        <select name="color" id="color">
+        <select name="fur" id="fur">
             <option value="Gray">Gray</option>
             <option value="Black">Black</option>
             <option value="Cinnamon">Cinnamon</option>
@@ -35,10 +39,29 @@
             <option value="Ground Plane">on the Ground Plane</option>
         </select>.
 
+        <button id="submit">Update</button>
+        </form>
+
+        <script>
+        // Select dropdowns from querystring
+
+        this_url = new URL(window.location.href)
+
+        selected_fur = this_url.searchParams.get("fur");
+        document.querySelector('option[value="'+selected_fur+'"]').selected = true
+
+        selected_location = this_url.searchParams.get("location");
+        document.querySelector('option[value="'+selected_location+'"]').selected = true
+
+        selected_age = this_url.searchParams.get("age");
+        document.querySelector('option[value="'+selected_age+'"]').selected = true
+
+        </script>
+
     </div>
 
     <div id="chart" style="height: 500px; width: 500px">
-        <canvas id="canvas"></canvas>
+        <canvas id="chart_canvas"></canvas>
     </div>
 
     <script>
@@ -81,7 +104,7 @@
             },
         };
 
-        const ctx = document.getElementById('myChart');
+        const ctx = document.getElementById('chart_canvas');
         new Chart(ctx, config)
     </script>
 
@@ -90,12 +113,19 @@
 
     </div>
 
-    ##ELSE
-
-    <div>No data available. <a href="#">Follow the tutorial instructions</a>.</div>
-
     ##ENDIF
 
+    <style>
+    body { 
+        font-family: 'Helvetica Neue';
+    }
+
+    #footer { 
+        font-size: 0.7em; 
+    }
+
+    form { display: inline-block} 
+    </style>
 </body>
 
 </html>

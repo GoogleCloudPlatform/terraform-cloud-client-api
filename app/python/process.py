@@ -4,6 +4,8 @@ process.py - take data in raw_data bucket, process, and store in processed bucke
 import json
 import csv
 
+from google.cloud import storage
+
 from config import *
 
 if RAW_DATA_BUCKET is None: 
@@ -12,7 +14,6 @@ if RAW_DATA_BUCKET is None:
 if PROCESSED_DATA_BUCKET is None: 
     raise ValueError("PROCESSED_DATA_BUCKET required")
 
-from google.cloud import storage
 
 temp_datafile = "test.csv"
 
@@ -52,6 +53,11 @@ with open(temp_datafile) as f:
                 aggregate_data[row[FACETS[0]]][row[FACETS[1]]][row[FACETS[2]]] = {}
 
             data_loc = aggregate_data[row[FACETS[0]]][row[FACETS[1]]][row[FACETS[2]]] 
+
+            if "_counter" not in data_loc.keys(): 
+                data_loc["_counter"] = 0
+
+            data_loc["_counter"] += 1
 
             for segment in SEGMENTS:
                 if segment not in data_loc.keys(): 
