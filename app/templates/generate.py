@@ -52,9 +52,9 @@ for lang in LANGUAGES:
 
                 if "##ENDIF" in line:
                     if lang == "python":
-                        replace == "{% end if %}"
+                        replace = "{% endif %}"
                     elif lang == "nodejs":
-                        replace == "\{\{/if\}\}"
+                        replace = "\{\{/if\}\}"
                     elif lang == "java":
                         replace = ""
                     line = line.replace("##ENDIF", replace)
