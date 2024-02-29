@@ -4,9 +4,14 @@ process.py - take data in raw_data bucket, process, and store in processed bucke
 import json
 import csv
 
-from google.cloud import storage
+from google.cloud import logging, storage
 
 from config import *
+
+storage_client = storage.Client()
+logging_client = logging.Client()
+logger = logging_client.logger("processing_job")
+
 
 if RAW_DATA_BUCKET is None: 
     raise ValueError("RAW_DATA_BUCKET required")
@@ -17,7 +22,7 @@ if PROCESSED_DATA_BUCKET is None:
 
 temp_datafile = "test.csv"
 
-storage_client = storage.Client()
+logger.write_text(f"Processing data from {RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}")
 
 raw_bucket = storage_client.get_bucket(RAW_DATA_BUCKET)
 processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
@@ -28,9 +33,13 @@ aggregate_data = {}
 
 counter = {"recorded": 0, "removed": 0, "written": 0}
 
+
 with open(temp_datafile) as f:
     csv_data = csv.DictReader(f)
     data = [row for row in csv_data]
+
+
+    logger.write_text(f"Processing {len(data)} records from {RAW_DATA_FILE}")
 
     # Process each row.
     for row in data:
@@ -81,4 +90,5 @@ for facet_a in aggregate_data.keys():
             processed_bucket.blob(data_file).upload_from_string(json.dumps(facet_data))
             counter["written"] += 1
 
-print("Records processed: " + str(counter))
+logger.log_text("Record processing complete.")
+logger.log_struct(counter, severity="INFO")
