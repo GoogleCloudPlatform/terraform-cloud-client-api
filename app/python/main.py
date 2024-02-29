@@ -19,52 +19,52 @@
 main.py - the server-side 
 """
 
-from flask import Flask, render_template, request
 import json
-from google.cloud import storage
+import logging
+
+import google.cloud.logging
+import google.cloud.storage
+from flask import Flask, render_template, request
 
 from config import *
 
 app = Flask(__name__)
-storage_client = storage.Client()
 
+storage_client = google.cloud.storage.Client()
+logging_client = google.cloud.logging.Client()
+logging_client.setup_logging()
 
-if PROCESSED_DATA_BUCKET is None: 
+if PROCESSED_DATA_BUCKET is None:
     raise ValueError("PROCESSED_DATA_BUCKET required")
 
 processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
 
+
 def retrieve_data(fur, age, location):
-    prefix = "/".join([fur, age, location])
+    filename = "/".join([fur, age, location]) + "/data.json"
+    fragment = processed_bucket.blob(filename).download_as_string()
 
-    squirrel_count = 0
-    data_points = {}
-    for segment in SEGMENTS: 
-        data_points[segment] = 0
+    data = json.loads(fragment)
 
-    blobs = storage_client.list_blobs(PROCESSED_DATA_BUCKET, prefix=prefix)
+    squirrel_count = data.pop("_counter")
 
-    for file in blobs: 
-        fragment = processed_bucket.blob(file.name).download_as_string()
-        data = json.loads(fragment)
-        squirrel_count += data["_counter"]
-        for segment in SEGMENTS: 
-            data_points[segment] += data[segment]
-
-    return squirrel_count, list(data_points.values())
+    logging.info(f"Retrieved data for {squirrel_count} entities.")
+    return squirrel_count, list(data.values())
 
 
 @app.route("/")
 def home():
-    fur = request.args.get("fur", "*")
-    age = request.args.get("age", "*")
-    location = request.args.get("location", "*")
+    fur = request.args.get("fur", "Gray")
+    age = request.args.get("age", "Adult")
+    location = request.args.get("location", "Above Ground")
+
+    logging.info(f"Request received for fur: {fur}, age: {age}, location: {location}")
 
     squirrel_count, data_points = retrieve_data(fur=fur, age=age, location=location)
 
-    # required data: squirrel_count, data_points, (selectors)
-    content = {}
-    return render_template("index.html", squirrel_count=squirrel_count, data_points=data_points)
+    return render_template(
+        "index.html", squirrel_count=squirrel_count, data_points=data_points
+    )
 
 
 if __name__ == "__main__":

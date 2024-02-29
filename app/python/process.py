@@ -21,14 +21,16 @@ process.py - take data in raw_data bucket, process, and store in processed bucke
 
 import csv
 import json
+import logging
 
-from google.cloud import logging, storage
+import google.cloud.logging
+import google.cloud.storage
 
 from config import *
 
-storage_client = storage.Client()
-logging_client = logging.Client()
-logger = logging_client.logger("processing_job")
+storage_client = google.cloud.storage.Client()
+logging_client = google.cloud.storage.Client()
+logging_client.setup_logging()
 
 
 if RAW_DATA_BUCKET is None:
@@ -40,7 +42,7 @@ if PROCESSED_DATA_BUCKET is None:
 
 temp_datafile = "test.csv"
 
-logger.write_text(f"Processing data from {RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}")
+logging.info(f"Processing data from {RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}")
 
 raw_bucket = storage_client.get_bucket(RAW_DATA_BUCKET)
 processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
@@ -56,7 +58,7 @@ with open(temp_datafile) as f:
     csv_data = csv.DictReader(f)
     data = [row for row in csv_data]
 
-    logger.write_text(f"Processing {len(data)} records from {RAW_DATA_FILE}")
+    logging.info(f"Processing {len(data)} records from {RAW_DATA_FILE}")
 
     # Process each row.
     for row in data:
@@ -106,5 +108,5 @@ for facet_a in aggregate.keys():
             processed_bucket.blob(data_file).upload_from_string(json.dumps(facet_data))
             counter["written"] += 1
 
-logger.log_text("Record processing complete.")
-logger.log_struct(counter, severity="INFO")
+logging.info("Record processing complete.")
+logging.info(counter)
