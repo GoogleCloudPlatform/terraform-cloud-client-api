@@ -18,3 +18,8 @@
 # Generate templates and save to folders.
 generate:
 	python3 app/templates/generate.py
+
+
+# Apply terraform 
+apply: 
+	terraform -chdir=infra apply -auto-approve
