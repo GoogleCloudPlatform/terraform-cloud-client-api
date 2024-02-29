@@ -1,0 +1,2 @@
+web: gunicorn --bind :8080 main:app
+process: python3 process.py 
