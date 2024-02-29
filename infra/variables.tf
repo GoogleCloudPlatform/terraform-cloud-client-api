@@ -14,4 +14,35 @@
  * limitations under the License.
  */
 
- 
+variable "project_id" {
+  type        = string
+  description = "The Google Cloud project ID where resources will be deployed."
+}
+
+variable "region" {
+  type        = string
+  description = "The Google Cloud region where resources will be deployed."
+  default     = "us-central1"
+}
+
+variable "deployment_name" {
+  type        = string
+  description = "Identifier for deployment, included in resource names."
+  default     = "client-api"
+}
+
+variable "labels" {
+  type        = map(string)
+  description = "A set of key/value label pairs to assign to the resources deployed by this solution."
+  default     = {}
+}
+
+variable "language" {
+  type        = string
+  description = "Programming language implementation to use (nodejs, java, python)"
+
+  validation {
+    condition     = contains(["nodejs", "java", "python"], var.language)
+    error_message = "Valid names for language: nodejs, java, python."
+  }
+}
