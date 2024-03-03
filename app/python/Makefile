@@ -38,10 +38,8 @@ test: venv
 
 # Show outstanding linting issues
 lint: venv
-	$(PYTHON) -m black --diff .
-	$(PYTHON) -m isort --diff .
+	$(PYTHON) -m black --check .
 
 # Fix outstanding linting issues
 format: venv
 	$(PYTHON) -m black .
-	$(PYTHON) -m isort .
