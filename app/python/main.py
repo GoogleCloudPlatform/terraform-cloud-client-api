@@ -31,17 +31,18 @@ from config import *
 app = Flask(__name__)
 
 storage_client = google.cloud.storage.Client()
-logging_client = google.cloud.logging.Client()
-logging_client.setup_logging()
 
-if PROCESSED_DATA_BUCKET is None:
-    raise ValueError("PROCESSED_DATA_BUCKET required")
 
-processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
+# Enable Cloud Logging only when deployed to Cloud Run
+if os.environ.get("K_SERVICE"):
+    logging_client = google.cloud.logging.Client()
+    logging_client.setup_logging()
 
 
 def retrieve_data(fur, age, location):
     filename = "/".join([fur, age, location]) + "/data.json"
+
+    processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
     fragment = processed_bucket.blob(filename).download_as_string()
 
     data = json.loads(fragment)
@@ -54,6 +55,9 @@ def retrieve_data(fur, age, location):
 
 @app.route("/")
 def home():
+    if PROCESSED_DATA_BUCKET is None:
+        return "Environment variable PROCESSED_DATA_BUCKET required", 500
+
     fur = request.args.get("fur", "Gray")
     age = request.args.get("age", "Adult")
     location = request.args.get("location", "Above Ground")

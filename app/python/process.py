@@ -22,6 +22,7 @@ process.py - take data in raw_data bucket, process, and store in processed bucke
 import csv
 import json
 import logging
+import os
 
 import google.cloud.logging
 import google.cloud.storage
@@ -29,40 +30,58 @@ import google.cloud.storage
 from config import *
 
 storage_client = google.cloud.storage.Client()
-logging_client = google.cloud.storage.Client()
-logging_client.setup_logging()
+
+# Enable Cloud Logging only when deployed to Cloud Run
+if os.environ.get("K_SERVICE"):
+    logging_client = google.cloud.storage.Client()
+    logging_client.setup_logging()
 
 
-if RAW_DATA_BUCKET is None:
-    raise ValueError("RAW_DATA_BUCKET required")
+def download_raw_data():
+    """
+    Download raw data from Cloud Storage into local file for processing
+    """
+    logging.info("  download_raw_data: start downloading data")
 
-if PROCESSED_DATA_BUCKET is None:
-    raise ValueError("PROCESSED_DATA_BUCKET required")
+    if RAW_DATA_BUCKET is None:
+        raise ValueError("RAW_DATA_BUCKET required")
+
+    if PROCESSED_DATA_BUCKET is None:
+        raise ValueError("PROCESSED_DATA_BUCKET required")
+
+    temp_datafile = "test.csv"
+    logging.info(
+        f"  download_raw_data: processing from {RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}"
+    )
+
+    raw_bucket = storage_client.get_bucket(RAW_DATA_BUCKET)
+
+    raw_bucket.blob(RAW_DATA_FILE).download_to_filename(temp_datafile)
+
+    logging.info("  download_raw_data: downloaded data to {temp_datafile}")
+    return temp_datafile
 
 
-temp_datafile = "test.csv"
+def process_raw_data(temp_datafile):
+    """
+    Process local file, producing aggregate data
+    """
+    logging.info("  process_raw_data: start processing data")
 
-logging.info(f"Processing data from {RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}")
+    aggregate = {}
 
-raw_bucket = storage_client.get_bucket(RAW_DATA_BUCKET)
-processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
+    count_recorded, count_removed = 0, 0
 
-raw_bucket.blob(RAW_DATA_FILE).download_to_filename(temp_datafile)
+    with open(temp_datafile) as f:
+        csv_data = csv.DictReader(f)
+        data = [row for row in csv_data]
 
-aggregate = {}
-
-counter = {"recorded": 0, "removed": 0, "written": 0}
-
-
-with open(temp_datafile) as f:
-    csv_data = csv.DictReader(f)
-    data = [row for row in csv_data]
-
-    logging.info(f"Processing {len(data)} records from {RAW_DATA_FILE}")
+        logging.info(f"Processing {len(data)} records from {RAW_DATA_FILE}")
 
     # Process each row.
     for row in data:
         process = True
+
         # Ignore any records with incomplete data
         for facet in FACETS:
             if row[facet] == "":
@@ -71,7 +90,6 @@ with open(temp_datafile) as f:
                 process = False
 
         if process:
-
             # pre-create data (could be better way?)
             if row[FACETS[0]] not in aggregate.keys():
                 aggregate[row[FACETS[0]]] = {}
@@ -93,20 +111,48 @@ with open(temp_datafile) as f:
                 if row[segment] == "true":
                     data_loc[segment] += 1
 
-            counter["recorded"] += 1
+            count_recorded += 1
         else:
-            counter["removed"] += 1
+            # Note count of records not recorded (due to data cleanup)
+            count_removed += 1
+
+    logging.info(
+        f"  process_raw_data: processed {count_recorded} records, removed {count_removed}."
+    )
+    return aggregate
 
 
-for facet_a in aggregate.keys():
-    for facet_b in aggregate[facet_a].keys():
-        for facet_c in aggregate[facet_a][facet_b].keys():
+def write_processed_data(aggregate):
+    """
+    Write aggregate data to Cloud Storage
+    """
+    logging.info("  write_processed_data: start writing data.")
+    counter = 0
+    processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
 
-            facet_data = aggregate[facet_a][facet_b][facet_c]
+    for facet_a in aggregate.keys():
+        for facet_b in aggregate[facet_a].keys():
+            for facet_c in aggregate[facet_a][facet_b].keys():
 
-            data_file = f"{facet_a}/{facet_b}/{facet_c}/data.json"
-            processed_bucket.blob(data_file).upload_from_string(json.dumps(facet_data))
-            counter["written"] += 1
+                facet_data = aggregate[facet_a][facet_b][facet_c]
 
-logging.info("Record processing complete.")
-logging.info(counter)
+                data_file = f"{facet_a}/{facet_b}/{facet_c}/data.json"
+                processed_bucket.blob(data_file).upload_from_string(
+                    json.dumps(facet_data)
+                )
+                counter += 1
+
+    logging.info(f"  write_processed_data: wrote {counter} files.")
+
+
+if __name__ == "__main__":
+
+    logging.info(
+        f"🟢 Start process.py with: {RAW_DATA_BUCKET}, {PROCESSED_DATA_BUCKET}."
+    )
+
+    datafile = download_raw_data()
+    result = process_raw_data(datafile)
+    write_processed_data(result)
+
+    logging.info(f"🏁 process.py complete.")
