@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-
-output "service_url" { 
-    description = "URL of the deployed Cloud Run service"
-    value = google_cloud_run_v2_service.default.uri
-}
-
-output "job_name" { 
-    description = "Name of the deployed Cloud Run Job"
-    value = google_cloud_run_v2_job.default.name
+terraform {
+  required_version = ">= 0.13"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 3.25.0"
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = ">= 3.25.0"
+    }
+  }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2024 Google LLC
+ * Copyright 2023 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,8 @@
  */
 
 
-output "service_url" { 
-    description = "URL of the deployed Cloud Run service"
-    value = google_cloud_run_v2_service.default.uri
-}
-
-output "job_name" { 
-    description = "Name of the deployed Cloud Run Job"
-    value = google_cloud_run_v2_job.default.name
+module "deployment" {
+  source     = "../../"
+  project_id = var.project_id
+  language = var.language
 }

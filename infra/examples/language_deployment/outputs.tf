@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-
 output "service_url" { 
     description = "URL of the deployed Cloud Run service"
-    value = google_cloud_run_v2_service.default.uri
+    value = module.deployment.service_url
 }
 
 output "job_name" { 
     description = "Name of the deployed Cloud Run Job"
-    value = google_cloud_run_v2_job.default.name
+    value = module.deployment.job_name
 }

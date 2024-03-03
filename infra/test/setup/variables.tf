@@ -15,12 +15,14 @@
  */
 
 
-output "service_url" { 
-    description = "URL of the deployed Cloud Run service"
-    value = google_cloud_run_v2_service.default.uri
+variable "org_id" {
+  description = "The numeric organization id"
 }
 
-output "job_name" { 
-    description = "Name of the deployed Cloud Run Job"
-    value = google_cloud_run_v2_job.default.name
+variable "folder_id" {
+  description = "The folder to deploy in"
+}
+
+variable "billing_account" {
+  description = "The billing account id associated with the project, e.g. XXXXXX-YYYYYY-ZZZZZZ"
 }
