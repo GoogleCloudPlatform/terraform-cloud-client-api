@@ -29,8 +29,6 @@ import google.cloud.storage
 
 from config import *
 
-storage_client = google.cloud.storage.Client()
-
 # Enable Cloud Logging only when deployed to Cloud Run
 if os.environ.get("K_SERVICE"):
     logging_client = google.cloud.storage.Client()
@@ -54,6 +52,7 @@ def download_raw_data():
         f"  download_raw_data: processing from {RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}"
     )
 
+    storage_client = google.cloud.storage.Client()
     raw_bucket = storage_client.get_bucket(RAW_DATA_BUCKET)
 
     raw_bucket.blob(RAW_DATA_FILE).download_to_filename(temp_datafile)
@@ -128,6 +127,8 @@ def write_processed_data(aggregate):
     """
     logging.info("  write_processed_data: start writing data.")
     counter = 0
+
+    storage_client = google.cloud.storage.Client()
     processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
 
     for facet_a in aggregate.keys():
