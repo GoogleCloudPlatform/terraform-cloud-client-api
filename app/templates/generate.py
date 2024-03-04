@@ -74,9 +74,9 @@ for lang in LANGUAGES:
             diffs += line
 
         if len(diffs) == 0:
-            print("Generate output identical. No differences.")
+            print(f" {lang} generated output identical. No differences.")
         else:
-            print("\n❌ Generated output different. Need to run `make generate`.\n")
+            print("\n❌ {lang} generated output different. Need to run `make generate`.\n")
             print("".join(diffs))
             sys.exit(1)
 
