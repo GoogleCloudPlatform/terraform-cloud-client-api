@@ -66,8 +66,7 @@
         var count = {{ squirrel_count }};
         var points = [{{ data_points }}];
 
-        set1_col = "#8e39a7"
-        set2_col = "#39a78e"
+        line_col = "#8e39a7"
 
         const data = {
             labels: ['Running', 'Climbing', 'Chasing', 'Eating', 'Foraging'],
@@ -76,12 +75,12 @@
                     label: 'Squirrels',
                     data: points,
                     fill: true,
-                    backgroundColor: set1_col + "42",
-                    borderColor: set1_col,
-                    pointBackgroundColor: set1_col,
+                    backgroundColor: line_col + "42",
+                    borderColor: line_col,
+                    pointBackgroundColor: line_col,
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: set1_col,
+                    pointHoverBorderColor: line_col,
                 }
             ]
         };
