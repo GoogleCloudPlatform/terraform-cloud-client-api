@@ -33,7 +33,6 @@ app = Flask(__name__)
 storage_client = google.cloud.storage.Client()
 
 
-
 # Enable Cloud Logging only when deployed to Cloud Run
 if os.environ.get("K_SERVICE"):
     logging_client = google.cloud.logging.Client()
