@@ -61,9 +61,12 @@
         <canvas id="chart_canvas"></canvas>
     </div>
 
-    <script>
-        count = {{ squirrel_count }}
-        points = {{ data_points }}
+    <script th:inline="javascript">
+        
+        var count = {{ squirrel_count }};
+        var points = {{ data_points }};
+        
+
         set1_col = "#8e39a7"
         set2_col = "#39a78e"
 
@@ -102,12 +105,12 @@
         };
 
         const ctx = document.getElementById('chart_canvas');
-        new Chart(ctx, config)
+        new Chart(ctx, config);
     </script>
 
-    <div id="footer">Data represents the number of squirrels observed performing described activities during the survey
-        period.</div>
-
+    <div id="footer">
+        Data represents the number of squirrels observed performing
+        described activities during the survey period.
     </div>
 
     {% else %}
