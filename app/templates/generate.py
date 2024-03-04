@@ -71,7 +71,7 @@ for lang in TEMPLATES.keys():
 
                 if "##IF SQUIRRELS##" in line:
                     if lang == "python":
-                        replacement = "{{ if squirrel_count > 0 }}"
+                        replacement = "{% if squirrel_count > 0 %}"
                     elif lang == "nodejs":
                         replacement = "{{#if squirrel_count}}"
                     elif lang == "java":
