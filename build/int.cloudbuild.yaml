@@ -14,11 +14,6 @@
 
 timeout: 36000s
 steps:
-- id: noop
-  name: alpine
-  script: | 
-    - "echo tests not yet setup, exiting early."
-
 - id: prepare
   dir: infra
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
