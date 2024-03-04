@@ -5,7 +5,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#	  http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,22 @@
 #
 
 
-# Generate templates and save to folders.
-generate:
-	python3 app/templates/generate.py
+# Install dependencies
+install: 
+	npm install
 
-# Confirm generate has been applied
-validate_generate:
-	python3 app/templates/generate.py --validate
+# Start development server
+dev: install
+	npm start
 
-# Apply terraform 
-apply: 
-	terraform -chdir=infra apply -auto-approve
+# Run unit tests
+test: install
+	npm run test
+
+# Show outstanding linting issues
+lint: install
+	npm run lint
+
+# Fix outstanding linting issues
+format: install
+	npm run format

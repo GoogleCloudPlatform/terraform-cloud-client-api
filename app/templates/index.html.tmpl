@@ -7,11 +7,7 @@
 
 <body>
 
-    ##IF(squirrel_count == 0)##
-
-    <div>No data available. <a href="#">Follow the tutorial instructions</a>.</div>
-
-    ##ELSE
+    ##IF SQUIRRELS##
 
     <h1>Census Data</h1>
 
@@ -66,7 +62,7 @@
 
     <script>
         count = ##VALUE(squirrel_count)##
-        points = ##VALUE(data_points)##
+        points = ##LIST(data_points)##
         set1_col = "#8e39a7"
         set2_col = "#39a78e"
 
@@ -112,6 +108,10 @@
         period.</div>
 
     </div>
+
+    ##ELSE
+
+    <div>No data available. <a href="#">Follow the tutorial instructions</a>.</div>
 
     ##ENDIF
 

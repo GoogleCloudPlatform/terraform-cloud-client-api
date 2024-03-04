@@ -5,11 +5,12 @@ generate.py - take generic template and process to different languages.
 import difflib
 import sys
 
-LANGUAGES = [
-    "python"
-]  # , "nodejs", "java"] # TODO(glasnt): Add when additional languages available.
 
-for lang in LANGUAGES:
+# Language / Template folder name
+TEMPLATES = {"python": "templates/index.html", "nodejs": "views/index.handlebars"}
+# TODO(glasnt): Add when additional languages available.
+
+for lang in TEMPLATES.keys():
     with open("app/templates/index.html.tmpl") as html:
         output = []
 
@@ -28,23 +29,33 @@ for lang in LANGUAGES:
                         ")##", back_replace
                     )
 
-                if "##IF" in line:
+                if "##LIST" in line:
                     if lang == "python":
-                        front_replace, back_replace = "{% if ", " %}"
+                        front_replace, back_replace = "{{ ", " }}"
                     elif lang == "nodejs":
-                        front_replace, back_replace = "\{\{\# if  ", " \}\}"
+                        front_replace, back_replace = "[{{ ", " }}]"
                     elif lang == "java":
-                        front_replace, back_replace = 'th:if="${ ', "\}"
+                        front_replace, back_replace = "${ ", "\}"
 
-                    line = line.replace("##IF(", front_replace).replace(
+                    line = line.replace("##LIST(", front_replace).replace(
                         ")##", back_replace
                     )
+
+                if "##IF SQUIRRELS##" in line:
+                    if lang == "python":
+                        replacement = "{{ if squirrel_count > 0 }}"
+                    elif lang == "nodejs":
+                        replacement = "{{#if squirrel_count}}"
+                    elif lang == "java":
+                        replacement = "TOOD(java)"
+
+                    line = line.replace("##IF SQUIRRELS##", replacement)
 
                 if "##ELSE" in line:
                     if lang == "python":
                         replace = "{% else %}"
                     elif lang == "nodejs":
-                        replace = "\{\{ else \}\}"
+                        replace = "{{else}}"
                     elif lang == "java":
                         replace = 'th:unless="$\{'
                     line = line.replace("##ELSE", replace)
@@ -53,14 +64,14 @@ for lang in LANGUAGES:
                     if lang == "python":
                         replace = "{% endif %}"
                     elif lang == "nodejs":
-                        replace = "\{\{/if\}\}"
+                        replace = "{{/if}}"
                     elif lang == "java":
                         replace = ""
                     line = line.replace("##ENDIF", replace)
 
             output.append(line)
 
-    html_output = f"app/{lang}/templates/index.html"
+    html_output = f"app/{lang}/{TEMPLATES[lang]}"
 
     # Check if any changes are required to be made, error 1 if updates needed
     if "--validate" in sys.argv:

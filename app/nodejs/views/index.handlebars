@@ -8,7 +8,7 @@
 
 <body>
 
-    {{ if squirrel_count > 0 }}
+    {{#if squirrel_count}}
 
     <h1>Census Data</h1>
 
@@ -63,7 +63,7 @@
 
     <script>
         count = {{ squirrel_count }}
-        points = {{ data_points }}
+        points = [{{ data_points }}]
         set1_col = "#8e39a7"
         set2_col = "#39a78e"
 
@@ -110,11 +110,11 @@
 
     </div>
 
-    {% else %}
+    {{else}}
 
     <div>No data available. <a href="#">Follow the tutorial instructions</a>.</div>
 
-    {% endif %}
+    {{/if}}
 
     <style>
     body { 

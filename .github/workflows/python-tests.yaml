@@ -14,7 +14,7 @@
 
 ## Runs python specific linting
 
-name: 'python lint'
+name: 'python tests'
 
 on:
   workflow_dispatch:
@@ -42,4 +42,8 @@ jobs:
 
       - name: lint
         working-directory: app/python
-        run: make lint  # if pending changes, step will fail.
+        run: make lint
+      
+      - name: test
+        working-directory: app/python
+        run: make test
