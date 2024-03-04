@@ -16,7 +16,7 @@
 
 
 import pytest
-
+from bs4 import BeautifulSoup as bs
 from main import app as flask_app
 
 
@@ -25,11 +25,29 @@ def client():
     return flask_app.test_client()
 
 
-def test_not_configured(client):
+def test_not_configured(client, mocker):
     response = client.get("/")
     assert response.status_code == 500
     assert b"PROCESSED_DATA_BUCKET required" in response.data
 
 
-# TODO: add additional unit tests here, for example:
-#   * mocking data from retrieve_data
+def test_mock_data(client, mocker):
+    squirrel_count = 20
+    data_points = [2, 2, 3, 5, 8]
+
+    mocker.patch("main.retrieve_data", return_value=(squirrel_count, data_points))
+    mocker.patch("main.PROCESSED_DATA_BUCKET", return_value="notarealbucket")
+
+    response = client.get("/?fur=Gray")
+    assert response.status_code == 200
+
+    soup = bs(response.data, "html.parser")
+    facets = soup.find("div", {"id": "facets"})
+    facets_text = " ".join(facets.text.split())
+    assert str(squirrel_count) in facets_text
+    assert "2018 Squirrel Census" in facets_text
+
+    # Can't check the canvas, so check the javascript
+    response_html = response.data.decode("UTF-8")
+    assert f"var count = {squirrel_count}" in response_html
+    assert f"var points = {data_points}" in response_html

@@ -26,7 +26,7 @@ venv:
 
 # Install dependencies
 install: 
-	$(PYTHON) -m pip install -r requirements.txt -r requirements-test.txt
+	$(PYTHON) -m pip install -r requirements.txt -r tests/requirements.txt
 
 # Start development server
 dev: venv
