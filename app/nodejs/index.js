@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* 
+/*
 index.js - default entrypoint
 */
 
 'use strict';
 
 import app from './app.js';
-import logger from './logger.js'
+import logger from './logger.js';
 
 const main = async () => {
-    const PORT = process.env.PORT || 8080;
-    app.listen(PORT, () => logger.info(`Listening on port ${PORT}`));
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => logger.info(`Listening on port ${PORT}`));
 };
 
 main();

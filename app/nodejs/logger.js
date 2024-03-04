@@ -12,26 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* 
+/*
 logger.js - configure functionality for Cloud Logging
 */
 
 'use strict';
 
 import winston from 'winston';
-import { LoggingWinston } from '@google-cloud/logging-winston';
+import {LoggingWinston} from '@google-cloud/logging-winston';
 
 // Setup Logging
 const loggingWinston = new LoggingWinston();
 
-let logger = winston.createLogger({
-    level: 'info',
-    transports: [new winston.transports.Console()],
+const logger = winston.createLogger({
+  level: 'info',
+  transports: [new winston.transports.Console()],
 });
 
 // Enable Cloud Logging only when deployed to Cloud Run
 if (process.env.K_SERVICE) {
-    logger.transports.append(loggingWinston);
+  logger.transports.append(loggingWinston);
 }
 
-export default logger
+export default logger;
