@@ -83,7 +83,7 @@ for lang in TEMPLATES.keys():
                 if "##VARIABLES_START" in line: 
                     if lang == "java": 
                         java_javascript_flag = True
-                        replace = "/*<![CDATA[*/\n"
+                        replace = "/*<![CDATA[*/"
                     else:
                         replace = ""
                     line = line.replace("##VARIABLES_START", replace)
@@ -91,7 +91,7 @@ for lang in TEMPLATES.keys():
                 if "##VARIABLES_END" in line:
                     if lang == "java": 
                         java_javascript_flag = False
-                        replace = "\n\t\t/*]]>*/"
+                        replace = "/*]]>*/"
                     else: 
                         replace = ""
                     line = line.replace("##VARIABLES_END", replace)
@@ -118,7 +118,7 @@ for lang in TEMPLATES.keys():
         if len(diffs) == 0:
             print(f" {lang} generated output identical. No differences.")
         else:
-            print("\n❌ {lang} generated output different. Need to run `make generate`.\n")
+            print(f"\n❌ {lang} generated output different. Need to run `make generate`.\n")
             print("".join(diffs))
             sys.exit(1)
 
