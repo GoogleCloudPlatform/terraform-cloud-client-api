@@ -16,41 +16,28 @@
 
 package com.google.cloudclientapi;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.TemplateEngine;
-
-import org.springframework.ui.Model;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
 @Controller
 public class CensusController {
   private static final Logger logger = LoggerFactory.getLogger(CensusController.class);
 
   @GetMapping("/")
   public String main(Model model) {
-        logger.info("Received request (TODO: data)");
+    logger.info("Received request (TODO: data)");
 
-        // TODO: get real values from dataset. 
-        model.addAttribute("squirrel_count", "5");
-        List<String> data_points = Arrays.asList("1", "2", "3", "4", "5");
-        model.addAttribute("data_points", data_points);
+    // TODO: get real values from dataset.
+    model.addAttribute("squirrel_count", "5");
+    List<String> dataPoints = Arrays.asList("1", "2", "3", "4", "5");
+    model.addAttribute("data_points", dataPoints);
 
-        return "index"; 
+    return "index";
   }
 }

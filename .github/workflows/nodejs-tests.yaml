@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-## Runs python specific linting
-
-name: 'node tests'
+name: 'nodejs tests'
 
 on:
   workflow_dispatch:
@@ -23,8 +21,8 @@ on:
       - main
 
 jobs:
-  lint:
-    name: 'app-lint'
+  test:
+    name: 'nodejs tests'
     runs-on: 'ubuntu-latest'
     steps:
       - uses: 'actions/checkout@v4'

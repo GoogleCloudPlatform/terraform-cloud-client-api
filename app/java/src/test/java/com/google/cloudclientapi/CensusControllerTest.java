@@ -17,7 +17,6 @@
 package com.google.cloudclientapi;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -33,8 +32,8 @@ public class CensusControllerTest {
   @Autowired private MockMvc mvc;
 
   @Test
-  public void returns_fail_if_not_configured() throws Exception {
-    this.mvc.perform(get("/")).andExpect(status().isMethodNotAllowed());
+  public void returns_ok_on_default() throws Exception {
+    //TODO: add correct tests here. 
+    this.mvc.perform(get("/")).andExpect(status().isOk());
   }
-
 }

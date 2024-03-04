@@ -29,3 +29,7 @@ def test_not_configured(client):
     response = client.get("/")
     assert response.status_code == 500
     assert b"PROCESSED_DATA_BUCKET required" in response.data
+
+
+# TODO: add additional unit tests here, for example:
+#   * mocking data from retrieve_data

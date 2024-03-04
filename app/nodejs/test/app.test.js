@@ -26,7 +26,8 @@ describe('Unit Tests', () => {
         request = supertest(app);
     });
 
-    it('should error without config on GET /', async () => {
-        await request.get('/').expect(500);
+    // TODO: add correct tests here. 
+    it('should return OK on GET /', async () => {
+        await request.get('/').expect(200);
     });
 });

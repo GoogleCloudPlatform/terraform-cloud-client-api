@@ -27,7 +27,7 @@ test:
 
 # Show outstanding linting issues
 lint: 
-	nvm compile checkstyle:check
+	mvn compile checkstyle:check
 
 # Fix outstanding linting issues
 format: 
