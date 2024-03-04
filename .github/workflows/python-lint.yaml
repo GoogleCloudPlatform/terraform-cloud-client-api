@@ -36,7 +36,9 @@ jobs:
 
       - name: install deps
         working-directory: app/python
-        run: make install
+        run: |
+          make venv
+          make install
 
       - name: lint
         working-directory: app/python
