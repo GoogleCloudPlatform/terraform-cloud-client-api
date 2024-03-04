@@ -30,8 +30,6 @@ from config import *
 
 app = Flask(__name__)
 
-storage_client = google.cloud.storage.Client()
-
 
 # Enable Cloud Logging only when deployed to Cloud Run
 if os.environ.get("K_SERVICE"):
@@ -42,6 +40,7 @@ if os.environ.get("K_SERVICE"):
 def retrieve_data(fur, age, location):
     filename = "/".join([fur, age, location]) + "/data.json"
 
+    storage_client = google.cloud.storage.Client()
     processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
     fragment = processed_bucket.blob(filename).download_as_string()
 
