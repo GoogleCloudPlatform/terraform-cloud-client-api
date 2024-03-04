@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'python tests'
+name: "python tests"
 
 on:
   workflow_dispatch:
@@ -22,15 +22,15 @@ on:
 
 jobs:
   test:
-    name: 'python tests'
-    runs-on: 'ubuntu-latest'
+    name: "python tests"
+    runs-on: ubuntu-latest
     steps:
-      - uses: 'actions/checkout@v4'
-          
+      - uses: actions/checkout@v4
+
       - name: setup python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'  # matches /app/python/.python-version
+          python-version: "3.11" # matches /app/python/.python-version
 
       - name: install deps
         working-directory: app/python
@@ -41,7 +41,7 @@ jobs:
       - name: lint
         working-directory: app/python
         run: make lint
-      
+
       - name: test
         working-directory: app/python
         run: make test

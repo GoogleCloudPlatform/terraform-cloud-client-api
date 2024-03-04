@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'nodejs tests'
+name: "nodejs tests"
 
 on:
   workflow_dispatch:
@@ -22,22 +22,21 @@ on:
 
 jobs:
   test:
-    name: 'nodejs tests'
-    runs-on: 'ubuntu-latest'
+    name: "nodejs tests"
+    runs-on: ubuntu-latest
     steps:
-      - uses: 'actions/checkout@v4'
-          
+      - uses: actions/checkout@v4
+
       - name: setup node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'  # matches /app/nodejs/package.json:engines.node
+          node-version: "20" # matches /app/nodejs/package.json:engines.node
 
       - name: install deps
         working-directory: app/nodejs
         run: |
-          make venv
           make install
 
       - name: lint
         working-directory: app/nodejs
-        run: make lint  # if pending changes, step will fail.
+        run: make lint # if pending changes, step will fail.
