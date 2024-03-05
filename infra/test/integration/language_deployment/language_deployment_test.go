@@ -87,7 +87,7 @@ func assertResponseContains(t *testing.T, assert *assert.Assertions, url string,
 		}
 		return retry, nil
 	}
-	utils.Poll(t, fn, 36, 10*time.Second)
+	utils.Poll(t, fn, 6, 10*time.Second)
 
 	// Assert expectations of the last checked response.
 	assert.Nil(err)
