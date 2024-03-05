@@ -18,5 +18,5 @@
 module "deployment" {
   source     = "../../"
   project_id = var.project_id
-  language = var.language
+  language   = var.language
 }

@@ -88,7 +88,7 @@ resource "google_cloud_run_v2_service" "default" {
     }
   }
 
-  depends_on = [ module.project_services ]
+  depends_on = [module.project_services]
 }
 
 resource "google_cloud_run_v2_service_iam_member" "public" {
@@ -126,11 +126,11 @@ resource "google_cloud_run_v2_job" "default" {
     }
   }
 
-  depends_on = [ module.project_services ]
+  depends_on = [module.project_services]
 }
 
 data "google_project" "project" {
-  depends_on = [ module.project_services ]
+  depends_on = [module.project_services]
 }
 
 #######################################################################################

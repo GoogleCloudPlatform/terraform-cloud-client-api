@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-output "project_id" { 
-    description = "Google Cloud project ID"
-    value = module.deployment.project_id
+output "project_id" {
+  description = "Google Cloud project ID"
+  value       = module.deployment.project_id
 }
 
-output "service_url" { 
-    description = "URL of the deployed Cloud Run service"
-    value = module.deployment.service_url
+output "service_url" {
+  description = "URL of the deployed Cloud Run service"
+  value       = module.deployment.service_url
 }
 
-output "job_name" { 
-    description = "Name of the deployed Cloud Run Job"
-    value = module.deployment.job_name
+output "job_name" {
+  description = "Name of the deployed Cloud Run Job"
+  value       = module.deployment.job_name
 }
