@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-steps:  
+steps:
   - id: python build
     name: gcr.io/k8s-skaffold/pack
     dir: app/python
@@ -21,7 +21,7 @@ steps:
       - build
       - ${_IMAGE_LOCATION}/python:$TAG_NAME
       - --builder=gcr.io/buildpacks/builder:v1
-    
+
   - id: nodejs build
     name: gcr.io/k8s-skaffold/pack
     dir: app/nodejs

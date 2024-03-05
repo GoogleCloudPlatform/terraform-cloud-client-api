@@ -24,8 +24,8 @@ generate:
 validate_generate:
 	python3 app/templates/generate.py --validate
 
-# Apply terraform 
-apply: 
+# Apply terraform
+apply:
 	terraform -chdir=infra apply -auto-approve
 
 

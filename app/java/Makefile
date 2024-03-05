@@ -14,21 +14,21 @@
 # limitations under the License.
 #
 
-install: 
+install:
 	echo "noop"
 
 # Start development server
-dev: 
+dev:
 	mvn spring-boot:run
 
 # Run unit tests
-test: 
+test:
 	mvn test
 
 # Show outstanding linting issues
-lint: 
+lint:
 	mvn compile checkstyle:check
 
 # Fix outstanding linting issues
-format: 
+format:
 	echo "TODO: configure"

@@ -1,10 +1,10 @@
 # Application Templates
 
-Templates in this directory are automatically copied to each implementation, taking care to edit to language template specifics. 
+Templates in this directory are automatically copied to each implementation, taking care to edit to language template specifics.
 
 ## Template syntax
 
-References: 
+References:
 
  * <https://handlebarsjs.com/guide/expressions.html>
  * <https://jinja.palletsprojects.com/en/3.1.x/templates>
