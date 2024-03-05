@@ -44,6 +44,7 @@ module "project_services" {
 # Cloud Storage
 
 resource "google_storage_bucket" "processed_data" {
+  project       = var.project_id
   name          = "processed-${local.unique}-${var.project_id}"
   location      = var.region
   storage_class = "REGIONAL"
@@ -53,6 +54,7 @@ resource "google_storage_bucket" "processed_data" {
 }
 
 resource "google_storage_bucket" "raw_data" {
+  project       = var.project_id
   name          = "raw_data-${local.unique}-${var.project_id}"
   location      = var.region
   storage_class = "REGIONAL"
@@ -71,6 +73,7 @@ resource "google_storage_bucket_object" "default" {
 # Cloud Run Service
 
 resource "google_cloud_run_v2_service" "default" {
+  project  = var.project_id
   name     = "chart-${local.unique}"
   location = var.region
 
@@ -102,6 +105,7 @@ resource "google_cloud_run_v2_service_iam_member" "public" {
 # Cloud Run Job
 
 resource "google_cloud_run_v2_job" "default" {
+  project  = var.project_id
   name     = "process-${local.unique}"
   location = var.region
 
