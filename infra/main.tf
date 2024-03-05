@@ -137,12 +137,14 @@ data "google_project" "project" {
 # Service account - Data Writer 
 
 resource "google_service_account" "writer" {
+  project      = var.project_id
   account_id   = "writer-${local.unique}"
   display_name = "Account with read/write access to data."
 }
 
 // Client APIs need to get the bucket to then get the object. 
 resource "google_project_iam_custom_role" "object_downloader" {
+  project     = var.project_id
   role_id     = "objectDownloader"
   title       = "Cloud Storage Object Downloader"
   description = "Permissions to download an object from a Cloud Storage bucket"
@@ -171,6 +173,7 @@ resource "google_project_iam_member" "writer_logging" {
 # Service account - Read-only
 
 resource "google_service_account" "reader" {
+  project      = var.project_id
   account_id   = "read-only-${local.unique}"
   display_name = "Account with read-only access to data."
 }
