@@ -18,6 +18,9 @@ locals {
   int_required_roles = [
     "roles/storage.admin",
     "roles/run.admin",
+    "roles/iam.serviceAccountAdmin",
+    "roles/iam.serviceAccountUser",
+    "roles/resourcemanager.projectIamAdmin",
   ]
 }
 
