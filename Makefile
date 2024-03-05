@@ -14,19 +14,20 @@
 # limitations under the License.
 #
 
-### Repo specific tasks
-
-# Generate templates and save to folders.
+### GitHub Actions tasks
 generate:
 	python3 app/templates/generate.py
 
-# Confirm generate has been applied
 validate_generate:
 	python3 app/templates/generate.py --validate
 
-# Apply terraform
+
+### Local development helpers
 apply:
 	terraform -chdir=infra apply -auto-approve
+
+build_latest_images:
+	gcloud builds submit --config build/images.cloudbuild.yaml --substitutions TAG_NAME=latest
 
 
 ### CFT Standard
