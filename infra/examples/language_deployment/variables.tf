@@ -18,6 +18,10 @@ variable "project_id" {
   description = "The Google Cloud project ID where resources will be deployed."
 }
 
+variable "region" {
+  description = "The Google Cloud region where resources will be deployed."
+}
+
 variable "language" {
   description = "Programming language implementation to use (nodejs, java, python)"
 }

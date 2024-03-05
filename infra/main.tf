@@ -18,11 +18,26 @@ locals {
   unique = "${random_id.default.hex}-${var.deployment_name}"
 
   # TODO(glasnt): temporary
-  application_image = "us-central1-docker.pkg.dev/glasnt-squirrel-10019/cloud-run-source-deploy/chart"
+  application_image = "us-docker.pkg.dev/glasnt-squirrel-10019/containers/cloud-client-api/${var.language}:latest"
 }
 
 resource "random_id" "default" {
   byte_length = 4
+}
+
+
+#######################################################################################
+# APIs
+
+module "project_services" {
+  source                      = "terraform-google-modules/project-factory/google//modules/project_services"
+  version                     = "~> 14.0"
+  disable_services_on_destroy = false
+  project_id                  = var.project_id
+
+  activate_apis = [
+    "run.googleapis.com",
+  ]
 }
 
 #######################################################################################
@@ -49,7 +64,7 @@ resource "google_storage_bucket" "raw_data" {
 resource "google_storage_bucket_object" "default" {
   bucket = google_storage_bucket.raw_data.name
   name   = "squirrels.csv"
-  source = "../data/squirrels.csv"
+  source = "${path.module}/data/squirrels.csv"
 }
 
 #######################################################################################
@@ -72,6 +87,8 @@ resource "google_cloud_run_v2_service" "default" {
       }
     }
   }
+
+  depends_on = [ module.project_services ]
 }
 
 resource "google_cloud_run_v2_service_iam_member" "public" {
@@ -108,8 +125,13 @@ resource "google_cloud_run_v2_job" "default" {
       }
     }
   }
+
+  depends_on = [ module.project_services ]
 }
 
+data "google_project" "project" {
+  depends_on = [ module.project_services ]
+}
 
 #######################################################################################
 # Service account - Data Writer 

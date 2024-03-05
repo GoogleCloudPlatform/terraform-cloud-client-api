@@ -32,7 +32,8 @@ func TestLanguageDeployment(t *testing.T) {
 	region := regionFromEnv()
 
 	cft := tft.NewTFBlueprintTest(t, tft.WithVars(map[string]interface{}{
-		"region": region,
+		"region":   region,
+		"language": "python", // TODO: generalize
 	}))
 
 	cft.DefineVerify(func(assert *assert.Assertions) {

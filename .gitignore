@@ -1,6 +1,6 @@
-infra/.terraform.lock.hcl
-infra/terraform.tfstate*
-infra/.terraform/
+.terraform.lock.hcl
+terraform.tfstate*
+.terraform/
 
 app/nodejs/node_modules/
 

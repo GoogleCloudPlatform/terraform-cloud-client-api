@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+output "project_id" { 
+    description = "Google Cloud project ID"
+    value = data.google_project.project.id
+}
+
 output "service_url" { 
     description = "URL of the deployed Cloud Run service"
     value = module.deployment.service_url
