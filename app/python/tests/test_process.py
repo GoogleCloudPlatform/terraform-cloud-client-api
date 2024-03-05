@@ -16,7 +16,7 @@
 
 from process import process_raw_data
 
-## Use real data validation
+# Use real data validation
 DATAFILE_NAME = "../../infra/data/squirrels.csv"
 DATAFILE_LEN = 3024
 

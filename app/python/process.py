@@ -24,10 +24,11 @@ import json
 import logging
 import os
 
+from config import FACETS, PROCESSED_DATA_BUCKET, RAW_DATA_BUCKET, RAW_DATA_FILE, SEGMENTS
+
 import google.cloud.logging
 import google.cloud.storage
 
-from config import *
 
 # Enable Cloud Logging only when deployed to Cloud Run
 if os.environ.get("K_SERVICE"):
@@ -156,4 +157,4 @@ if __name__ == "__main__":
     result = process_raw_data(datafile)
     write_processed_data(result)
 
-    logging.info(f"🏁 process.py complete.")
+    logging.info("🏁 process.py complete.")

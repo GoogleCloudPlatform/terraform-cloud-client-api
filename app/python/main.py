@@ -16,20 +16,22 @@
 
 
 """
-main.py - the server-side 
+main.py - the server-side
 """
 
 import json
 import logging
+import os
+
+from config import PROCESSED_DATA_BUCKET
+
+from flask import Flask, render_template, request
 
 import google.cloud.logging
 import google.cloud.storage
-from flask import Flask, render_template, request
 
-from config import *
 
 app = Flask(__name__)
-
 
 # Enable Cloud Logging only when deployed to Cloud Run
 if os.environ.get("K_SERVICE"):

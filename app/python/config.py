@@ -15,7 +15,8 @@
 # limitations under the License.
 
 """
-config.py - enviornment variables and default values, shared with the job and service.
+config.py - enviornment variables and default values,
+            shared with the job and service.
 """
 
 import os

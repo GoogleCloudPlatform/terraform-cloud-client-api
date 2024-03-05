@@ -1,4 +1,4 @@
-black
+flake8==6.1.0
 pytest
 pytest-mock
 beautifulsoup4
