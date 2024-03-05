@@ -1,0 +1,54 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+steps:
+  - id: python build
+    name: gcr.io/k8s-skaffold/pack
+    dir: app/python
+    entrypoint: pack
+    args:
+      - build
+      - ${_IMAGE_LOCATION}/python:$TAG_NAME
+      - --builder=gcr.io/buildpacks/builder:v1
+
+  - id: nodejs build
+    name: gcr.io/k8s-skaffold/pack
+    dir: app/nodejs
+    entrypoint: pack
+    args:
+      - build
+      - ${_IMAGE_LOCATION}/nodejs:$TAG_NAME
+      - --builder=gcr.io/buildpacks/builder:v1
+
+
+  - id: java build
+    name: gcr.io/k8s-skaffold/pack
+    dir: app/java
+    entrypoint: pack
+    args:
+      - build
+      - ${_IMAGE_LOCATION}/java:$TAG_NAME
+      - --builder=gcr.io/buildpacks/builder:v1
+
+
+images:
+  - ${_IMAGE_LOCATION}/python:$TAG_NAME
+  - ${_IMAGE_LOCATION}/nodejs:$TAG_NAME
+  - ${_IMAGE_LOCATION}/java:$TAG_NAME
+
+substitutions:
+  _IMAGE_LOCATION: us-docker.pkg.dev/${PROJECT_ID}/containers/cloud-client-api
+
+options:
+  dynamic_substitutions: true

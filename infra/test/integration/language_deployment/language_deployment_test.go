@@ -32,15 +32,16 @@ func TestLanguageDeployment(t *testing.T) {
 	region := regionFromEnv()
 
 	cft := tft.NewTFBlueprintTest(t, tft.WithVars(map[string]interface{}{
-		"region": region,
+		"region":   region,
+		"language": "python", // TODO: generalize
 	}))
 
 	cft.DefineVerify(func(assert *assert.Assertions) {
 		cft.DefaultVerify(assert)
 
 		projectID := cft.GetTFSetupStringOutput("project_id")
-		serviceURL := cft.GetTFSetupStringOutput("service_url")
-		jobName := cft.GetTFSetupStringOutput("job_name")
+		serviceURL := cft.GetStringOutput("service_url")
+		jobName := cft.GetStringOutput("job_name")
 
 		assert.Truef(strings.HasSuffix(serviceURL, ".run.app"), "unexpected service URL %q", serviceURL)
 
@@ -51,7 +52,11 @@ func TestLanguageDeployment(t *testing.T) {
 		gcloud.Runf(t, "run jobs execute  %s --project %s --region %s  --wait", jobName, projectID, region)
 
 		// After job run, expected to have data.
-		assertResponseContains(t, assert, serviceURL, "/", "2018 Squirrel Census")
+		assertResponseContains(t, assert, serviceURL, "2018 Squirrel Census")
+
+		// Check some known values to confirm data processing
+		assertResponseContains(t, assert, serviceURL+"/?age=Adult&fur=Black&location=Ground+Plane", "count = 66")
+		assertResponseContains(t, assert, serviceURL+"/?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95")
 	})
 
 	cft.DefineTeardown(func(assert *assert.Assertions) {
@@ -86,7 +91,7 @@ func assertResponseContains(t *testing.T, assert *assert.Assertions, url string,
 		}
 		return retry, nil
 	}
-	utils.Poll(t, fn, 36, 10*time.Second)
+	utils.Poll(t, fn, 6, 10*time.Second)
 
 	// Assert expectations of the last checked response.
 	assert.Nil(err)

@@ -16,7 +16,8 @@
 
 
 """
-process.py - take data in raw_data bucket, process, and store in processed bucket.
+process.py - take data in raw_data bucket, process,
+             and store in processed bucket.
 """
 
 import csv
@@ -24,10 +25,17 @@ import json
 import logging
 import os
 
+from config import (
+    FACETS,
+    PROCESSED_DATA_BUCKET,
+    RAW_DATA_BUCKET,
+    RAW_DATA_FILE,
+    SEGMENTS,
+)
+
 import google.cloud.logging
 import google.cloud.storage
 
-from config import *
 
 # Enable Cloud Logging only when deployed to Cloud Run
 if os.environ.get("K_SERVICE"):
@@ -49,7 +57,8 @@ def download_raw_data():
 
     temp_datafile = "test.csv"
     logging.info(
-        f"  download_raw_data: processing from {RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}"
+        "  download_raw_data: processing from "
+        f"{RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}"
     )
 
     storage_client = google.cloud.storage.Client()
@@ -94,10 +103,15 @@ def process_raw_data(temp_datafile):
                 aggregate[row[FACETS[0]]] = {}
             if row[FACETS[1]] not in aggregate[row[FACETS[0]]].keys():
                 aggregate[row[FACETS[0]]][row[FACETS[1]]] = {}
-            if row[FACETS[2]] not in aggregate[row[FACETS[0]]][row[FACETS[1]]].keys():
+            if (
+                row[FACETS[2]]
+                not in aggregate[row[FACETS[0]]][row[FACETS[1]]].keys()
+            ):
                 aggregate[row[FACETS[0]]][row[FACETS[1]]][row[FACETS[2]]] = {}
 
-            data_loc = aggregate[row[FACETS[0]]][row[FACETS[1]]][row[FACETS[2]]]
+            data_loc = aggregate[row[FACETS[0]]][row[FACETS[1]]][
+                row[FACETS[2]]
+            ]
 
             if "_counter" not in data_loc.keys():
                 data_loc["_counter"] = 0
@@ -116,7 +130,8 @@ def process_raw_data(temp_datafile):
             count_removed += 1
 
     logging.info(
-        f"  process_raw_data: processed {count_recorded} records, removed {count_removed}."
+        f"  process_raw_data: processed {count_recorded} records,"
+        f" removed {count_removed}."
     )
     return aggregate
 
@@ -134,7 +149,6 @@ def write_processed_data(aggregate):
     for facet_a in aggregate.keys():
         for facet_b in aggregate[facet_a].keys():
             for facet_c in aggregate[facet_a][facet_b].keys():
-
                 facet_data = aggregate[facet_a][facet_b][facet_c]
 
                 data_file = f"{facet_a}/{facet_b}/{facet_c}/data.json"
@@ -147,7 +161,6 @@ def write_processed_data(aggregate):
 
 
 if __name__ == "__main__":
-
     logging.info(
         f"🟢 Start process.py with: {RAW_DATA_BUCKET}, {PROCESSED_DATA_BUCKET}."
     )
@@ -156,4 +169,4 @@ if __name__ == "__main__":
     result = process_raw_data(datafile)
     write_processed_data(result)
 
-    logging.info(f"🏁 process.py complete.")
+    logging.info("🏁 process.py complete.")

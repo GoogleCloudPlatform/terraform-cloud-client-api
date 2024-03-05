@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* 
+/*
 app.js - application
 */
 
@@ -31,7 +31,7 @@ app.set('views', './views');
 app.get('/', async (req, res) => {
     logger.info("Request received (TODO: data)")
 
-    // TODO: get real values from dataset. 
+    // TODO: get real values from dataset.
     var squirrel_count = 5
     var data_points = [1, 2, 3, 4, 5]
 

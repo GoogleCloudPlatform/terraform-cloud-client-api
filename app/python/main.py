@@ -16,20 +16,22 @@
 
 
 """
-main.py - the server-side 
+main.py - the server-side
 """
 
 import json
 import logging
+import os
+
+from config import PROCESSED_DATA_BUCKET
+
+from flask import Flask, render_template, request
 
 import google.cloud.logging
 import google.cloud.storage
-from flask import Flask, render_template, request
 
-from config import *
 
 app = Flask(__name__)
-
 
 # Enable Cloud Logging only when deployed to Cloud Run
 if os.environ.get("K_SERVICE"):
@@ -42,8 +44,16 @@ def retrieve_data(fur, age, location):
 
     storage_client = google.cloud.storage.Client()
     processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
-    fragment = processed_bucket.blob(filename).download_as_string()
+    blob = processed_bucket.blob(filename)
 
+    if not blob.exists():
+        logging.warning(
+            f"{PROCESSED_DATA_BUCKET} does not contain {filename}. "
+            "Has the job been run?"
+        )
+        return 0, []
+
+    fragment = blob.download_as_string()
     data = json.loads(fragment)
 
     squirrel_count = data.pop("_counter")
@@ -61,9 +71,13 @@ def home():
     age = request.args.get("age", "Adult")
     location = request.args.get("location", "Above Ground")
 
-    logging.info(f"Request received for fur: {fur}, age: {age}, location: {location}")
+    logging.info(
+        f"Request received for fur: {fur}, age: {age}, location: {location}"
+    )
 
-    squirrel_count, data_points = retrieve_data(fur=fur, age=age, location=location)
+    squirrel_count, data_points = retrieve_data(
+        fur=fur, age=age, location=location
+    )
 
     return render_template(
         "index.html", squirrel_count=squirrel_count, data_points=data_points

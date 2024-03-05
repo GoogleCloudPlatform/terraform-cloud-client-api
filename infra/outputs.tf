@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-
-output "service_url" { 
-    description = "URL of the deployed Cloud Run service"
-    value = google_cloud_run_v2_service.default.uri
+output "project_id" {
+  description = "Google Cloud project ID"
+  value       = var.project_id
 }
 
-output "job_name" { 
-    description = "Name of the deployed Cloud Run Job"
-    value = google_cloud_run_v2_job.default.name
+output "service_url" {
+  description = "URL of the deployed Cloud Run service"
+  value       = google_cloud_run_v2_service.default.uri
+}
+
+output "job_name" {
+  description = "Name of the deployed Cloud Run Job"
+  value       = google_cloud_run_v2_job.default.name
 }

@@ -15,9 +15,11 @@
 # limitations under the License.
 
 
-import pytest
 from bs4 import BeautifulSoup as bs
+
 from main import app as flask_app
+
+import pytest
 
 
 @pytest.fixture()
@@ -25,7 +27,7 @@ def client():
     return flask_app.test_client()
 
 
-def test_not_configured(client, mocker):
+def test_not_configured(client):
     response = client.get("/")
     assert response.status_code == 500
     assert b"PROCESSED_DATA_BUCKET required" in response.data
@@ -35,7 +37,9 @@ def test_mock_data(client, mocker):
     squirrel_count = 20
     data_points = [2, 2, 3, 5, 8]
 
-    mocker.patch("main.retrieve_data", return_value=(squirrel_count, data_points))
+    mocker.patch(
+        "main.retrieve_data", return_value=(squirrel_count, data_points)
+    )
     mocker.patch("main.PROCESSED_DATA_BUCKET", return_value="notarealbucket")
 
     response = client.get("/?fur=Gray")

@@ -18,17 +18,33 @@ locals {
   unique = "${random_id.default.hex}-${var.deployment_name}"
 
   # TODO(glasnt): temporary
-  application_image = "us-central1-docker.pkg.dev/glasnt-squirrel-10019/cloud-run-source-deploy/chart"
+  application_image = "us-docker.pkg.dev/glasnt-squirrel-10019/containers/cloud-client-api/${var.language}:latest"
 }
 
 resource "random_id" "default" {
   byte_length = 4
 }
 
+
+#######################################################################################
+# APIs
+
+module "project_services" {
+  source                      = "terraform-google-modules/project-factory/google//modules/project_services"
+  version                     = "~> 14.0"
+  disable_services_on_destroy = false
+  project_id                  = var.project_id
+
+  activate_apis = [
+    "run.googleapis.com",
+  ]
+}
+
 #######################################################################################
 # Cloud Storage
 
 resource "google_storage_bucket" "processed_data" {
+  project       = var.project_id
   name          = "processed-${local.unique}-${var.project_id}"
   location      = var.region
   storage_class = "REGIONAL"
@@ -38,6 +54,7 @@ resource "google_storage_bucket" "processed_data" {
 }
 
 resource "google_storage_bucket" "raw_data" {
+  project       = var.project_id
   name          = "raw_data-${local.unique}-${var.project_id}"
   location      = var.region
   storage_class = "REGIONAL"
@@ -49,13 +66,14 @@ resource "google_storage_bucket" "raw_data" {
 resource "google_storage_bucket_object" "default" {
   bucket = google_storage_bucket.raw_data.name
   name   = "squirrels.csv"
-  source = "../data/squirrels.csv"
+  source = "${path.module}/data/squirrels.csv"
 }
 
 #######################################################################################
 # Cloud Run Service
 
 resource "google_cloud_run_v2_service" "default" {
+  project  = var.project_id
   name     = "chart-${local.unique}"
   location = var.region
 
@@ -72,9 +90,12 @@ resource "google_cloud_run_v2_service" "default" {
       }
     }
   }
+
+  depends_on = [module.project_services]
 }
 
 resource "google_cloud_run_v2_service_iam_member" "public" {
+  project  = google_cloud_run_v2_service.default.project
   location = google_cloud_run_v2_service.default.location
   name     = google_cloud_run_v2_service.default.name
   role     = "roles/run.invoker"
@@ -85,6 +106,7 @@ resource "google_cloud_run_v2_service_iam_member" "public" {
 # Cloud Run Job
 
 resource "google_cloud_run_v2_job" "default" {
+  project  = var.project_id
   name     = "process-${local.unique}"
   location = var.region
 
@@ -108,19 +130,23 @@ resource "google_cloud_run_v2_job" "default" {
       }
     }
   }
+
+  depends_on = [module.project_services]
 }
 
 
 #######################################################################################
-# Service account - Data Writer 
+# Service account - Data Writer
 
 resource "google_service_account" "writer" {
+  project      = var.project_id
   account_id   = "writer-${local.unique}"
   display_name = "Account with read/write access to data."
 }
 
-// Client APIs need to get the bucket to then get the object. 
+// Client APIs need to get the bucket to then get the object.
 resource "google_project_iam_custom_role" "object_downloader" {
+  project     = var.project_id
   role_id     = "objectDownloader"
   title       = "Cloud Storage Object Downloader"
   description = "Permissions to download an object from a Cloud Storage bucket"
@@ -149,6 +175,7 @@ resource "google_project_iam_member" "writer_logging" {
 # Service account - Read-only
 
 resource "google_service_account" "reader" {
+  project      = var.project_id
   account_id   = "read-only-${local.unique}"
   display_name = "Account with read-only access to data."
 }

@@ -1,0 +1,13 @@
+.terraform.lock.hcl
+terraform.tfstate*
+.terraform/
+
+app/nodejs/node_modules/
+
+app/python/venv/
+app/python/__pycache__/
+app/python/tests/__pycache__/
+app.python/.pytest_cache/
+
+app/java/target/
+app/java/pom.xml.*

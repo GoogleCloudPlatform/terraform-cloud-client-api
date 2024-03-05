@@ -26,7 +26,7 @@ describe('Unit Tests', () => {
         request = supertest(app);
     });
 
-    // TODO: add correct tests here. 
+    // TODO: add correct tests here.
     it('should return OK on GET /', async () => {
         await request.get('/').expect(200);
     });

@@ -19,13 +19,13 @@
 PYTHON=venv/bin/python3
 
 # Setup virtual environment
-venv: 
+venv:
 	python3 -m pip install --upgrade pip
 	python3 -m pip install virtualenv
 	virtualenv venv
 
 # Install dependencies
-install: 
+install:
 	$(PYTHON) -m pip install -r requirements.txt -r tests/requirements.txt
 
 # Start development server
@@ -38,8 +38,8 @@ test: venv
 
 # Show outstanding linting issues
 lint: venv
-	$(PYTHON) -m black --check .
+	$(PYTHON) -m flake8 *.py tests/*.py
 
 # Fix outstanding linting issues
 format: venv
-	$(PYTHON) -m black .
+	$(PYTHON) -m black . -l 79
