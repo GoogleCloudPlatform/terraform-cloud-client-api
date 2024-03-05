@@ -40,8 +40,8 @@ func TestLanguageDeployment(t *testing.T) {
 		cft.DefaultVerify(assert)
 
 		projectID := cft.GetTFSetupStringOutput("project_id")
-		serviceURL := cft.GetTFSetupStringOutput("service_url")
-		jobName := cft.GetTFSetupStringOutput("job_name")
+		serviceURL := cft.GetStringOutput("service_url")
+		jobName := cft.GetStringOutput("job_name")
 
 		assert.Truef(strings.HasSuffix(serviceURL, ".run.app"), "unexpected service URL %q", serviceURL)
 
