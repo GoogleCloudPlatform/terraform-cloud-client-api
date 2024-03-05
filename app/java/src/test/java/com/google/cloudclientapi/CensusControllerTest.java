@@ -33,7 +33,7 @@ public class CensusControllerTest {
 
   @Test
   public void returns_ok_on_default() throws Exception {
-    //TODO: add correct tests here. 
+    //TODO: add correct tests here.
     this.mvc.perform(get("/")).andExpect(status().isOk());
   }
 }

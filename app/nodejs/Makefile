@@ -16,7 +16,7 @@
 
 
 # Install dependencies
-install: 
+install:
 	npm install
 
 # Start development server

@@ -136,7 +136,7 @@ resource "google_cloud_run_v2_job" "default" {
 
 
 #######################################################################################
-# Service account - Data Writer 
+# Service account - Data Writer
 
 resource "google_service_account" "writer" {
   project      = var.project_id
@@ -144,7 +144,7 @@ resource "google_service_account" "writer" {
   display_name = "Account with read/write access to data."
 }
 
-// Client APIs need to get the bucket to then get the object. 
+// Client APIs need to get the bucket to then get the object.
 resource "google_project_iam_custom_role" "object_downloader" {
   project     = var.project_id
   role_id     = "objectDownloader"
