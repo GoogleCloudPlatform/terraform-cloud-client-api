@@ -52,11 +52,11 @@ func TestLanguageDeployment(t *testing.T) {
 		gcloud.Runf(t, "run jobs execute  %s --project %s --region %s  --wait", jobName, projectID, region)
 
 		// After job run, expected to have data.
-		assertResponseContains(t, assert, serviceURL, "/", "2018 Squirrel Census")
+		assertResponseContains(t, assert, serviceURL, "2018 Squirrel Census")
 
 		// Check some known values to confirm data processing
-		assertResponseContains(t, assert, serviceURL, "/?age=Adult&fur=Black&location=Ground+Plane", "count = 66")
-		assertResponseContains(t, assert, serviceURL, "?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95")
+		assertResponseContains(t, assert, serviceURL+"/?age=Adult&fur=Black&location=Ground+Plane", "count = 66")
+		assertResponseContains(t, assert, serviceURL+"/?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95")
 	})
 
 	cft.DefineTeardown(func(assert *assert.Assertions) {
