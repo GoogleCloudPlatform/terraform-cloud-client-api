@@ -49,14 +49,17 @@ for lang in TEMPLATES.keys():
                     # remove java syntax helper (noop in other langs)
                     line = line.replace(' th:inline="javascript"', "")
 
-            # Language-specific placements for various logic 
+            # Language-specific placements for various logic
             if "##" in line:
                 if "##VALUE" in line:
                     if lang == "python" or lang == "nodejs":
                         front_replace, back_replace = "{{ ", " }}"
                     elif lang == "java":
                         if java_javascript_flag:
-                            front_replace, back_replace = "/*[[${", "}]]*/ 'default'"
+                            front_replace, back_replace = (
+                                "/*[[${",
+                                "}]]*/ 'default'",
+                            )
                         else:
                             front_replace, back_replace = (
                                 '<span th:text="${',
@@ -74,7 +77,10 @@ for lang in TEMPLATES.keys():
                         front_replace, back_replace = "[{{ ", " }}]"
                     elif lang == "java":
                         if java_javascript_flag:
-                            front_replace, back_replace = "/*[[${", "}]]*/ 'default'"
+                            front_replace, back_replace = (
+                                "/*[[${",
+                                "}]]*/ 'default'",
+                            )
                         else:
                             front_replace, back_replace = (
                                 '<span th:text="${',
@@ -101,7 +107,9 @@ for lang in TEMPLATES.keys():
                     elif lang == "nodejs":
                         replace = "{{else}}"
                     elif lang == "java":
-                        replace = '</span><span th:unless="${squirrel_count} > 0">'
+                        replace = (
+                            '</span><span th:unless="${squirrel_count} > 0">'
+                        )
                     line = line.replace("##ELSE", replace)
 
                 if "##ENDIF" in line:
@@ -124,7 +132,10 @@ for lang in TEMPLATES.keys():
 
         diffs = []
         for line in difflib.unified_diff(
-            original, output, fromfile=html_output, tofile=f"(new {html_output})"
+            original,
+            output,
+            fromfile=html_output,
+            tofile=f"(new {html_output})",
         ):
             diffs += line
 
