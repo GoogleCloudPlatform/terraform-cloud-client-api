@@ -44,8 +44,16 @@ def retrieve_data(fur, age, location):
 
     storage_client = google.cloud.storage.Client()
     processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
-    fragment = processed_bucket.blob(filename).download_as_string()
+    blob = processed_bucket.blob(filename)
 
+    if not blob.exists():
+        logging.warning(
+            f"{PROCESSED_DATA_BUCKET} does not contain {filename}. "
+            "Has the job been run?"
+        )
+        return 0, []
+
+    fragment = blob.download_as_string()
     data = json.loads(fragment)
 
     squirrel_count = data.pop("_counter")
