@@ -63,9 +63,13 @@ def home():
     age = request.args.get("age", "Adult")
     location = request.args.get("location", "Above Ground")
 
-    logging.info(f"Request received for fur: {fur}, age: {age}, location: {location}")
+    logging.info(
+        f"Request received for fur: {fur}, age: {age}, location: {location}"
+    )
 
-    squirrel_count, data_points = retrieve_data(fur=fur, age=age, location=location)
+    squirrel_count, data_points = retrieve_data(
+        fur=fur, age=age, location=location
+    )
 
     return render_template(
         "index.html", squirrel_count=squirrel_count, data_points=data_points

@@ -37,7 +37,9 @@ def test_mock_data(client, mocker):
     squirrel_count = 20
     data_points = [2, 2, 3, 5, 8]
 
-    mocker.patch("main.retrieve_data", return_value=(squirrel_count, data_points))
+    mocker.patch(
+        "main.retrieve_data", return_value=(squirrel_count, data_points)
+    )
     mocker.patch("main.PROCESSED_DATA_BUCKET", return_value="notarealbucket")
 
     response = client.get("/?fur=Gray")

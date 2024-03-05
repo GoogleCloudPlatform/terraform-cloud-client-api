@@ -38,8 +38,8 @@ test: venv
 
 # Show outstanding linting issues
 lint: venv
-	$(PYTHON) -m black --check .
+	$(PYTHON) -m flake8 *.py tests/*.py
 
 # Fix outstanding linting issues
 format: venv
-	$(PYTHON) -m black .
+	$(PYTHON) -m black . -l 79
