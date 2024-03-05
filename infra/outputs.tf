@@ -16,7 +16,7 @@
 
 output "project_id" {
   description = "Google Cloud project ID"
-  value       = data.google_project.project.id
+  value       = var.project_id
 }
 
 output "service_url" {

@@ -95,6 +95,7 @@ resource "google_cloud_run_v2_service" "default" {
 }
 
 resource "google_cloud_run_v2_service_iam_member" "public" {
+  project  = google_cloud_run_v2_service.default.project
   location = google_cloud_run_v2_service.default.location
   name     = google_cloud_run_v2_service.default.name
   role     = "roles/run.invoker"
@@ -133,9 +134,6 @@ resource "google_cloud_run_v2_job" "default" {
   depends_on = [module.project_services]
 }
 
-data "google_project" "project" {
-  depends_on = [module.project_services]
-}
 
 #######################################################################################
 # Service account - Data Writer 
