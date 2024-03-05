@@ -21,6 +21,8 @@ locals {
     "roles/iam.serviceAccountAdmin",
     "roles/iam.serviceAccountUser",
     "roles/resourcemanager.projectIamAdmin",
+    "roles/iam.roleAdmin",
+    "roles/serviceusage.serviceUsageAdmin",
   ]
 }
 
