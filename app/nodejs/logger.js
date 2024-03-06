@@ -31,7 +31,7 @@ const logger = winston.createLogger({
 
 // Enable Cloud Logging only when deployed to Cloud Run
 if (process.env.K_SERVICE) {
-  logger.transports.append(loggingWinston);
+  logger.transports.push(loggingWinston);
 }
 
 export default logger;
