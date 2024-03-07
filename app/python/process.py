@@ -77,8 +77,8 @@ def process_raw_data(temp_datafile):
     logging.info("  process_raw_data: start processing data")
 
     aggregate = {}
-
-    count_recorded, count_removed = 0, 0
+    ignored_records = 0
+    counted_records = 0
 
     with open(temp_datafile) as f:
         csv_data = csv.DictReader(f)
@@ -88,50 +88,37 @@ def process_raw_data(temp_datafile):
 
     # Process each row.
     for row in data:
-        process = True
 
         # Ignore any records with incomplete data
+        process = True
         for facet in FACETS:
-            if row[facet] == "":
-                process = False
-            if row[facet] == "?":
+            if row[facet] == "" or row[facet] == "?":
+                ignored_records += 1
                 process = False
 
         if process:
-            # pre-create data (could be better way?)
-            if row[FACETS[0]] not in aggregate.keys():
-                aggregate[row[FACETS[0]]] = {}
-            if row[FACETS[1]] not in aggregate[row[FACETS[0]]].keys():
-                aggregate[row[FACETS[0]]][row[FACETS[1]]] = {}
-            if (
-                row[FACETS[2]]
-                not in aggregate[row[FACETS[0]]][row[FACETS[1]]].keys()
-            ):
-                aggregate[row[FACETS[0]]][row[FACETS[1]]][row[FACETS[2]]] = {}
+            # Build aggregate identifier
+            row_key = "/".join([row[f] for f in FACETS])
 
-            data_loc = aggregate[row[FACETS[0]]][row[FACETS[1]]][
-                row[FACETS[2]]
-            ]
+            # Build the base data structure on first interaction
+            if row_key not in aggregate.keys():
+                aggregate[row_key] = {"_counter": 0}
+                for segment in SEGMENTS:
+                    if segment not in aggregate[row_key].keys():
+                        aggregate[row_key][segment] = 0
 
-            if "_counter" not in data_loc.keys():
-                data_loc["_counter"] = 0
-
-            data_loc["_counter"] += 1
-
+            # Record the relevant data
             for segment in SEGMENTS:
-                if segment not in data_loc.keys():
-                    data_loc[segment] = 0
                 if row[segment] == "true":
-                    data_loc[segment] += 1
+                    aggregate[row_key][segment] += 1
 
-            count_recorded += 1
-        else:
-            # Note count of records not recorded (due to data cleanup)
-            count_removed += 1
+            # Increment counters
+            aggregate[row_key]["_counter"] += 1
+            counted_records += 1
 
     logging.info(
-        f"  process_raw_data: processed {count_recorded} records,"
-        f" removed {count_removed}."
+        f"  process_raw_data: processed {counted_records} records,"
+        f" removed {ignored_records}."
     )
     return aggregate
 
@@ -146,16 +133,12 @@ def write_processed_data(aggregate):
     storage_client = google.cloud.storage.Client()
     processed_bucket = storage_client.get_bucket(PROCESSED_DATA_BUCKET)
 
-    for facet_a in aggregate.keys():
-        for facet_b in aggregate[facet_a].keys():
-            for facet_c in aggregate[facet_a][facet_b].keys():
-                facet_data = aggregate[facet_a][facet_b][facet_c]
+    for rowkey in aggregate.keys():
+        data_file = f"{rowkey}/data.json"
+        facet_data = json.dumps(aggregate[rowkey])
+        processed_bucket.blob(data_file).upload_from_string(facet_data)
 
-                data_file = f"{facet_a}/{facet_b}/{facet_c}/data.json"
-                processed_bucket.blob(data_file).upload_from_string(
-                    json.dumps(facet_data)
-                )
-                counter += 1
+        counter += 1
 
     logging.info(f"  write_processed_data: wrote {counter} files.")
 

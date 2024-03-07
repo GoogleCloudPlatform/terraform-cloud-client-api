@@ -31,12 +31,11 @@ def test_raw_data_validate():
 def test_process_raw_data():
     results = process_raw_data(DATAFILE_NAME)
 
-    # Check known data results
-    assert "Gray" in results.keys()
-    assert "Cinnamon" in results.keys()
-    assert "Black" in results.keys()
+    # Check for known values
+    assert "Gray/Adult/Above Ground" in results.keys()
+    assert "Black/Juvenile/Ground Plane" in results.keys()
 
     # Validate a specific aggregate result
-    old_tree_sq = results["Gray"]["Adult"]["Above Ground"]
+    old_tree_sq = results["Gray/Adult/Above Ground"]
     assert old_tree_sq["_counter"] == 561
     assert old_tree_sq["Running"] == 114
