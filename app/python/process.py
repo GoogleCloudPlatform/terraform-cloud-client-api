@@ -23,6 +23,7 @@ process.py - take data in raw_data bucket, process,
 import csv
 import json
 import logging
+import sys
 import os
 
 from config import (
@@ -41,6 +42,8 @@ import google.cloud.storage
 if os.environ.get("K_SERVICE"):
     logging_client = google.cloud.storage.Client()
     logging_client.setup_logging()
+else:
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 def download_raw_data():
