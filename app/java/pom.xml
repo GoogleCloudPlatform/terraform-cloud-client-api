@@ -13,10 +13,10 @@ limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.cloudrun</groupId>
-  <artifactId>template-cloud-client-api</artifactId>
+  <groupId>com.google</groupId>
+  <artifactId>cloud-client-api</artifactId>
   <version>0.1.0</version>
-  <name>>template-cloud-client-api</name>
+  <name>cloud-client-api</name>
   <description>Terraform Cloud Client API</description>
 
   <properties>
@@ -64,33 +64,28 @@ limitations under the License.
       <artifactId>google-cloud-core</artifactId>
       <version>2.28.0</version>
     </dependency>
-
-        <!-- web mvc -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- thymeleaf -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <!-- test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- hot swapping, disable cache for template, enable live reload -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
-
+    <!-- web mvc -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- thymeleaf -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <!-- test -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <!-- hot swapping, disable cache for template, enable live reload -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
     <!-- Optionally include development tools -->
     <!-- Provides Automatic Restart functionality -->
     <dependency>
@@ -108,6 +103,7 @@ limitations under the License.
       <optional>true</optional>
     </dependency>
 
+    <!--- Testing depedencies -->
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
@@ -130,6 +126,8 @@ limitations under the License.
 
   <build>
     <plugins>
+
+      <!--- Build Springboot-->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -143,17 +141,30 @@ limitations under the License.
         </executions>
       </plugin>
 
+      <!--- Build a separate JAR file for the processing job.  -->
       <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
-        <version>3.4.0</version>
-        <configuration>
-          <to>
-            <image>gcr.io/glasnt/TODO-fix-this</image>
-          </to>
-        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>ProcessingJob</id>
+            <goals><goal>jar</goal></goals>
+            <phase>package</phase>
+            <configuration>
+              <classifier>processingjob</classifier>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                  <mainClass>com.google.cloudclientapi.ProcessingJob</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
+      <!--- Linting (TODO: confirm usage)-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
