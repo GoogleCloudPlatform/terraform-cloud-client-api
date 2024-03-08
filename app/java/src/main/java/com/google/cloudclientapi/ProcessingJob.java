@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+
 //
-// ProcessingJob.java - take data in raw_data bucket, 
+// ProcessingJob.java - take data in raw_data bucket,
 //                      process, and store in processed bucket.
 //
 
@@ -31,7 +32,7 @@ abstract class ProcessingJob {
     System.out.println(
         String.format(
             "🟢 Start process.py with: %s, %s", RAW_DATA_BUCKET, PROCESSED_DATA_BUCKET));
-    
+
     // TODO: real processing.
     System.out.println("TODO: IMPLEMENTATION");
   }
