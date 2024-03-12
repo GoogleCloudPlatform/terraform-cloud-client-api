@@ -16,9 +16,9 @@
 
 
 module "deployment" {
-  source     = "../../"
-  project_id = var.project_id
-  region     = var.region
-  language   = var.language
-  version    = "0.1.0a" // TESTING
+  source        = "../../"
+  project_id    = var.project_id
+  region        = var.region
+  language      = var.language
+  image_version = "0.1.0a" // TESTING
 }

@@ -15,7 +15,7 @@
  */
 
 
-variable "version" {
+variable "image_version" {
   type        = string
   description = "Version of application image to use"
   default     = "0.1.0"
