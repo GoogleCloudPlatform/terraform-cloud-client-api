@@ -20,4 +20,5 @@ module "deployment" {
   project_id = var.project_id
   region     = var.region
   language   = var.language
+  version    = var.version
 }
