@@ -17,7 +17,7 @@
 locals {
   unique = "${random_id.default.hex}-${var.deployment_name}"
 
-  application_image = "us-docker.pkg.dev/hsa-public/containers/cloud-client-api/${var.language}:${var.version}"
+  application_image = "us-docker.pkg.dev/hsa-public/containers/cloud-client-api/${var.language}:${var.image_version}"
 }
 
 resource "random_id" "default" {
