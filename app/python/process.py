@@ -22,10 +22,7 @@ process.py - take data in raw_data bucket, process,
 
 import csv
 import json
-import logging
-import sys
 import tempfile
-import os
 
 from config import (
     FACETS,
@@ -38,13 +35,10 @@ from config import (
 import google.cloud.logging
 import google.cloud.storage
 
-
-# Enable Cloud Logging only when deployed to Cloud Run
-if os.environ.get("K_SERVICE"):
-    logging_client = google.cloud.storage.Client()
-    logging_client.setup_logging()
-else:
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+# Setup integrated logging https://cloud.google.com/logging/docs/setup/python
+logging_client = google.cloud.logging.Client()
+logging_client.setup_logging()
+import logging  # noqa: E402
 
 
 def download_raw_data():
