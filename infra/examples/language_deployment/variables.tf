@@ -25,3 +25,7 @@ variable "region" {
 variable "language" {
   description = "Programming language implementation to use (nodejs, java, python)"
 }
+
+variable "image_version" {
+  description = "Version of application image to use."
+}
