@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+
+variable "image_version" {
+  type        = string
+  description = "Version of application image to use"
+  default     = "0.1.0"
+}
+
 variable "project_id" {
   type        = string
   description = "The Google Cloud project ID where resources will be deployed."

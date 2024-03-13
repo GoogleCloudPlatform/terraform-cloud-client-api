@@ -24,6 +24,7 @@ import csv
 import json
 import logging
 import sys
+import tempfile
 import os
 
 from config import (
@@ -58,7 +59,7 @@ def download_raw_data():
     if PROCESSED_DATA_BUCKET is None:
         raise ValueError("PROCESSED_DATA_BUCKET required")
 
-    temp_datafile = "test.csv"
+    temp_datafile = f"{tempfile.mkdtemp()}/raw_data.csv"
     logging.info(
         "  download_raw_data: processing from "
         f"{RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}"
@@ -69,7 +70,7 @@ def download_raw_data():
 
     raw_bucket.blob(RAW_DATA_FILE).download_to_filename(temp_datafile)
 
-    logging.info("  download_raw_data: downloaded data to {temp_datafile}")
+    logging.info(f"  download_raw_data: downloaded data to {temp_datafile}")
     return temp_datafile
 
 
