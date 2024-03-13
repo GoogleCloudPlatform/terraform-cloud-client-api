@@ -17,8 +17,7 @@
 locals {
   unique = "${random_id.default.hex}-${var.deployment_name}"
 
-  # TODO(glasnt): temporary
-  application_image = "us-docker.pkg.dev/glasnt-squirrel-10019/containers/cloud-client-api/${var.language}:latest"
+  application_image = "us-docker.pkg.dev/hsa-public/containers/cloud-client-api/${var.language}:${var.image_version}"
 }
 
 resource "random_id" "default" {
