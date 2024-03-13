@@ -20,23 +20,15 @@ main.py - the server-side
 """
 
 import json
-import logging
-import os
 
-from config import PROCESSED_DATA_BUCKET
+from config import PROCESSED_DATA_BUCKET, logging
 
 from flask import Flask, render_template, request
 
-import google.cloud.logging
 import google.cloud.storage
 
 
 app = Flask(__name__)
-
-# Enable Cloud Logging only when deployed to Cloud Run
-if os.environ.get("K_SERVICE"):
-    logging_client = google.cloud.logging.Client()
-    logging_client.setup_logging()
 
 
 def retrieve_data(fur, age, location):

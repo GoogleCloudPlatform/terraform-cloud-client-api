@@ -15,11 +15,15 @@
 # limitations under the License.
 
 """
-config.py - enviornment variables and default values,
+config.py - environment variables and default values,
             shared with the job and service.
 """
 
 import os
+import sys
+
+import google.cloud.logging
+
 
 # Where the original raw data lives
 RAW_DATA_BUCKET = os.environ.get("RAW_DATA_BUCKET")
@@ -34,3 +38,14 @@ FACETS = ["Primary Fur Color", "Age", "Location"]
 
 # Segmentation to display data by, used for displaying processed data
 SEGMENTS = ["Running", "Chasing", "Climbing", "Eating", "Foraging"]
+
+
+# Setup integrated logging https://cloud.google.com/logging/docs/setup/python
+# But only when authentication available.
+try:
+    logging_client = google.cloud.logging.Client()
+    logging_client.setup_logging()
+    import logging  # noqa: E402
+except google.auth.exceptions.GoogleAuthError:
+    import logging  # noqa: E402
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)

@@ -30,15 +30,11 @@ from config import (
     RAW_DATA_BUCKET,
     RAW_DATA_FILE,
     SEGMENTS,
+    logging
 )
 
-import google.cloud.logging
-import google.cloud.storage
 
-# Setup integrated logging https://cloud.google.com/logging/docs/setup/python
-logging_client = google.cloud.logging.Client()
-logging_client.setup_logging()
-import logging  # noqa: E402
+import google.cloud.storage
 
 
 def download_raw_data():
