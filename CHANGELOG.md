@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.1.0...v0.1.1) (2024-03-13)
+
+
+### Bug Fixes
+
+* correct context-specific logging ([#12](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/12)) ([71f45f6](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/71f45f61791393de378826550745f1671b408458))
+
 ## 0.1.0 (2024-03-08)
 
 
