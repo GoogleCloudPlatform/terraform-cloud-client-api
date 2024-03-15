@@ -1,0 +1,38 @@
+{
+    "packages": {
+        ".": {
+            "release-type": "simple"
+        }
+    },
+    "extra-files": [
+        {
+            "type": "generic",
+            "path": "infra/variables.tf"
+        },
+        {
+            "type": "json",
+            "path": "app/nodejs/package.json",
+            "jsonpath": "$.version"
+        },
+        {
+            "type": "json",
+            "path": "app/nodejs/package-lock.json",
+            "jsonpath": "$.version"
+        },
+        {
+            "type": "json",
+            "path": "app/nodejs/package-lock.json",
+            "jsonpath": "$['packages']['']['version']"
+        },
+        {
+            "type": "xml",
+            "path": "app/java/pom.xml",
+            "jsonpath": "//project/version"
+        },
+        {
+            "type": "toml",
+            "path": "app/python/pom.xml",
+            "jsonpath": "//project/version"
+        }
+    ]
+  }
