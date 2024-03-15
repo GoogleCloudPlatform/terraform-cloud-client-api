@@ -16,12 +16,12 @@
 steps:
   - id: tagname
     name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
-    script: | 
+    script: |
       #!/usr/bin/env bash
 
       TAG_NAME=$(cat version.txt)
 
       echo "Building images for TAG_NAME: ${TAG_NAME}. "
-      gcloud builds submit --config build/images.cloudbuild.yaml --substitutions TAG_NAME=$TAG_NAME 
+      gcloud builds submit --config build/images.cloudbuild.yaml --substitutions TAG_NAME=$TAG_NAME
 
-      
+
