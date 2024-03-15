@@ -30,7 +30,8 @@ from config import (
     RAW_DATA_BUCKET,
     RAW_DATA_FILE,
     SEGMENTS,
-    logging
+    logging,
+    version
 )
 
 
@@ -138,8 +139,9 @@ def write_processed_data(aggregate):
 
 
 if __name__ == "__main__":
+
     logging.info(
-        f"🟢 Start process.py with: {RAW_DATA_BUCKET}, {PROCESSED_DATA_BUCKET}."
+        f"🟢 Start process.py (v{version}) with: {RAW_DATA_BUCKET}, {PROCESSED_DATA_BUCKET}."
     )
 
     datafile = download_raw_data()

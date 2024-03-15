@@ -21,6 +21,8 @@ config.py - environment variables and default values,
 
 import os
 import sys
+import tomllib
+
 
 import google.cloud.logging
 
@@ -49,3 +51,9 @@ try:
 except google.auth.exceptions.GoogleAuthError:
     import logging  # noqa: E402
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+
+
+# Get version from pyproject.toml (not a package, just for convenience)
+with open("pyproject.toml", 'rb') as f:
+    config = tomllib.load(f)
+    version = config["project"]["version"]
