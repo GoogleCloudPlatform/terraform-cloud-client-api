@@ -12,7 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-releaseType: terraform-module
 handleGHRelease: true
-primaryBranch: main
-bumpMinorPreMajor: true
+manifest: true
