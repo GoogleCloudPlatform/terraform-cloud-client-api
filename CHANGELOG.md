@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.1.1...v0.2.0) (2024-03-15)
+
+
+### Features
+
+* release-please config ([#15](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/15)) ([481d8e1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/481d8e19cb4f9cce24ed5047a3698cabd671927d))
+
 ## [0.1.1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.1.0...v0.1.1) (2024-03-13)
 
 
