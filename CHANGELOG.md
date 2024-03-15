@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.2.0...v0.3.0) (2024-03-15)
+
+
+### Features
+
+* show python version in processing job ([#20](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/20)) ([317e7cc](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/317e7cca48b58d2bab9d557b34f27416be4d5bde))
+
+
+### Bug Fixes
+
+* correct release-please config ([#21](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/21)) ([1c26f27](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/1c26f275b0981692fe793a939bdd3bac9a1fc5a3))
+
 ## [0.2.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.1.1...v0.2.0) (2024-03-15)
 
 
