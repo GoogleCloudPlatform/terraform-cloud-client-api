@@ -25,13 +25,6 @@
             "jsonpath": "$['packages']['']['version']"
         },
         {
-            "type": "generic",
-            "path": "app/java/pom.xml"
-        },
-        {   "type": "generic",
-            "path": "app/java/Procfile"
-        },
-        {
             "type": "toml",
             "path": "app/python/pyproject.toml",
             "jsonpath": "$.project.version"
