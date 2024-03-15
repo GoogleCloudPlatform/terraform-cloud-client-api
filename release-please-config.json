@@ -1,0 +1,29 @@
+{
+    "packages": {
+        ".": {
+            "release-type": "simple"
+        }
+    },
+    "extra-files": [
+        {
+            "type": "json",
+            "path": "app/nodejs/package.json",
+            "jsonpath": "$.version"
+        },
+        {
+            "type": "json",
+            "path": "app/nodejs/package-lock.json",
+            "jsonpath": "$.version"
+        },
+        {
+            "type": "json",
+            "path": "app/nodejs/package-lock.json",
+            "jsonpath": "$['packages']['']['version']"
+        },
+        {
+            "type": "xml",
+            "path": "app/java/pom.xml",
+            "jsonpath": "//project/version"
+        }
+    ]
+  }

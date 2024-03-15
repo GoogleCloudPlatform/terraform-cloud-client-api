@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 
 steps:
   - id: python build
+    waitFor: ['-']
     name: gcr.io/k8s-skaffold/pack
     dir: app/python
     entrypoint: pack
@@ -22,7 +23,9 @@ steps:
       - ${_IMAGE_LOCATION}/python:$TAG_NAME
       - --builder=gcr.io/buildpacks/builder:v1
 
+
   - id: nodejs build
+    waitFor: ['-']
     name: gcr.io/k8s-skaffold/pack
     dir: app/nodejs
     entrypoint: pack
@@ -33,6 +36,7 @@ steps:
 
 
   - id: java build
+    waitFor: ['-']
     name: gcr.io/k8s-skaffold/pack
     dir: app/java
     entrypoint: pack
@@ -51,4 +55,4 @@ substitutions:
   _IMAGE_LOCATION: us-docker.pkg.dev/${PROJECT_ID}/containers/cloud-client-api
 
 options:
-  dynamic_substitutions: true
+  dynamicSubstitutions: true
