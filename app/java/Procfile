@@ -1,2 +1,2 @@
-web: java -jar target/cloud-client-api-0.1.0.jar
-process: java -jar target/cloud-client-api-0.1.0-processingjob.jar
+web: java -jar target/cloud-client-api-0.1.0.jar  // x-release-please-version
+process: java -jar target/cloud-client-api-0.1.0-processingjob.jar // x-release-please-version
