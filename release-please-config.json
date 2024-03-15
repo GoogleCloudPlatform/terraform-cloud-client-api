@@ -31,7 +31,7 @@
         },
         {
             "type": "toml",
-            "path": "app/python/pom.xml",
+            "path": "app/python/pyproject.toml",
             "jsonpath": "$.project.version"
         }
     ]
