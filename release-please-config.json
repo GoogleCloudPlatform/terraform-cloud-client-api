@@ -5,10 +5,7 @@
         }
     },
     "extra-files": [
-        {
-            "type": "generic",
-            "path": "infra/variables.tf"
-        },
+        "infra/variables.tf",
         {
             "type": "json",
             "path": "app/nodejs/package.json",
