@@ -3,11 +3,11 @@
 
 # Tagline
 
-Use Cloud SDK Client Libraries to transform and present data in a simple ETL pipeline and visualization web app. 
+Use Cloud SDK Client Libraries to transform and present data in a simple ETL pipeline and visualization web app.
 
 ## Detailed
 
-The following resources that this module will create are: 
+The following resources that this module will create are:
 
  * Cloud Run
  * Cloud Storage
@@ -24,7 +24,7 @@ TODO
 
 ## Usage
 
-Basic usage of this module is as follows: 
+Basic usage of this module is as follows:
 
 
 ```hcl
