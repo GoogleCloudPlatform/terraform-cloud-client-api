@@ -1,0 +1,99 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: terraform-cloud-client-api
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  info:
+    title: Header 1
+    source:
+      repo: https://github.com/googlecloudPlatform/terraform-cloud-client-api
+      sourceType: git
+      dir: /infra
+    actuationTool:
+      flavor: Terraform
+      version: ">= 0.13"
+    description: {}
+  content:
+    examples:
+      - name: language_deployment
+        location: examples/language_deployment
+  interfaces:
+    variables:
+      - name: deployment_name
+        description: Identifier for deployment, included in resource names.
+        varType: string
+        defaultValue: client-api
+      - name: image_version
+        description: Version of application image to use
+        varType: string
+        defaultValue: 0.3.0
+      - name: labels
+        description: A set of key/value label pairs to assign to the resources deployed by this solution.
+        varType: map(string)
+        defaultValue: {}
+      - name: language
+        description: Programming language implementation to use (nodejs, java, python)
+        varType: string
+        required: true
+      - name: project_id
+        description: The Google Cloud project ID where resources will be deployed.
+        varType: string
+        required: true
+      - name: region
+        description: The Google Cloud region where resources will be deployed.
+        varType: string
+        defaultValue: us-central1
+    outputs:
+      - name: job_name
+        description: Name of the deployed Cloud Run Job
+      - name: project_id
+        description: Google Cloud project ID
+      - name: service_url
+        description: URL of the deployed Cloud Run service
+  requirements:
+    roles:
+      - level: Project
+        roles:
+          - roles/storage.admin
+          - roles/run.admin
+          - roles/iam.serviceAccountAdmin
+          - roles/iam.serviceAccountUser
+          - roles/resourcemanager.projectIamAdmin
+          - roles/iam.roleAdmin
+          - roles/serviceusage.serviceUsageAdmin
+    services:
+      - bigquery.googleapis.com
+      - bigquerymigration.googleapis.com
+      - bigquerystorage.googleapis.com
+      - cloudtrace.googleapis.com
+      - datastore.googleapis.com
+      - logging.googleapis.com
+      - monitoring.googleapis.com
+      - servicemanagement.googleapis.com
+      - serviceusage.googleapis.com
+      - sql-component.googleapis.com
+      - storage.googleapis.com
+      - storage-api.googleapis.com
+      - storage-component.googleapis.com
+      - artifactregistry.googleapis.com
+      - cloudbuild.googleapis.com
+      - cloudresourcemanager.googleapis.com
+      - compute.googleapis.com
+      - iam.googleapis.com
+      - run.googleapis.com
