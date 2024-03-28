@@ -35,7 +35,7 @@ module "cloud-client-api" {
 
 Functional examples are included in the [examples](./examples/) directory.
 
-<!-- x-release-please-start-version --> 
+<!-- x-release-please-start-version -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
