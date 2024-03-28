@@ -6,6 +6,7 @@
     },
     "extra-files": [
         "infra/variables.tf",
+        "infra/README.md",
         {
             "type": "json",
             "path": "app/nodejs/package.json",
