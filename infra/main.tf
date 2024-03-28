@@ -156,6 +156,8 @@ resource "google_storage_bucket_iam_member" "writer_raw_data" {
   bucket = google_storage_bucket.raw_data.name
   role   = google_project_iam_custom_role.object_downloader.id
   member = "serviceAccount:${google_service_account.writer.email}"
+
+  depends_on = [google_cloud_run_v2_service.default] # IAM eventual consistency buffer
 }
 
 resource "google_storage_bucket_iam_member" "writer_processed_data" {
@@ -183,6 +185,8 @@ resource "google_storage_bucket_iam_member" "reader_processed_data" {
   bucket = google_storage_bucket.processed_data.name
   role   = google_project_iam_custom_role.object_downloader.id
   member = "serviceAccount:${google_service_account.reader.email}"
+
+  depends_on = [google_cloud_run_v2_service.default] # IAM eventual consistency buffer
 }
 
 resource "google_project_iam_member" "reader_logging" {
