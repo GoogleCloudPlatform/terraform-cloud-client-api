@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.3.0...v0.3.1) (2024-03-28)
+
+
+### Bug Fixes
+
+* automatically update infra/README.md version on release ([#29](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/29)) ([e01e269](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e01e269cc01696d63c50eb884f6e2506b60809ad))
+* metadata, resource length limits ([#25](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/25)) ([bec3cc8](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/bec3cc8760aa611ade4f856585d43ac58a9a8a84))
+* remove Makefile conflict by renaming app makefiles ([#27](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/27)) ([59ec37e](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/59ec37e7b541987e7bf65cff795ba3a67b762c2d))
+
 ## [0.3.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.2.0...v0.3.0) (2024-03-15)
 
 
