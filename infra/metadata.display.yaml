@@ -20,7 +20,7 @@ metadata:
     config.kubernetes.io/local-config: "true"
 spec:
   info:
-    title: Header 1
+    title: Use a Cloud Client SDK
     source:
       repo: https://github.com/googlecloudPlatform/terraform-cloud-client-api
       sourceType: git

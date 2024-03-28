@@ -3,16 +3,11 @@
 
 # Tagline
 
-Use Cloud SDK Client Libraries to transform and present data in a simple ETL pipeline and visualization web app.
+Interact with Google Cloud using the Cloud SDK Client Libraries to transform and query information.
 
 ## Detailed
 
-The following resources that this module will create are:
-
- * Cloud Run
- * Cloud Storage
- * IAM
-
+This solution deploys a processing job, rendering service, and initial unprocessed data, which is then manipulated by the processing job to be viewed by the rendering service.
 
 ## Predeploy
 
