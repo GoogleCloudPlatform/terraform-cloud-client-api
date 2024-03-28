@@ -20,7 +20,7 @@ metadata:
     config.kubernetes.io/local-config: "true"
 spec:
   info:
-    title: Header 1
+    title: Use a Cloud Client
     source:
       repo: https://github.com/googlecloudPlatform/terraform-cloud-client-api
       sourceType: git
@@ -28,8 +28,28 @@ spec:
     actuationTool:
       flavor: Terraform
       version: ">= 0.13"
-    description: {}
+    deploymentDuration:
+        configurationSecs: 60
+        deploymentSecs: 120
+    description:
+      tagline: "Interact with Google Cloud using the Cloud SDK Client Libraries to transform and query information."
+      detailed: "This solution deploys a processing job, rendering service, and initial unprocessed data, which is then manipulated by the processing job to be viewed by the rendering service."
+    cloudProducts:
+      - productId: STORAGE_SECTION
+        pageUrl: ""
+        label: Cloud Storage
+      - productId: RUN_SECTION
+        pageUrl: ""
+        label: "Cloud Run"
   content:
+    architecture:
+      diagramUrl: "https://www.gstatic.com/pantheon/images/solutions/cloud_client_api_v1.svg"
+      description:
+        - "Unprocessed data has been uploaded to a Cloud Storage bucket."
+        - "A Cloud Run job transforms the raw data into a more structured format that the frontend service can understand. The Cloud Run job uploads the processed data in a second Cloud Storage bucket."
+        - "The frontend, hosted as a Cloud Run service, pulls the processed data from the second Cloud Storage bucket."
+        - "The user can visit the web application served by the frontend Cloud Run service."
+
     examples:
       - name: language_deployment
         location: examples/language_deployment

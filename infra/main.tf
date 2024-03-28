@@ -15,13 +15,13 @@
  */
 
 locals {
-  unique = "${random_id.default.hex}-${var.deployment_name}"
+  unique = "${var.deployment_name}-${random_id.default.hex}"
 
   application_image = "us-docker.pkg.dev/hsa-public/containers/cloud-client-api/${var.language}:${var.image_version}"
 }
 
 resource "random_id" "default" {
-  byte_length = 4
+  byte_length = 2
 }
 
 
@@ -139,8 +139,8 @@ resource "google_cloud_run_v2_job" "default" {
 
 resource "google_service_account" "writer" {
   project      = var.project_id
-  account_id   = "writer-${local.unique}"
-  display_name = "Account with read/write access to data."
+  account_id   = "write-${local.unique}"
+  display_name = "SA with write access to Cloud Storage"
 }
 
 // Client APIs need to get the bucket to then get the object.
@@ -156,6 +156,8 @@ resource "google_storage_bucket_iam_member" "writer_raw_data" {
   bucket = google_storage_bucket.raw_data.name
   role   = google_project_iam_custom_role.object_downloader.id
   member = "serviceAccount:${google_service_account.writer.email}"
+
+  depends_on = [google_cloud_run_v2_service.default] # IAM eventual consistency buffer
 }
 
 resource "google_storage_bucket_iam_member" "writer_processed_data" {
@@ -175,14 +177,16 @@ resource "google_project_iam_member" "writer_logging" {
 
 resource "google_service_account" "reader" {
   project      = var.project_id
-  account_id   = "read-only-${local.unique}"
-  display_name = "Account with read-only access to data."
+  account_id   = "read-${local.unique}"
+  display_name = "SA with read-only access access to Cloud Storage"
 }
 
 resource "google_storage_bucket_iam_member" "reader_processed_data" {
   bucket = google_storage_bucket.processed_data.name
   role   = google_project_iam_custom_role.object_downloader.id
   member = "serviceAccount:${google_service_account.reader.email}"
+
+  depends_on = [google_cloud_run_v2_service.default] # IAM eventual consistency buffer
 }
 
 resource "google_project_iam_member" "reader_logging" {
