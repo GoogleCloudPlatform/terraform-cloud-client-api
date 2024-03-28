@@ -35,6 +35,7 @@ module "cloud-client-api" {
 
 Functional examples are included in the [examples](./examples/) directory.
 
+<!-- x-release-please-start-version -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
@@ -56,3 +57,4 @@ Functional examples are included in the [examples](./examples/) directory.
 | service\_url | URL of the deployed Cloud Run service |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- x-release-please-end -->
