@@ -46,13 +46,12 @@ async function retrieveData(fur, age, location) {
       .file(dataFilename);
 
   if (!dataFile.exists()) {
-    logger.warning(`${PROCESSED_DATA_BUCKET} does not contain ${dataFile}. 
-        Has the job been run?`);
+    logger.warning(`${PROCESSED_DATA_BUCKET} does not contain ${dataFile}.` +
+        `Has the job been run?`);
     return 0, [];
   }
   const fragment = await dataFile.download();
   const data = JSON.parse(fragment);
-
   const squirrelCount = data._counter;
   delete data._counter;
 
