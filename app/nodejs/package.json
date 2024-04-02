@@ -9,14 +9,15 @@
     "scripts": {
         "start": "node index.js",
         "test": "mocha test/app.test.js --check-leaks",
-        "lint": "eslint --ext *.js --ext test/*.js",
-        "format": "eslint --fix --ext *.js --ext test/*.js"
+        "lint": "eslint *.js test/*.js",
+        "format": "eslint --fix *.js test/*.js"
     },
     "author": "Google LLC",
     "license": "Apache-2.0",
     "dependencies": {
         "@google-cloud/logging-winston": "^6.0.0",
-        "@google-cloud/storage": "^7.7.0",
+        "@google-cloud/storage": "^7.9.0",
+        "csv-parser": "^3.0.0",
         "express": "^4.19.2",
         "express-handlebars": "^7.1.2",
         "handlebars": "^4.7.8",

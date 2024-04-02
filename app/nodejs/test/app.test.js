@@ -13,7 +13,6 @@
 // limitations under the License.
 
 
-
 'use strict';
 
 import app from '../app.js';
@@ -22,12 +21,12 @@ import supertest from 'supertest';
 let request;
 
 describe('Unit Tests', () => {
-    before(async () => {
-        request = supertest(app);
-    });
+  before(async () => {
+    request = supertest(app);
+  });
 
-    // TODO: add correct tests here.
-    it('should return OK on GET /', async () => {
-        await request.get('/').expect(200);
-    });
+  // TODO: add correct tests here.
+  it('should return OK on GET /', async () => {
+    await request.get('/').expect(200);
+  });
 });
