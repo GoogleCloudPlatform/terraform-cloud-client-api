@@ -20,13 +20,18 @@ import supertest from 'supertest';
 
 let request;
 
-describe('Unit Tests', () => {
+describe('Unconfigured Tests', () => {
   before(async () => {
+    process.env.RAW_DATA_BUCKET = '';
+    process.env.PROCESSED_DATA_BUCKET = '';
+
     request = supertest(app);
   });
 
-  // TODO: add correct tests here.
-  it('should return OK on GET /', async () => {
-    await request.get('/').expect(200);
+  it('should return error on GET /', async () => {
+    await request
+        .get('/')
+        .expect(500)
+        .expect('Environment variable PROCESSED_DATA_BUCKET required');
   });
 });
