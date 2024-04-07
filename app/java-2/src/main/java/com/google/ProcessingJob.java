@@ -67,15 +67,19 @@ public class ProcessingJob
         throws FileNotFoundException, IOException {
         System.out.println("processRawData: start processing data");
         Dictionary<String, Integer> colorAgeLocationToCount = new Hashtable<String, Integer>();
+        int numOfProcessedRows = 0;
+        int numOfIgnoredRows = 0;
         // Go through each row of the CSV file.
         FileReader reader = new FileReader(tempDataFilePath);
         CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader());
         for (CSVRecord record : csvParser) {
+            numOfProcessedRows++;
             // Ignore rows where crucial columns are empty/unknown.
             boolean shouldIgnoreRow = false;
             for (String column : CSV_COLUMNS) {
                 String value = record.get(column);
                 if (value == null || value.isEmpty() || value.equals("?")) {
+                    numOfIgnoredRows++;        
                     shouldIgnoreRow = true;
                 }
             }
@@ -95,6 +99,10 @@ public class ProcessingJob
                 colorAgeLocationToCount.put(key, currCount + 1);
             }
         }
+        System.out.println(String.format(
+            "processRawData: processed %s records, removed %s",
+            numOfProcessedRows, 
+            numOfIgnoredRows));
         return colorAgeLocationToCount;
     }
 
