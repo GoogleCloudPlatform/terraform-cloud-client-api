@@ -29,6 +29,12 @@
       <artifactId>commons-csv</artifactId>
       <version>1.9.0</version>
     </dependency>
+    <!-- Gson is used to convert objects into JSON strings. -->
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
