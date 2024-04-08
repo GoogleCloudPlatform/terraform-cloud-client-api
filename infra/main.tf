@@ -146,7 +146,7 @@ resource "google_service_account" "writer" {
 // Client APIs need to get the bucket to then get the object.
 resource "google_project_iam_custom_role" "object_downloader" {
   project     = var.project_id
-  role_id     = "objectDownloader-${random_id.default.hex}"
+  role_id     = "objectDownloader_${random_id.default.hex}"
   title       = "Cloud Storage Object Downloader"
   description = "Permissions to download an object from a Cloud Storage bucket"
   permissions = ["storage.objects.get", "storage.objects.list", "storage.buckets.get"]
