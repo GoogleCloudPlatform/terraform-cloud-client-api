@@ -145,7 +145,7 @@ function writeProcessedData(aggregate) {
     Object.keys(aggregate).forEach(async function(rowKey) {
       const facetData = aggregate[rowKey];
       processedBucket
-          .file(`${rowKey}/promise_data.json`)
+          .file(`${rowKey}/data.json`)
           .save(JSON.stringify(facetData));
       counter += 1;
     });
