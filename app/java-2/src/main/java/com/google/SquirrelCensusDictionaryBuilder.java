@@ -26,6 +26,25 @@ class SquirrelSegment {
     public int Eating = 0;
     public int Foraging = 0;
 
+    public void bumpCountsBasedOnCsvRow(CSVRecord row) {
+        this._count++;
+        if (row.get("Running").equals("true")) {
+            this.Running++;
+        }
+        if (row.get("Chasing").equals("true")) {
+            this.Chasing++;
+        }
+        if (row.get("Climbing").equals("true")) {
+            this.Climbing++;
+        }
+        if (row.get("Eating").equals("true")) {
+            this.Eating++;
+        }
+        if (row.get("Foraging").equals("true")) {
+            this.Foraging++;
+        }
+    }
+
 }
 
 public class SquirrelCensusDictionaryBuilder {
@@ -66,6 +85,7 @@ public class SquirrelCensusDictionaryBuilder {
                     currSegment = new SquirrelSegment();
                     colorAgeLocationToCount.put(key, currSegment);
                 }
+                currSegment.bumpCountsBasedOnCsvRow(record);
                 currSegment._count++;
             }
         }
