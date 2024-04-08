@@ -66,8 +66,8 @@ func TestLanguageDeployment(t *testing.T) {
 		process_job := gcloud.Run(t, fmt.Sprintf("run jobs describe %s", jobName), gcloudOps)
 		process_bucket := process_job.Get("spec.template.spec.containers[0].env[PROCESS_BUCKET_NAME].value")
 		bucket_objects := gcloud.Run(t,
-			fmt.Sprintf("gcloud storage objects list --exhaustive gs://%s/**/data.json --format value(name)", process_bucket),
-			gcloudOps).Array()
+			fmt.Sprintf("gcloud storage objects list --exhaustive gs://%s/**/data.json", process_bucket),
+			gcloudOps).Get("name").Array()
 		assert.Contains(bucket_objects, "Cinnamon/Juvenile/Ground Plane/data.json")
 		assert.Contains(bucket_objects, "Grey/Adult/Above Ground/data.json")
 
