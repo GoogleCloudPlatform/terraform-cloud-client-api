@@ -10,9 +10,22 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 class SquirrelCensusDictionaryBuildResult {
-    public Dictionary<String, Integer> dictionary;
+    public Dictionary<String, SquirrelSegment> dictionary;
     public int numOfRowsProcessed;
     public int numOfRowsIgnored;
+}
+
+class SquirrelSegment {
+    
+    // Variables names may not follow Java conventions because these names need
+    // to match names used for the Python and JavaScript version of this code.
+    public int _count = 0;
+    public int Running = 0;
+    public int Chasing = 0;
+    public int Climbing = 0;
+    public int Eating = 0;
+    public int Foraging = 0;
+
 }
 
 public class SquirrelCensusDictionaryBuilder {
@@ -21,7 +34,8 @@ public class SquirrelCensusDictionaryBuilder {
 
     public static SquirrelCensusDictionaryBuildResult buildFromRawCsvFile(String csvFilePath) 
         throws FileNotFoundException, IOException {
-        Dictionary<String, Integer> colorAgeLocationToCount = new Hashtable<String, Integer>();
+        Dictionary<String, SquirrelSegment> 
+            colorAgeLocationToCount = new Hashtable<String, SquirrelSegment>();
         int numOfRowsProcessed = 0;
         int numOfRowsIgnored = 0;
         
@@ -47,11 +61,12 @@ public class SquirrelCensusDictionaryBuilder {
                     record.get("Age"),
                     record.get("Location")
                 );
-                Integer currCount = colorAgeLocationToCount.get(key);
-                if (currCount == null) {
-                    currCount = 0;
+                SquirrelSegment currSegment = colorAgeLocationToCount.get(key);
+                if (currSegment == null) {
+                    currSegment = new SquirrelSegment();
+                    colorAgeLocationToCount.put(key, currSegment);
                 }
-                colorAgeLocationToCount.put(key, currCount + 1);
+                currSegment._count++;
             }
         }
 

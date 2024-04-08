@@ -34,7 +34,8 @@ public class ProcessingJob
         throwErrorIfInvalidArgs();
         try {
             String tempDataFilePath = downloadRawData();
-            Dictionary<String, Integer> colorAgeLocationToCount = processRawData(tempDataFilePath);
+            Dictionary<String, SquirrelSegment> 
+                colorAgeLocationToCount = processRawData(tempDataFilePath);
             writeProcessedData(colorAgeLocationToCount);
         } catch (Exception e) {
             System.out.println("ProcessingJob failed: " + e.getMessage());
@@ -68,7 +69,7 @@ public class ProcessingJob
         return tempDataFile.getAbsolutePath();
     }
 
-    public static Dictionary<String, Integer> processRawData(String tempDataFilePath) 
+    public static Dictionary<String, SquirrelSegment> processRawData(String tempDataFilePath) 
         throws FileNotFoundException, IOException {
         System.out.println("processRawData: start processing data");
         SquirrelCensusDictionaryBuildResult result = SquirrelCensusDictionaryBuilder
@@ -84,8 +85,9 @@ public class ProcessingJob
      * Uploads a JSON file (to a Google Cloud Storage bucket)
      * for each combination of facets (for each color-age-location combination).
      */
-    public static void writeProcessedData(Dictionary<String, Integer> colorAgeLocationToCount) 
-        throws UnsupportedEncodingException {
+    public static void writeProcessedData(
+        Dictionary<String, SquirrelSegment> colorAgeLocationToCount
+    ) throws UnsupportedEncodingException {
         System.out.println("writeProcessedData: start writing");
         Gson gson = new Gson();
         Enumeration<String> keys = colorAgeLocationToCount.keys();
