@@ -1,8 +1,5 @@
 package com.google;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
@@ -27,7 +24,6 @@ public class ProcessingJob
     private static String RAW_DATA_BUCKET = System.getenv().get("RAW_DATA_BUCKET");
     private static String PROCESSED_DATA_BUCKET = System.getenv().get("PROCESSED_DATA_BUCKET");
     private static String RAW_DATA_FILE = "squirrels.csv";
-    private static String[] CSV_COLUMNS = {"Primary Fur Color", "Age", "Location"};
 
     public static void main( String[] args )
     {
@@ -75,44 +71,13 @@ public class ProcessingJob
     public static Dictionary<String, Integer> processRawData(String tempDataFilePath) 
         throws FileNotFoundException, IOException {
         System.out.println("processRawData: start processing data");
-        Dictionary<String, Integer> colorAgeLocationToCount = new Hashtable<String, Integer>();
-        int numOfProcessedRows = 0;
-        int numOfIgnoredRows = 0;
-        // Go through each row of the CSV file.
-        FileReader reader = new FileReader(tempDataFilePath);
-        CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader());
-        for (CSVRecord record : csvParser) {
-            numOfProcessedRows++;
-            // Ignore rows where crucial columns are empty/unknown.
-            boolean shouldIgnoreRow = false;
-            for (String column : CSV_COLUMNS) {
-                String value = record.get(column);
-                if (value == null || value.isEmpty() || value.equals("?")) {
-                    numOfIgnoredRows++;        
-                    shouldIgnoreRow = true;
-                }
-            }
-
-            // Bump count in "Color/Age/Location" dictionary.
-            if (!shouldIgnoreRow) {
-                String key = String.format(
-                    "%s/%s/%s",
-                    record.get("Primary Fur Color"),
-                    record.get("Age"),
-                    record.get("Location")
-                );
-                Integer currCount = colorAgeLocationToCount.get(key);
-                if (currCount == null) {
-                    currCount = 0;
-                }
-                colorAgeLocationToCount.put(key, currCount + 1);
-            }
-        }
+        SquirrelCensusDictionaryBuildResult result = SquirrelCensusDictionaryBuilder
+            .buildFromRawCsvFile(tempDataFilePath);
         System.out.println(String.format(
             "processRawData: processed %s records, removed %s",
-            numOfProcessedRows, 
-            numOfIgnoredRows));
-        return colorAgeLocationToCount;
+            result.numOfRowsProcessed, 
+            result.numOfRowsIgnored));
+        return result.dictionary;
     }
 
     /**
