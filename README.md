@@ -2,11 +2,11 @@
 
 This sample app shows:
 
-* Cloud Run 
-* Cloud Storage 
+* Cloud Run
+* Cloud Storage
 * Terraform
 
-## Launch 
+## Launch
 [![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=GITHUB_URL)
 
 *Description*
