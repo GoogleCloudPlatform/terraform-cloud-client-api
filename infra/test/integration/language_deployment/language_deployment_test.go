@@ -45,7 +45,7 @@ func TestLanguageDeployment(t *testing.T) {
 		jobName := cft.GetStringOutput("job_name")
 
 		// Save common arguments for gcloud calls.
-		gcloudOps := gcloud.WithCommonArgs([]string{"--project", projectID, "--region", region})
+		gcloudOps := gcloud.WithCommonArgs([]string{"--project", projectID, "--region", region, "--format", "json"})
 
 		assert.Truef(strings.HasSuffix(serviceURL, ".run.app"), "unexpected service URL %q", serviceURL)
 
@@ -63,7 +63,7 @@ func TestLanguageDeployment(t *testing.T) {
 
 		// Ensure processed files appear as they should in Cloud Storage
 		// Retrieve processed bucket from service envvar
-		process_job := gcloud.Run(t, fmt.Sprintf("run jobs describe %s --format json)", jobName), gcloudOps)
+		process_job := gcloud.Run(t, fmt.Sprintf("run jobs describe %s", jobName), gcloudOps)
 		process_bucket := process_job.Get("spec.template.spec.containers[0].env[PROCESS_BUCKET_NAME].value")
 		bucket_objects := gcloud.Run(t,
 			fmt.Sprintf("gcloud storage objects list --exhaustive gs://%s/**/data.json --format value(name)", process_bucket),
