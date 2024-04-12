@@ -20,6 +20,8 @@ import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import com.google.gson.Gson;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import org.slf4j.Logger;
@@ -74,19 +76,23 @@ public class CensusController {
         return "index";
     }
 
+    /**
+     * @return 
+     *  A SquirrelSegment object representing the contents of the JSON file. 
+     *  Returns null if we're unable to find the file inside the Cloud Storage bucket.
+     */
     private SquirrelSegment retrieveData(String fur, String age, String location) {
         Storage storage = StorageOptions.getDefaultInstance().getService();
         String filePath =  fur + "/" + age + "/" + location + "/data.json";
-        logger.info(filePath); // TODO: Remove this line.
         Blob blob = storage.get(PROCESSED_DATA_BUCKET, filePath);
         if (blob == null) {
-            logger.info("Returning null"); // TODO: Remove this line.
            return null;
         }
-        byte[] content = blob.getContent();
-        logger.info(content.toString());
-        logger.info("See above");
-        return new SquirrelSegment();
+        byte[] jsonAsBytes = blob.getContent();
+        String jsonAsString = new String(jsonAsBytes, StandardCharsets.UTF_8);
+        Gson gson = new Gson();
+        SquirrelSegment squirrelSegment = gson.fromJson(jsonAsString, SquirrelSegment.class); 
+        logger.info("Retrieved data for {} entities.", squirrelSegment._count);
+        return squirrelSegment;
     }
 }
- 
