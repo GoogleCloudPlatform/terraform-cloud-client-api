@@ -49,7 +49,7 @@ variable "language" {
   description = "Programming language implementation to use (nodejs, java, python)"
 
   validation {
-    condition     = contains(["nodejs", "java", "python"], var.language)
+    condition     = contains(["nodejs", "java", "python"], lower(var.language))
     error_message = "Valid names for language: nodejs, java, python."
   }
 }
