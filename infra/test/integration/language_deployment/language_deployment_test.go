@@ -67,11 +67,9 @@ func TestLanguageDeployment(t *testing.T) {
 		process_bucket := process_job.Get("spec.template.spec.template.spec.containers.0.env.#(name==\"PROCESSED_DATA_BUCKET\").value")
 
 		// Use bucket name to assert object state
-		bucket_objects := gcloud.Run(t,
-			fmt.Sprintf("storage objects list --exhaustive gs://%s/**/data.json", process_bucket),
-			gcloudOps).Get("name").Array()
-		assert.Contains(bucket_objects, "Cinnamon/Juvenile/Ground Plane/data.json")
-		assert.Contains(bucket_objects, "Grey/Adult/Above Ground/data.json")
+		object_list := gcloud.Run(t, fmt.Sprintf("storage objects list --exhaustive gs://%s/**/data.json --format json", processed_bucket)).Array()
+		match := utils.GetFirstMatchResult(t, object_list, "name", "Cinnamon/Juvenile/Ground Plane/data.json")
+		assert.Equal(t, "90", match.Get("size").String(), "object must match expected size")
 	})
 
 	cft.DefineTeardown(func(assert *assert.Assertions) {
