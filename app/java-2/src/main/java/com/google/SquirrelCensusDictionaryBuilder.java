@@ -27,25 +27,6 @@ class SquirrelSegment {
     public int Eating = 0;
     public int Foraging = 0;
 
-    public void bumpCountsBasedOnCsvRow(CSVRecord row) {
-        this._count++;
-        if (row.get("Running").equals("true")) {
-            this.Running++;
-        }
-        if (row.get("Chasing").equals("true")) {
-            this.Chasing++;
-        }
-        if (row.get("Climbing").equals("true")) {
-            this.Climbing++;
-        }
-        if (row.get("Eating").equals("true")) {
-            this.Eating++;
-        }
-        if (row.get("Foraging").equals("true")) {
-            this.Foraging++;
-        }
-    }
-
 }
 
 public class SquirrelCensusDictionaryBuilder {
@@ -86,7 +67,7 @@ public class SquirrelCensusDictionaryBuilder {
                     currSegment = new SquirrelSegment();
                     colorAgeLocationToCount.put(key, currSegment);
                 }
-                currSegment.bumpCountsBasedOnCsvRow(record);
+                bumpSquirrelSegmentCountsForCsvRow(currSegment, record);
                 currSegment._count++;
             }
         }
@@ -96,6 +77,25 @@ public class SquirrelCensusDictionaryBuilder {
         result.numOfRowsProcessed = numOfRowsProcessed;
         result.numOfRowsIgnored = numOfRowsIgnored;
         return result;
+    }
+
+    private static bumpSquirrelSegmentCountsForCsvRow(SquirrelSegment squirrelSegment, CSVRecord row) {
+        squirrelSegment._count++;
+        if (row.get("Running").equals("true")) {
+            squirrelSegment.Running++;
+        }
+        if (row.get("Chasing").equals("true")) {
+            squirrelSegment.Chasing++;
+        }
+        if (row.get("Climbing").equals("true")) {
+            squirrelSegment.Climbing++;
+        }
+        if (row.get("Eating").equals("true")) {
+            squirrelSegment.Eating++;
+        }
+        if (row.get("Foraging").equals("true")) {
+            squirrelSegment.Foraging++;
+        }
     }
 
 }
