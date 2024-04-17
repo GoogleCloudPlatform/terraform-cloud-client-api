@@ -1,4 +1,4 @@
-package com.google;
+package com.google.cloudclientapi;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -13,20 +13,6 @@ class SquirrelCensusDictionaryBuildResult {
     public Dictionary<String, SquirrelSegment> dictionary;
     public int numOfRowsProcessed;
     public int numOfRowsIgnored;
-}
-
-class SquirrelSegment {
-    
-    // Variables names may not follow Java conventions because these names need
-    // to match names used for the other versions/languages (e.g. Python) 
-    // of this Jump Start Solution and the names originally used in the raw data file (CSV).
-    public int _count = 0;
-    public int Running = 0;
-    public int Chasing = 0;
-    public int Climbing = 0;
-    public int Eating = 0;
-    public int Foraging = 0;
-
 }
 
 public class SquirrelCensusDictionaryBuilder {
@@ -79,7 +65,7 @@ public class SquirrelCensusDictionaryBuilder {
         return result;
     }
 
-    private static bumpSquirrelSegmentCountsForCsvRow(SquirrelSegment squirrelSegment, CSVRecord row) {
+    private static void bumpSquirrelSegmentCountsForCsvRow(SquirrelSegment squirrelSegment, CSVRecord row) {
         squirrelSegment._count++;
         if (row.get("Running").equals("true")) {
             squirrelSegment.Running++;

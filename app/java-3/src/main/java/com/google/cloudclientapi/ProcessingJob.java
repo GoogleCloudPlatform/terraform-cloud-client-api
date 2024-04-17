@@ -1,4 +1,4 @@
-package com.google;
+package com.google.cloudclientapi;
 
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
