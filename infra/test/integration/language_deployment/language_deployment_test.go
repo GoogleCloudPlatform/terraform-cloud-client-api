@@ -64,7 +64,9 @@ func TestLanguageDeployment(t *testing.T) {
 		// Ensure processed files appear as they should in Cloud Storage
 		// Retrieve processed bucket from service envvar
 		process_job := gcloud.Run(t, fmt.Sprintf("run jobs describe %s", jobName), gcloudOps)
-		process_bucket := process_job.Get("spec.template.spec.template.spec.containers[0].env[PROCESS_BUCKET_NAME].value")
+		process_job.Get("spec.template.spec.template.spec.containers.0.env.#(name==\"PROCESSED_DATA_BUCKET\").value")
+
+		// Use bucket name to assert object state
 		bucket_objects := gcloud.Run(t,
 			fmt.Sprintf("storage objects list --exhaustive gs://%s/**/data.json", process_bucket),
 			gcloudOps).Get("name").Array()
