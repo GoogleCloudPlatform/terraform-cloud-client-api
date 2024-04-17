@@ -31,15 +31,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-class SquirrelSegment {
-    public int _count = 10;
-    public int Running = 1;
-    public int Chasing = 2;
-    public int Climbing = 3;
-    public int Eating = 4;
-    public int Foraging = 5;
-}
-
 @Controller
 public class CensusController {
  
