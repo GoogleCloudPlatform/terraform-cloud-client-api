@@ -51,7 +51,10 @@ def retrieve_data(fur, age, location):
     squirrel_count = data.pop("_counter")
 
     logging.info(f"Retrieved data for {squirrel_count} entities.")
-    return squirrel_count, list(data.values())
+
+    # Ensure data values are returned ordered by key
+    data_points = list(dict(sorted(data.items())).values())
+    return squirrel_count, data_points
 
 
 @app.route("/")
