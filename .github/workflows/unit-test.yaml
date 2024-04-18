@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-## Runs application specific linting and testing
+## Runs application specific linting and testing, across different implementations. 
 # Differs from CFT linting, defined in lint.yaml
 
-name: "Unit test"
+name: "Checks"
 
 on:
   workflow_dispatch:
@@ -24,8 +24,8 @@ on:
       - main
 
 jobs:
-  tmpl-lint:
-    name: "Template Lint"
+  template:
+    name: "Template Validation"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,8 +34,8 @@ jobs:
           python-version: "3.11" # matches /app/python/.python-version
       - run: make validate_generate
 
-  python-lint:
-    name: "Python lint"
+  python:
+    name: "Python"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -49,8 +49,8 @@ jobs:
       - run: make test
       - run: make lint
 
-  nodejs-lint:
-    name: "NodeJS lint"
+  nodejs:
+    name: "NodeJS"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -64,8 +64,8 @@ jobs:
       - run: make test
       - run: make lint
 
-  java-lint:
-    name: "Java lint"
+  java:
+    name: "Java"
     runs-on: ubuntu-latest
     defaults:
       run:
