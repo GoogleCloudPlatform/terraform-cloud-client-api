@@ -54,6 +54,11 @@ the Spring "initialz": https://start.spring.io/
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    <!--
+      spring-boot-devtools is used during development.
+      It disables caching of templates during development.
+      It also enables live-reloading of the web app — upon source code changes.
+    -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
