@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.2](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.3.1...v0.3.2) (2024-04-18)
+
+
+### Bug Fixes
+
+* Ensure all segments are sorted alphabetically by key ([#39](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/39)) ([8bdc14d](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/8bdc14daa59c0bec8119d7036760819096aa4484))
+* ensure custom role is unique ([#34](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/34)) ([89f7ea3](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/89f7ea37d8421ba4d32f597a5e77230f5851d095))
+* Use alphabetical graph label order ([#36](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/36)) ([a5afc8b](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/a5afc8bb60d63fc12c7402e53763d935fd168829))
+
 ## [0.3.1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.3.0...v0.3.1) (2024-03-28)
 
 
