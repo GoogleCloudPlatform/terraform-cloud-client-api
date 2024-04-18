@@ -17,7 +17,6 @@
 package com.google.cloudclientapi;
 
 import com.google.cloud.storage.Blob;
-import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import com.google.gson.Gson;
@@ -33,57 +32,56 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CensusController {
- 
-    private static final String PROCESSED_DATA_BUCKET = System.getenv().get("PROCESSED_DATA_BUCKET");
-    private static final Logger logger = LoggerFactory.getLogger(CensusController.class);
 
-    @GetMapping("/")
-    public String main(
-        @RequestParam(name="fur", required=false, defaultValue="Gray") String fur,
-        @RequestParam(name="age", required=false, defaultValue="Adult") String age,
-        @RequestParam(name="location", required=false, defaultValue="Above Ground") String location,
-        Model model
-    ) {
-        logger.info("Request received for fur: {}, age: {}, location: {}", fur, age, location);
+  private static final String PROCESSED_DATA_BUCKET = System.getenv().get("PROCESSED_DATA_BUCKET");
+  private static final Logger logger = LoggerFactory.getLogger(CensusController.class);
 
-        // Default values (which would be rendered as "No data available.").
-        model.addAttribute("squirrel_count", 0);
-        model.addAttribute("data_points", Arrays.asList("0", "0", "0", "0", "0"));
+  @GetMapping("/")
+  public String main(
+      @RequestParam(name = "fur", required = false, defaultValue = "Gray") String fur,
+      @RequestParam(name = "age", required = false, defaultValue = "Adult") String age,
+      @RequestParam(name = "location", required = false, defaultValue = "Above Ground")
+          String location,
+      Model model) {
+    logger.info("Request received for fur: {}, age: {}, location: {}", fur, age, location);
 
-        SquirrelSegment squirrelSegment = retrieveData(fur, age, location);
-        if (squirrelSegment == null) {
-            return "index";
-        }
+    // Default values (which would be rendered as "No data available.").
+    model.addAttribute("squirrel_count", 0);
+    model.addAttribute("data_points", Arrays.asList("0", "0", "0", "0", "0"));
 
-        model.addAttribute("squirrel_count", Integer.toString(squirrelSegment._count));
-        List<String> dataPoints = Arrays.asList(
-          Integer.toString(squirrelSegment.Chasing),
-          Integer.toString(squirrelSegment.Climbing),
-          Integer.toString(squirrelSegment.Eating),
-          Integer.toString(squirrelSegment.Foraging),
-          Integer.toString(squirrelSegment.Running)
-        );
-        model.addAttribute("data_points", dataPoints);
-        return "index";
+    SquirrelSegment squirrelSegment = retrieveData(fur, age, location);
+    if (squirrelSegment == null) {
+      return "index";
     }
 
-    /**
-     * @return 
-     *  A SquirrelSegment object representing the contents of the JSON file. 
-     *  Returns null if we're unable to find the file inside the Cloud Storage bucket.
-     */
-    private SquirrelSegment retrieveData(String fur, String age, String location) {
-        Storage storage = StorageOptions.getDefaultInstance().getService();
-        String filePath =  fur + "/" + age + "/" + location + "/data.json";
-        Blob blob = storage.get(PROCESSED_DATA_BUCKET, filePath);
-        if (blob == null) {
-           return null;
-        }
-        byte[] jsonAsBytes = blob.getContent();
-        String jsonAsString = new String(jsonAsBytes, StandardCharsets.UTF_8);
-        Gson gson = new Gson();
-        SquirrelSegment squirrelSegment = gson.fromJson(jsonAsString, SquirrelSegment.class); 
-        logger.info("Retrieved data for {} entities.", squirrelSegment._count);
-        return squirrelSegment;
+    model.addAttribute("squirrel_count", Integer.toString(squirrelSegment._count));
+    List<String> dataPoints =
+        Arrays.asList(
+            Integer.toString(squirrelSegment.Chasing),
+            Integer.toString(squirrelSegment.Climbing),
+            Integer.toString(squirrelSegment.Eating),
+            Integer.toString(squirrelSegment.Foraging),
+            Integer.toString(squirrelSegment.Running));
+    model.addAttribute("data_points", dataPoints);
+    return "index";
+  }
+
+  /**
+   * @return A SquirrelSegment object representing the contents of the JSON file. Returns null if
+   *     we're unable to find the file inside the Cloud Storage bucket.
+   */
+  private SquirrelSegment retrieveData(String fur, String age, String location) {
+    Storage storage = StorageOptions.getDefaultInstance().getService();
+    String filePath = fur + "/" + age + "/" + location + "/data.json";
+    Blob blob = storage.get(PROCESSED_DATA_BUCKET, filePath);
+    if (blob == null) {
+      return null;
     }
+    byte[] jsonAsBytes = blob.getContent();
+    String jsonAsString = new String(jsonAsBytes, StandardCharsets.UTF_8);
+    Gson gson = new Gson();
+    SquirrelSegment squirrelSegment = gson.fromJson(jsonAsString, SquirrelSegment.class);
+    logger.info("Retrieved data for {} entities.", squirrelSegment._count);
+    return squirrelSegment;
+  }
 }
