@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-## Runs application specific linting and testing, across different implementations. 
+## Runs application specific linting and testing, across different implementations.
 # Differs from CFT linting, defined in lint.yaml
 
 name: "Checks"
