@@ -15,6 +15,7 @@
 package language_deployment
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -43,25 +44,36 @@ func TestLanguageDeployment(t *testing.T) {
 		serviceURL := cft.GetStringOutput("service_url")
 		jobName := cft.GetStringOutput("job_name")
 
+		// Save common arguments for gcloud calls.
+		gcloudOps := gcloud.WithCommonArgs([]string{"--project", projectID, "--region", region, "--format", "json"})
+
 		assert.Truef(strings.HasSuffix(serviceURL, ".run.app"), "unexpected service URL %q", serviceURL)
 
-		// On initial deployment, not expected to have any data.
+		// On initial deployment, website is serving, but has no data.
 		assertResponseContains(t, assert, serviceURL, "/", "No data available.")
 
 		// Run job
-		gcloud.Runf(t, "run jobs execute  %s --project %s --region %s  --wait", jobName, projectID, region)
+		gcloud.Run(t, fmt.Sprintf("run jobs execute  %s --wait", jobName), gcloudOps)
 
-		// After job run, expected to have data.
+		// After job run, expect website to be serving valid data
 		assertResponseContains(t, assert, serviceURL, "2018 Squirrel Census")
-
 		// Check some known values to confirm data processing
-		assertResponseContains(t, assert, serviceURL+"/?age=Adult&fur=Black&location=Ground+Plane", "count = 66")
-		assertResponseContains(t, assert, serviceURL+"/?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95")
+		assertResponseContains(t, assert, serviceURL+"/?age=Adult&fur=Black&location=Ground+Plane", "count = 66", "points = [5, 4, 19, 36, 19]")
+		assertResponseContains(t, assert, serviceURL+"/?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95", "points = [13, 56, 22, 17, 13]")
+
+		// Ensure processed files appear as they should in Cloud Storage
+		// Retrieve processed bucket from service envvar
+		process_job := gcloud.Run(t, fmt.Sprintf("run jobs describe %s", jobName), gcloudOps)
+		processed_bucket := process_job.Get("spec.template.spec.template.spec.containers.0.env.#(name==\"PROCESSED_DATA_BUCKET\").value")
+
+		// Use bucket name to assert object state
+		object_list := gcloud.Run(t, fmt.Sprintf("storage objects list --exhaustive gs://%s/**/data.json --format json", processed_bucket)).Array()
+		match := utils.GetFirstMatchResult(t, object_list, "name", "Cinnamon/Juvenile/Ground Plane/data.json")
+		assert.Equal(match.Get("size").String(), "90", "object must match expected size")
 	})
 
 	cft.DefineTeardown(func(assert *assert.Assertions) {
 		cft.DefaultTeardown(assert)
-
 	})
 	cft.Test()
 }
