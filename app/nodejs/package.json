@@ -8,6 +8,7 @@
     },
     "scripts": {
         "start": "node index.js",
+        "dev": "npx nodemon index.js",
         "test": "mocha test/app.test.js --check-leaks",
         "lint": "eslint *.js test/*.js",
         "format": "eslint --fix *.js test/*.js"

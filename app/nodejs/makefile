@@ -21,7 +21,7 @@ install:
 
 # Start development server
 dev: install
-	npm start
+	npm run dev
 
 # Run unit tests
 test: install
