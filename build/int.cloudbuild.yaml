@@ -22,21 +22,46 @@ steps:
   - 'TF_VAR_org_id=$_ORG_ID'
   - 'TF_VAR_folder_id=$_FOLDER_ID'
   - 'TF_VAR_billing_account=$_LR_BILLING_ACCOUNT'
-- id: create
+
+# Initialize all tests, then run two parallel sets of tests
+- id: init-all
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestLanguageDeployment --stage init --verbose']
-- id: apply
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestLanguageDeployment --stage apply --verbose']
-- id: verify
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestLanguageDeployment --stage verify --verbose']
-- id: destroy
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestLanguageDeployment --stage destroy --verbose']
+  args: ['/bin/bash', '-c', 'cft test run all --stage init --verbose']
+
+- id: python
+  name: $_CFT_IMAGE
+  waitFor: ['init-all']
+  script: |
+    cft test run TestPythonDeployment --stage init --verbose
+    cft test run TestPythonDeployment --stage apply --verbose
+    cft test run TestPythonDeployment --stage verify --verbose
+    cft test run TestPythonDeployment --stage destroy --verbose
+
+- id: nodejs
+  name: $_CFT_IMAGE
+  waitFor: ['init-all']
+  script: |
+    cft test run TestNodeJSDeployment --stage init --verbose
+    cft test run TestNodeJSDeployment --stage apply --verbose
+    cft test run TestNodeJSDeployment --stage verify --verbose
+    cft test run TestNodeJSDeployment --stage destroy --verbose
+
+- id: java
+  name: $_CFT_IMAGE
+  waitFor: ['init-all']
+  script: |
+    cft test run TestJavaDeployment --stage init --verbose
+    cft test run TestJavaDeployment --stage apply --verbose
+    cft test run TestJavaDeployment --stage verify --verbose
+    cft test run TestJavaDeployment --stage destroy --verbose
+
 tags:
 - 'ci'
 - 'integration'
+
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cft/developer-tools'
   _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '1.19'
+  _CFT_IMAGE: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+options:
+  dynamicSubstitutions: true

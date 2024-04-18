@@ -14,6 +14,10 @@
 
 package language_deployment
 
+// language_deployment.go - common functionality for testing a deployment
+// specific invocations defined in /infra/examples/*_deployment/
+// which map to tests in /infra/test/integration/*_deployment/*_deployment_test.go
+
 import (
 	"fmt"
 	"io"
@@ -29,12 +33,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLanguageDeployment(t *testing.T) {
+func AssertLanguageDeployment(t *testing.T) {
 	region := regionFromEnv()
 
 	cft := tft.NewTFBlueprintTest(t, tft.WithVars(map[string]interface{}{
-		"region":   region,
-		"language": "python", // TODO: generalize
+		"region": region,
 	}))
 
 	cft.DefineVerify(func(assert *assert.Assertions) {
