@@ -18,7 +18,7 @@
 variable "image_version" {
   type        = string
   description = "Version of application image to use"
-  default     = "0.3.1" // x-release-please-version
+  default     = "0.3.2" // x-release-please-version
 }
 
 variable "project_id" {
@@ -49,7 +49,7 @@ variable "language" {
   description = "Programming language implementation to use (nodejs, java, python)"
 
   validation {
-    condition     = contains(["nodejs", "java", "python"], var.language)
+    condition     = contains(["nodejs", "java", "python"], lower(var.language))
     error_message = "Valid names for language: nodejs, java, python."
   }
 }
