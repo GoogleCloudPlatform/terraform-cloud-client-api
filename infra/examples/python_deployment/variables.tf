@@ -17,6 +17,7 @@
 
 variable "project_id" {
   description = "The Google Cloud project ID where resources will be deployed."
+  type        = string
 }
 
 variable "region" {
