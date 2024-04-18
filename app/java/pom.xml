@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 Copyright 2024 Google LLC
 
@@ -16,34 +15,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<!-- 
+<!--
 The very first version of this pom.xml file was generated using
 the Spring "initialz": https://start.spring.io/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.google</groupId>
 	<artifactId>cloud-client-api</artifactId>
 	<version>0.0.0-SNAPSHOT</version>
 	<name>cloud-client-api</name>
 	<description>Terraform Cloud Client API</description>
-	
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-	
+
 	<dependencies>
 
-		<dependency>
+    <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
@@ -51,7 +53,6 @@ the Spring "initialz": https://start.spring.io/
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -64,7 +65,7 @@ the Spring "initialz": https://start.spring.io/
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Logging -->
+    <!-- Logging -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
@@ -82,29 +83,28 @@ the Spring "initialz": https://start.spring.io/
 			<version>2.7</version>
 		</dependency>
 
-		<!-- Google Cloud Storage -->
+    <!-- Google Cloud Storage -->
 		<dependency>
 			<groupId>com.google.cloud</groupId>
 			<artifactId>google-cloud-storage</artifactId>
 			<version>2.36.1</version>
 		</dependency>
 
-		<!-- Gson is used to convert objects to/from JSON strings. -->
+    <!-- Gson is used to convert objects to/from JSON strings. -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.10.1</version>
 		</dependency>
 
-		<!-- Apache Commons CSV is used for parsing CSV. -->
+    <!-- Apache Commons CSV is used for parsing CSV. -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
 			<version>1.9.0</version>
 		</dependency>
 
-	</dependencies>
-
+  </dependencies>
 	<build>
 		<plugins>
 
@@ -120,22 +120,24 @@ the Spring "initialz": https://start.spring.io/
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.3.0</version>
 				<executions>
-				<execution>
-					<id>ProcessingJob</id>
-					<goals><goal>jar</goal></goals>
-					<phase>package</phase>
-					<configuration>
-					<classifier>processingjob</classifier>
-					<archive>
-						<manifest>
-						<addClasspath>true</addClasspath>
-						<!-- We use maven-dependency-plugin to copy dependencies into ./target/libs/. -->
-						<classpathPrefix>libs/</classpathPrefix>
-						<mainClass>com.google.cloudclientapi.ProcessingJob</mainClass>
-						</manifest>
-					</archive>
-					</configuration>
-				</execution>
+					<execution>
+						<id>ProcessingJob</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<classifier>processingjob</classifier>
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<!-- We use maven-dependency-plugin to copy dependencies into ./target/libs/. -->
+									<classpathPrefix>libs/</classpathPrefix>
+									<mainClass>com.google.cloudclientapi.ProcessingJob</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
@@ -161,26 +163,25 @@ the Spring "initialz": https://start.spring.io/
 
 			<!-- Configure linter to enforce Google's Java style guide. -->
 			<plugin>
-                <groupId>com.spotify.fmt</groupId>
-                <artifactId>fmt-maven-plugin</artifactId>
-                <version>2.22.1</version>
+				<groupId>com.spotify.fmt</groupId>
+				<artifactId>fmt-maven-plugin</artifactId>
+				<version>2.22.1</version>
 				<configuration>
 					<style>google</style>
 					<verbose>true</verbose>
 				</configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
 							<!-- Using <goal>format</goal> instead will auto-format/fix your code as you build. -->
 							<!-- Alternatively, to auto-format/fix your code, run: mvn com.spotify.fmt:fmt-maven-plugin:format -->
 							<!-- Unlike <goal>format</goal>, <goal>check</goal> runs during "mvn verify". -->
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 		</plugins>
 	</build>
-
 </project>
