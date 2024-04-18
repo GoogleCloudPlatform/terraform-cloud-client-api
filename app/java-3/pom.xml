@@ -113,11 +113,33 @@ the Spring "initialz": https://start.spring.io/
 					<archive>
 						<manifest>
 						<addClasspath>true</addClasspath>
+						<!-- We use maven-dependency-plugin to copy dependencies into ./target/libs/. -->
+						<classpathPrefix>libs/</classpathPrefix>
 						<mainClass>com.google.cloudclientapi.ProcessingJob</mainClass>
 						</manifest>
 					</archive>
 					</configuration>
 				</execution>
+				</executions>
+			</plugin>
+
+			<!-- The JAR file for the processing job needs dependencies to be copied into a separate folder. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${project.build.directory}/libs
+							</outputDirectory>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
