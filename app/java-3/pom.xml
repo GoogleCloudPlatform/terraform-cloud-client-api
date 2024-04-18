@@ -17,7 +17,7 @@ the Spring "initialz": https://start.spring.io/
 	</parent>
 	<groupId>com.google</groupId>
 	<artifactId>cloud-client-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.0-SNAPSHOT</version>
 	<name>cloud-client-api</name>
 	<description>Terraform Cloud Client API</description>
 	
