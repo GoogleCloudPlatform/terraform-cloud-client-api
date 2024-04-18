@@ -23,8 +23,3 @@ variable "region" {
   description = "The Google Cloud region where resources will be deployed."
   type        = string
 }
-
-variable "language" {
-  description = "Programming language implementation to use"
-  type        = string
-}

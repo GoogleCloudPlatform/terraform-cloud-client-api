@@ -7,7 +7,6 @@ This example illustrates how to use the `cloud-client-api` module, specifying th
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| language | Programming language implementation to use | `string` | "python" | yes |
 | project\_id | The Google Cloud project ID where resources will be deployed. | `string` | n/a | yes |
 | region | The Google Cloud region where resources will be deployed. | `string` | n/a | yes |
 
