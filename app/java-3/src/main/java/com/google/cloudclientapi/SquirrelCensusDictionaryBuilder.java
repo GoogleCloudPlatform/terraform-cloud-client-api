@@ -67,9 +67,6 @@ public class SquirrelCensusDictionaryBuilder {
 
     private static void bumpSquirrelSegmentCountsForCsvRow(SquirrelSegment squirrelSegment, CSVRecord row) {
         squirrelSegment._count++;
-        if (row.get("Running").equals("true")) {
-            squirrelSegment.Running++;
-        }
         if (row.get("Chasing").equals("true")) {
             squirrelSegment.Chasing++;
         }
@@ -81,6 +78,9 @@ public class SquirrelCensusDictionaryBuilder {
         }
         if (row.get("Foraging").equals("true")) {
             squirrelSegment.Foraging++;
+        }
+        if (row.get("Running").equals("true")) {
+            squirrelSegment.Running++;
         }
     }
 

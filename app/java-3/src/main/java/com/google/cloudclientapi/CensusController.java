@@ -57,11 +57,11 @@ public class CensusController {
 
         model.addAttribute("squirrel_count", Integer.toString(squirrelSegment._count));
         List<String> dataPoints = Arrays.asList(
-          Integer.toString(squirrelSegment.Running),
           Integer.toString(squirrelSegment.Chasing),
           Integer.toString(squirrelSegment.Climbing),
           Integer.toString(squirrelSegment.Eating),
-          Integer.toString(squirrelSegment.Foraging)
+          Integer.toString(squirrelSegment.Foraging),
+          Integer.toString(squirrelSegment.Running)
         );
         model.addAttribute("data_points", dataPoints);
         return "index";
