@@ -1,4 +1,3 @@
-#
 # Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
+# Install dependencies
 install:
-	echo "noop"
+	mvn dependency:resolve
 
-# Start development server
+# Build the web app and processing job
+build:
+	mvn package
+
+# Start Spring Boot development server (web app)
 dev:
 	mvn spring-boot:run
 
@@ -27,8 +30,8 @@ test:
 
 # Show outstanding linting issues
 lint:
-	mvn compile checkstyle:check
+	mvn com.spotify.fmt:fmt-maven-plugin:check
 
-# Fix outstanding linting issues
+# Fix some outstanding linting issues
 format:
-	echo "TODO: configure"
+	mvn com.spotify.fmt:fmt-maven-plugin:format

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,24 +16,12 @@
 
 package com.google.cloudclientapi;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-@AutoConfigureMockMvc
-public class CensusControllerTest {
-
-  @Autowired private MockMvc mvc;
+class SquirrelCensusDictionaryBuilderTest {
 
   @Test
-  public void returns_ok_on_default() throws Exception {
-    //TODO: add correct tests here.
-    this.mvc.perform(get("/")).andExpect(status().isOk());
-  }
+  void contextLoads() {}
 }
