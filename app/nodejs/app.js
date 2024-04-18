@@ -56,7 +56,15 @@ async function retrieveData(fur, age, location) {
   delete data._counter;
 
   logger.info(`Retrieved data for ${squirrelCount} entities.`);
-  return [squirrelCount, Object.values(data)];
+
+  // Get aggregate counter values, sorted by their respective key
+  const dataValues = [];
+  Object.keys(data).sort().forEach(function(key) {
+    console.log(`Key: ${key}, data: ${data[key]}`);
+    dataValues.push(data[key]);
+  });
+
+  return [squirrelCount, dataValues];
 }
 
 app.get('/', async (req, res) => {
