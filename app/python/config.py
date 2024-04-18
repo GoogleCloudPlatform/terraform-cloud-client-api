@@ -39,7 +39,7 @@ PROCESSED_DATA_BUCKET = os.environ.get("PROCESSED_DATA_BUCKET")
 FACETS = ["Primary Fur Color", "Age", "Location"]
 
 # Segmentation to display data by, used for displaying processed data
-SEGMENTS = ["Running", "Chasing", "Climbing", "Eating", "Foraging"]
+SEGMENTS = ["Chasing", "Climbing", "Eating", "Foraging", "Running"]
 
 
 # Setup integrated logging https://cloud.google.com/logging/docs/setup/python

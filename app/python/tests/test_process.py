@@ -36,6 +36,7 @@ def test_process_raw_data():
     assert "Black/Juvenile/Ground Plane" in results.keys()
 
     # Validate a specific aggregate result
-    old_tree_sq = results["Gray/Adult/Above Ground"]
-    assert old_tree_sq["_counter"] == 561
-    assert old_tree_sq["Running"] == 114
+    sample = results["Gray/Adult/Above Ground"]
+    assert sample["_counter"] == 561
+    assert sample["Running"] == 114
+    assert sample["Chasing"] == 63
