@@ -128,6 +128,7 @@ the Spring "initialz": https://start.spring.io/
                 <version>2.22.1</version>
 				<configuration>
 					<style>google</style>
+					<verbose>true</verbose>
 				</configuration>
                 <executions>
                     <execution>
