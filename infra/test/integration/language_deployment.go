@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package language_deployment
+package test
 
 // language_deployment.go - common functionality for testing a deployment
 // specific invocations defined in /infra/examples/*_deployment/
