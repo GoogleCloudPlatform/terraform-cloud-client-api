@@ -35,10 +35,10 @@ jobs:
       - run: make validate_generate
 
   python-lint:
-    name: "Python lint" 
+    name: "Python lint"
     runs-on: ubuntu-latest
-    defaults: 
-      run: 
+    defaults:
+      run:
         working-directory: app/python
     steps:
       - uses: actions/checkout@v4
@@ -48,12 +48,12 @@ jobs:
       - run: make install
       - run: make test
       - run: make lint
-    
-  nodejs-lint: 
+
+  nodejs-lint:
     name: "NodeJS lint"
     runs-on: ubuntu-latest
-    defaults: 
-      run: 
+    defaults:
+      run:
         working-directory: app/nodejs
     steps:
       - uses: actions/checkout@v4
@@ -67,8 +67,8 @@ jobs:
   java-lint:
     name: "Java lint"
     runs-on: ubuntu-latest
-    defaults: 
-      run: 
+    defaults:
+      run:
         working-directory: app/java
     steps:
       - uses: actions/checkout@v4
