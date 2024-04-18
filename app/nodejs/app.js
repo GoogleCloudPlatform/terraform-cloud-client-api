@@ -60,7 +60,6 @@ async function retrieveData(fur, age, location) {
   // Get aggregate counter values, sorted by their respective key
   const dataValues = [];
   Object.keys(data).sort().forEach(function(key) {
-    console.log(`Key: ${key}, data: ${data[key]}`);
     dataValues.push(data[key]);
   });
 
