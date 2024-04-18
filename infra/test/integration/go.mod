@@ -1,4 +1,4 @@
-module github.com/terraform-google-modules/terraform-genai-rag/test/integration
+module github.com/terraform-google-modules/terraform-cloud-client-api/test/integration
 
 go 1.21
 

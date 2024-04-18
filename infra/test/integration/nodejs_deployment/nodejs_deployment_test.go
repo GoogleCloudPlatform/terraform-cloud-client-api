@@ -17,7 +17,7 @@ package language_deployment
 import (
 	"testing"
 
-	test "github.com/terraform-google-modules/cloud-client-api/test/integration"
+	test "github.com/terraform-google-modules/terraform-cloud-client-api/test/integration"
 )
 
 func TestNodeJSDeployment(t *testing.T) {
