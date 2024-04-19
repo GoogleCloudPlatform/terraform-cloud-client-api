@@ -42,9 +42,7 @@ class CensusApplicationTest {
   void homePageShouldSayNoDataAvailable() throws Exception {
     try (MockedStatic<GoogleCloudStorage> mockedGcs =
         Mockito.mockStatic(GoogleCloudStorage.class)) {
-      mockedGcs
-          .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
-          .thenReturn(null);
+      mockedGcs.when(() -> GoogleCloudStorage.downloadFileAsString(any(), any())).thenReturn(null);
       this.mockMvc
           .perform(get("/"))
           .andDo(print())
