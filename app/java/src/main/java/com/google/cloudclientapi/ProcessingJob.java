@@ -16,17 +16,11 @@
 
 package com.google.cloudclientapi;
 
-import com.google.cloud.storage.Blob;
-import com.google.cloud.storage.BlobId;
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
 import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Dictionary;
@@ -75,9 +69,8 @@ public class ProcessingJob {
         "downloadRawData: processing from " + RAW_DATA_BUCKET + " to " + PROCESSED_DATA_BUCKET);
 
     // Read from Google Cloud Storage bucket
-    Storage storage = StorageOptions.getDefaultInstance().getService();
-    Blob blob = storage.get(RAW_DATA_BUCKET, RAW_DATA_FILE);
-    blob.downloadTo(tempDataFile.toPath());
+    GoogleCloudStorage.downloadFileToFilePath(
+        RAW_DATA_BUCKET, RAW_DATA_FILE, tempDataFile.toPath());
     logger.info("downloadRawData: downloaded data to " + tempDataFile.getAbsolutePath());
     return tempDataFile.getAbsolutePath();
   }
@@ -103,16 +96,10 @@ public class ProcessingJob {
     logger.info("writeProcessedData: start writing");
     Gson gson = new Gson();
     Enumeration<String> keys = colorAgeLocationToCount.keys();
-    Storage storage = StorageOptions.getDefaultInstance().getService();
     while (keys.hasMoreElements()) {
       String key = keys.nextElement();
       String jsonString = gson.toJson(colorAgeLocationToCount.get(key));
-      BlobId cloudStorageBlobId = BlobId.of(PROCESSED_DATA_BUCKET, key + "/data.json");
-      BlobInfo cloudStorageBlobInfo =
-          BlobInfo.newBuilder(cloudStorageBlobId).setContentType("application/json").build();
-      String utf8CharsetName = StandardCharsets.UTF_8.name();
-      byte[] jsonStringAsByes = jsonString.getBytes(utf8CharsetName);
-      storage.create(cloudStorageBlobInfo, jsonStringAsByes, 0, jsonStringAsByes.length);
+      GoogleCloudStorage.upload(PROCESSED_DATA_BUCKET, key + "/data.json", jsonString);
     }
     logger.info("writeProcessedData: wrote " + colorAgeLocationToCount.size() + " files");
   }
