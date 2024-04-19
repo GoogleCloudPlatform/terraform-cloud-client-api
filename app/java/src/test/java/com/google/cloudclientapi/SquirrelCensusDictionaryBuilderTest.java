@@ -16,12 +16,20 @@
 
 package com.google.cloudclientapi;
 
+import java.io.IOException;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class SquirrelCensusDictionaryBuilderTest {
 
   @Test
-  void contextLoads() {}
+  public void testBuildFromRawCsvFile() throws IOException {
+    String csvFilePath = "../../infra/data/squirrels.csv";
+    SquirrelCensusDictionaryBuildResult result =
+        SquirrelCensusDictionaryBuilder.buildFromRawCsvFile(csvFilePath);
+    SquirrelSegment segment = result.dictionary.get("Gray/Adult/Above Ground");
+    Assertions.assertThat(segment._count).isEqualTo(561);
+    Assertions.assertThat(segment.Running).isEqualTo(114);
+    Assertions.assertThat(segment.Chasing).isEqualTo(63);
+  }
 }

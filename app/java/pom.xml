@@ -65,9 +65,24 @@ the Spring "initialz": https://start.spring.io/
       <scope>runtime</scope>
       <optional>true</optional>
     </dependency>
+
+    <!-- Testing -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+    <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <!-- use 2.9.1 for Java 7 projects -->
+      <version>2.9.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.2</version>
       <scope>test</scope>
     </dependency>
 
