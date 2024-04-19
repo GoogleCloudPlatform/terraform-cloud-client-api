@@ -51,5 +51,5 @@ jobs:
       - run: docker run --rm -e ENABLE_BPMETADATA -v ${{ github.workspace }}:/workspace ${{ steps.variables.outputs.dev-tools }} /usr/local/bin/test_lint.sh
         env:
           ENABLE_BPMETADATA: 1env:
-          EXCLUDE_LINT_DIRS: "\\./app/java/.mvn/wrapper/maven-wrapper.jar"
+          EXCLUDE_LINT_DIRS: \./app/java/.mvn/wrapper/maven-wrapper.jar
 
