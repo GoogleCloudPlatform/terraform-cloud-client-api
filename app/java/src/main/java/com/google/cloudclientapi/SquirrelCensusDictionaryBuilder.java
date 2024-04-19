@@ -68,7 +68,6 @@ public class SquirrelCensusDictionaryBuilder {
           colorAgeLocationToCount.put(key, currSegment);
         }
         bumpSquirrelSegmentCountsForCsvRow(currSegment, record);
-        currSegment._count++;
       }
     }
 
