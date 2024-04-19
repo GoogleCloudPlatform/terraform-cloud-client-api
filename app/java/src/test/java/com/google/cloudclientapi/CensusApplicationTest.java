@@ -17,7 +17,7 @@
 package com.google.cloudclientapi;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -43,7 +43,7 @@ class CensusApplicationTest {
     try (MockedStatic<GoogleCloudStorage> mockedGcs =
         Mockito.mockStatic(GoogleCloudStorage.class)) {
       mockedGcs
-          .when(() -> GoogleCloudStorage.downloadFileAsString(anyString(), anyString()))
+          .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
           .thenReturn(null);
       this.mockMvc
           .perform(get("/"))
@@ -58,7 +58,7 @@ class CensusApplicationTest {
     try (MockedStatic<GoogleCloudStorage> mockedGcs =
         Mockito.mockStatic(GoogleCloudStorage.class)) {
       mockedGcs
-          .when(() -> GoogleCloudStorage.downloadFileAsString(anyString(), anyString()))
+          .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
           .thenReturn(validSquirrelSegmentJson);
       this.mockMvc
           .perform(get("/"))
