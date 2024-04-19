@@ -12,26 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# If you're on Windows, use mvnw.cmd instead of ./mvnw.
+
 # Install dependencies
 install:
-	mvn dependency:resolve
+	./mvnw dependency:resolve
 
 # Build the web app and processing job
 build:
-	mvn package
+	./mvnw package
 
 # Start Spring Boot development server (web app)
 dev:
-	mvn spring-boot:run
+	./mvnw spring-boot:run
 
 # Run unit tests
 test:
-	mvn test
+	./mvnw test
 
 # Show outstanding linting issues
 lint:
-	mvn com.spotify.fmt:fmt-maven-plugin:check
+	./mvnw com.spotify.fmt:fmt-maven-plugin:check
 
 # Fix some outstanding linting issues
 format:
-	mvn com.spotify.fmt:fmt-maven-plugin:format
+	./mvnw com.spotify.fmt:fmt-maven-plugin:format
