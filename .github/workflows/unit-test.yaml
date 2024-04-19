@@ -76,6 +76,6 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: "21" # matches /app/java/pom.xml:properties/maven.compiler.source
+          java-version: "17" # matches /app/java/pom.xml:properties/maven.compiler.source
       - run: make lint
       - run: make test
