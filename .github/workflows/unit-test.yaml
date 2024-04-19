@@ -77,5 +77,6 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "17" # matches /app/java/pom.xml:properties/maven.compiler.source
+      - run: make build # Not needed but leads to well-sectioned (easy to browse) logs.
       - run: make lint
       - run: make test
