@@ -70,6 +70,7 @@ public class CensusController {
     String filePath = fur + "/" + age + "/" + location + "/data.json";
     String jsonAsString = GoogleCloudStorage.downloadFileAsString(PROCESSED_DATA_BUCKET, filePath);
     if (jsonAsString == null) {
+      logger.info("GoogleCloudStorage.downloadFileAsString returned null."); // TODO: Delete this line!
       return null;
     }
     Gson gson = new Gson();
