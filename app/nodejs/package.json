@@ -9,8 +9,8 @@
     "scripts": {
         "start": "node index.js",
         "test": "mocha test/app.test.js --check-leaks",
-        "lint": "eslint --ext *.js --ext test/*.js",
-        "format": "eslint --fix --ext *.js --ext test/*.js"
+        "lint": "eslint",
+        "format": "eslint --fix"
     },
     "author": "Google LLC",
     "license": "Apache-2.0",
@@ -23,8 +23,7 @@
         "winston": "^3.11.0"
     },
     "devDependencies": {
-        "eslint": "^8.57.0",
-        "eslint-config-google": "^0.14.0",
+        "eslint": "^9.0.0",
         "got": "^14.0.0",
         "mocha": "^10.0.0",
         "nodemon": "^3.0.0",
