@@ -69,12 +69,11 @@ async function downloadRawData() {
 async function processRawData(tempDataFile) {
   logger.info('processRawData: start processing data');
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const aggregate = {};
     let ignoredRecords = 0;
     let countedRecords = 0;
     const results = [];
-
 
     fs.createReadStream(tempDataFile)
         .pipe(csv())
@@ -141,7 +140,7 @@ function writeProcessedData(aggregate) {
 
   const processedBucket = storage.bucket(config.PROCESSED_DATA_BUCKET);
 
-  const writeData = new Promise((resolve, reject) => {
+  const writeData = new Promise((resolve) => {
     Object.keys(aggregate).forEach(async function(rowKey) {
       const facetData = aggregate[rowKey];
       processedBucket

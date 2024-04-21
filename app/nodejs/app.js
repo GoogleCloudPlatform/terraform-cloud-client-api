@@ -46,7 +46,7 @@ async function retrieveData(fur, age, location) {
       .file(dataFilename);
 
   if (!dataFile.exists()) {
-    logger.warning(`${PROCESSED_DATA_BUCKET} does not contain ${dataFile}.` +
+    logger.warning(`${config.PROCESSED_DATA_BUCKET} does not contain ${dataFile}.` +
       `Has the job been run?`);
     return 0, [];
   }
