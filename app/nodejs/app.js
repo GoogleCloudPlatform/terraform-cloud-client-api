@@ -23,8 +23,6 @@ import logger from './logger.js';
 import {engine} from 'express-handlebars';
 import {Storage} from '@google-cloud/storage';
 
-import config from './config.js';
-
 const app = express();
 const storage = new Storage();
 
@@ -42,15 +40,16 @@ async function retrieveData(fur, age, location) {
   const dataFilename = [fur, age, location].join('/') + '/data.json';
 
   const dataFile = storage
-      .bucket(config.PROCESSED_DATA_BUCKET)
+      .bucket(process.env.PROCESSED_DATA_BUCKET)
       .file(dataFilename);
 
   if (!dataFile.exists()) {
-    logger.warning(`${config.PROCESSED_DATA_BUCKET} does not contain ${dataFile}.` +
+    logger.warning(`${process.env.PROCESSED_DATA_BUCKET} does not contain ${dataFile}.` +
       `Has the job been run?`);
     return 0, [];
   }
   const fragment = await dataFile.download();
+
   const data = JSON.parse(fragment);
   const squirrelCount = data._counter;
   delete data._counter;
@@ -67,7 +66,7 @@ async function retrieveData(fur, age, location) {
 }
 
 app.get('/', async (req, res) => {
-  if (!config.PROCESSED_DATA_BUCKET) {
+  if (!process.env.PROCESSED_DATA_BUCKET) {
     res.status(500).send('Environment variable PROCESSED_DATA_BUCKET required');
   } else {
     const fur = req.query.fur || 'Gray';

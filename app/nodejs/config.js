@@ -18,15 +18,6 @@ config.js - environment variables and default values,
 */
 
 const config = {
-  // Where the original raw data lives
-  RAW_DATA_BUCKET: process.env.RAW_DATA_BUCKET,
-
-  // Location of the raw data file
-  RAW_DATA_FILE: process.env.RAW_DATA_FILE || 'squirrels.csv',
-
-  // Where the processed data should go
-  PROCESSED_DATA_BUCKET: process.env.PROCESSED_DATA_BUCKET,
-
   // Facets to segment data by, used for building processed data structure
   FACETS: ['Primary Fur Color', 'Age', 'Location'],
 

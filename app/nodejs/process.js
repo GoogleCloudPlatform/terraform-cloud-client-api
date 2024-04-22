@@ -31,7 +31,6 @@ import config from './config.js';
 
 const storage = new Storage();
 
-
 /**
  * Download raw data from Cloud Storage into local file for processing
  * @return {string} Local filename containing downloaded data
@@ -39,22 +38,22 @@ const storage = new Storage();
 async function downloadRawData() {
   logger.info('downloadRawData: start downloading data');
 
-  if (!config.RAW_DATA_BUCKET) {
+  if (!process.env.RAW_DATA_BUCKET) {
     throw new Error('RAW_DATA_BUCKET required');
   }
-  if (!config.PROCESSED_DATA_BUCKET) {
+  if (!process.env.PROCESSED_DATA_BUCKET) {
     throw new Error('PROCESSED_DATA_BUCKET required');
   }
 
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'rawData'));
   const tempDataFile = path.join(tempDir, 'raw_data.csv');
 
-  logger.info(`downloadRawData: processing from ${config.RAW_DATA_BUCKET} ` +
-      `to ${config.PROCESSED_DATA_BUCKET}`);
+  logger.info(`downloadRawData: processing from ${process.env.RAW_DATA_BUCKET} ` +
+      `to ${process.env.PROCESSED_DATA_BUCKET}`);
 
   await storage
-      .bucket(config.RAW_DATA_BUCKET)
-      .file(config.RAW_DATA_FILE)
+      .bucket(process.env.RAW_DATA_BUCKET)
+      .file(process.env.RAW_DATA_FILE || 'squirrels.csv')
       .download({destination: tempDataFile});
 
   logger.info(`downloadRawData: downloaded data to ${tempDataFile}`);
@@ -138,7 +137,7 @@ function writeProcessedData(aggregate) {
 
   let counter = 0;
 
-  const processedBucket = storage.bucket(config.PROCESSED_DATA_BUCKET);
+  const processedBucket = storage.bucket(process.env.PROCESSED_DATA_BUCKET);
 
   const writeData = new Promise((resolve) => {
     Object.keys(aggregate).forEach(async function(rowKey) {
@@ -160,7 +159,7 @@ function writeProcessedData(aggregate) {
 
 const main = async () => {
   logger.info(`🟢 Start process.py with: ` +
-    `${config.RAW_DATA_BUCKET},${config.PROCESSED_DATA_BUCKET}`);
+    `${process.env.RAW_DATA_BUCKET},${process.env.PROCESSED_DATA_BUCKET}`);
 
   const dataFile = await downloadRawData();
   processRawData(dataFile)
