@@ -8,7 +8,7 @@ This solution implements the same functionality in multiple different programmin
 
 Each implementation has two main features:
 
- * A processing script that takes initial raw data and produces aggregate information, and
+ * A processing script that takes initial raw data (.csv file) and produces aggregate information, and
  * A web page that uses the aggregate information to serve a [Chart.js radar](https://www.chartjs.org/docs/latest/charts/radar.html) graph.
 
 The index page for each implementation is served by a [generated template](./templates/README.md).
