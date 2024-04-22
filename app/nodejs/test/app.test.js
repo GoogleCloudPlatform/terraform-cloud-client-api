@@ -43,17 +43,17 @@ describe('No configuration set', () => {
 TODO(glasnt): correct mocking tests
 
 describe("Application with mock data", () => {
-  before(async() => { 
+  before(async() => {
     request = supertest(app);
     //esmock('../app.js', { retrieveData:  async () => [20, [2, 2, 3, 5, 8]] })
   })
 
-  it('should display valid data', async () => { 
+  it('should display valid data', async () => {
     process.env.PROCESSED_DATA_BUCKET = "faux-bucket-123"
 
     const response = await request
         .get('/')
-    
+
     assert.equal(response.status, 200)
     assert.match(response.text, /var count = 20/)
 
