@@ -16,12 +16,15 @@
 'use strict';
 
 import app from '../app.js';
-import supertest from 'supertest';
+import assert from 'assert';
+import supertest from 'supertest'
 
 let request;
 
-describe('Unconfigured Tests', () => {
+
+describe('No configuration set', () => {
   before(async () => {
+
     process.env.RAW_DATA_BUCKET = '';
     process.env.PROCESSED_DATA_BUCKET = '';
 
@@ -29,9 +32,31 @@ describe('Unconfigured Tests', () => {
   });
 
   it('should return error on GET /', async () => {
-    await request
-        .get('/')
-        .expect(500)
-        .expect('Environment variable PROCESSED_DATA_BUCKET required');
+    const response = await request.get("/")
+    assert.equal(response.statusCode, 500)
+    assert.equal(response.text, 'Environment variable PROCESSED_DATA_BUCKET required');
   });
 });
+
+/*
+
+TODO(glasnt): correct mocking tests
+
+describe("Application with mock data", () => {
+  before(async() => { 
+    request = supertest(app);
+    //esmock('../app.js', { retrieveData:  async () => [20, [2, 2, 3, 5, 8]] })
+  })
+
+  it('should display valid data', async () => { 
+    process.env.PROCESSED_DATA_BUCKET = "faux-bucket-123"
+
+    const response = await request
+        .get('/')
+    
+    assert.equal(response.status, 200)
+    assert.match(response.text, /var count = 20/)
+
+  });
+})
+*/
