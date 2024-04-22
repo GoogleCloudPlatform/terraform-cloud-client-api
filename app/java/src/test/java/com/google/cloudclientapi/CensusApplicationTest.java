@@ -35,7 +35,7 @@ class CensusApplicationTest {
 
   @Autowired private MockMvc mockMvc;
 
-  private final String validSquirrelSegmentJson =
+  private final String VALID_SQUIRREL_SEGMENT_JSON =
       "{\"_count\":561,\"Chasing\":63,\"Climbing\":361,\"Eating\":102,\"Foraging\":95,\"Running\":114}";
 
   @Test
@@ -57,7 +57,7 @@ class CensusApplicationTest {
         Mockito.mockStatic(GoogleCloudStorage.class)) {
       mockedGcs
           .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
-          .thenReturn(validSquirrelSegmentJson);
+          .thenReturn(VALID_SQUIRREL_SEGMENT_JSON);
       this.mockMvc
           .perform(get("/"))
           .andDo(print())
