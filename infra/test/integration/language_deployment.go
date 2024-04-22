@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package language_deployment
+package test
+
+// language_deployment.go - common functionality for testing a deployment
+// specific invocations defined in /infra/examples/*_deployment/
+// which map to tests in /infra/test/integration/*_deployment/*_deployment_test.go
 
 import (
 	"fmt"
@@ -29,12 +33,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLanguageDeployment(t *testing.T) {
+func AssertLanguageDeployment(t *testing.T) {
 	region := regionFromEnv()
 
 	cft := tft.NewTFBlueprintTest(t, tft.WithVars(map[string]interface{}{
-		"region":   region,
-		"language": "python", // TODO: generalize
+		"region": region,
 	}))
 
 	cft.DefineVerify(func(assert *assert.Assertions) {
