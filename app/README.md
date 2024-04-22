@@ -17,7 +17,7 @@ The index page for each implementation is served by a [generated template](./tem
 
 Use [Google Cloud Shell](https://cloud.google.com/shell), or a local development installation of the programming language of choice (see [this configuration](../.github/workflows/unit-test.yaml) for language versions currently in use).
 
-Each language includes a `markdown` file that includes common development steps:
+Each language includes a `makefile` file that includes common development steps:
 
  * `make install`: install the package dependencies
  * `make dev`: run a local development web server
