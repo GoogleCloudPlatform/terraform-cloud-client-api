@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-output "project_id" {
-  value = module.project.project_id
+
+output "service_url" {
+  description = "URL of the deployed Cloud Run service"
+  value       = module.deployment.service_url
 }
 
-output "sa_key" {
-  value     = google_service_account_key.int_test.private_key
-  sensitive = true
+output "job_name" {
+  description = "Name of the deployed Cloud Run Job"
+  value       = module.deployment.job_name
 }

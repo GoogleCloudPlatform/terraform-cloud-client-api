@@ -1,15 +1,14 @@
-# Language Deployment
+# Java Deployment
 
-This example illustrates how to use the `cloud-client-api` module.
+This example illustrates how to use the `cloud-client-api` module, specifying the Java implementation
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| language | Programming language implementation to use (nodejs, java, python) | `any` | n/a | yes |
-| project\_id | The Google Cloud project ID where resources will be deployed. | `any` | n/a | yes |
-| region | The Google Cloud region where resources will be deployed. | `any` | n/a | yes |
+| project\_id | The Google Cloud project ID where resources will be deployed. | `string` | n/a | yes |
+| region | The Google Cloud region where resources will be deployed. | `string` | n/a | yes |
 
 ## Outputs
 
