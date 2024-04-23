@@ -62,7 +62,7 @@ func AssertLanguageDeployment(t *testing.T) {
 		assertResponseContains(t, assert, serviceURL, "2018 Squirrel Census")
 		// Check some known values to confirm data processing (spaces in arrays don't matter)
 		assertResponseContains(t, assert, serviceURL+"/?age=Adult&fur=Black&location=Ground+Plane", "count = 66", `5,(\s*)4,(\s*)19,(\s*)36,(\s*)19`)
-		assertResponseContains(t, assert, serviceURL+"/?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95", `13,(\s*)56,(\s*)22,(\s*)17,(\s*)13]`)
+		assertResponseContains(t, assert, serviceURL+"/?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95", `13,(\s*)56,(\s*)22,(\s*)17,(\s*)13`)
 
 		// Ensure processed files appear as they should in Cloud Storage
 		// Retrieve processed bucket from service envvar
@@ -114,7 +114,7 @@ func assertResponseContains(t *testing.T, assert *assert.Assertions, url string,
 
 	for _, fragment := range text {
 
-		assert.Regexp(responseBody, fragment, "couldn't find %q in response body", fragment)
+		assert.Regexpf(responseBody, fragment, "couldn't find %q in response body", fragment)
 	}
 }
 
