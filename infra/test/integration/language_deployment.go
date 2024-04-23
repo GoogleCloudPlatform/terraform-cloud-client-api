@@ -98,7 +98,7 @@ func AssertLanguageDeployment(t *testing.T) {
 			"Running":  {value: "13"},
 		}
 		for facet, tc := range validationTests {
-			assert.Equal(sample_object.Get(facet).String(), tc.value, fmt.Sprintf("field %s must match expected value"))
+			assert.Equal(sample_object.Get(facet).String(), tc.value, fmt.Sprintf("field %s must match expected value", facet))
 		}
 	})
 
