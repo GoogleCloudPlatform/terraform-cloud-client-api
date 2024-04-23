@@ -130,7 +130,8 @@ def write_processed_data(aggregate):
 
     for rowkey in aggregate.keys():
         data_file = f"{rowkey}/data.json"
-        facet_data = json.dumps(aggregate[rowkey])
+        # Convert dictionary to json, removing whitespace
+        facet_data = json.dumps(aggregate[rowkey], separators=(',', ':'))
         processed_bucket.blob(data_file).upload_from_string(facet_data)
 
         counter += 1
