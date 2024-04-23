@@ -61,8 +61,8 @@ func AssertLanguageDeployment(t *testing.T) {
 		// After job run, expect website to be serving valid data
 		assertResponseContains(t, assert, serviceURL, "2018 Squirrel Census")
 		// Check some known values to confirm data processing
-		assertResponseContains(t, assert, serviceURL+"/?age=Adult&fur=Black&location=Ground+Plane", "count = 66", "points = [5, 4, 19, 36, 19]")
-		assertResponseContains(t, assert, serviceURL+"/?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95", "points = [13, 56, 22, 17, 13]")
+		assertResponseContains(t, assert, serviceURL+"/?age=Adult&fur=Black&location=Ground+Plane", "count = 66", "points = [5,4,19,36,19]")
+		assertResponseContains(t, assert, serviceURL+"/?age=Juvenile&fur=Gray&location=Above+Ground", "count = 95", "points = [13,56,22,17,13]")
 
 		// Ensure processed files appear as they should in Cloud Storage
 		// Retrieve processed bucket from service envvar
