@@ -73,7 +73,7 @@ func AssertLanguageDeployment(t *testing.T) {
 
 		// Use bucket name to assert objects state
 		object_list := gcloud.Run(t, fmt.Sprintf("storage objects list --exhaustive gs://%s/**", processed_bucket)).Array()
-		assert.Equal(t, len(object_list), 12, "expect twelve objects in bucket")
+		assert.Equal(len(object_list), 12, "expect twelve objects in bucket")
 
 		// Confirm contents of a bucket
 		// Uses terratest-shell directly due to space in file name
@@ -98,7 +98,7 @@ func AssertLanguageDeployment(t *testing.T) {
 			"Running":  {value: "13"},
 		}
 		for facet, tc := range validationTests {
-			assert.Equal(t, sample_object.Get(facet).String(), tc.value, fmt.Sprintf("field %s must match expected value"))
+			assert.Equal(sample_object.Get(facet).String(), tc.value, fmt.Sprintf("field %s must match expected value"))
 		}
 	})
 
