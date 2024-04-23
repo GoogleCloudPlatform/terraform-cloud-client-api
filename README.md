@@ -4,20 +4,16 @@ This sample app shows:
 
 * Cloud Run
 * Cloud Storage
+* Cloud Logging
 * Terraform
 
-## Launch
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=GITHUB_URL)
+## Deployment
 
-*Description*
+See [infra/README.md](infra/README.md).
 
-> **🧪 Preview:** Any notes about stability or launch stage.
+## Development
 
-## Features
-
-## Getting Started
-
-### Prerequisites
+See [app/README.md](app/README.md).
 
 ## Contributing
 
