@@ -50,7 +50,7 @@ public class CensusController {
       return "index";
     }
 
-    model.addAttribute("squirrel_count", Integer.toString(squirrelSegment._count));
+    model.addAttribute("squirrel_count", Integer.toString(squirrelSegment._counter));
     List<String> dataPoints =
         Arrays.asList(
             Integer.toString(squirrelSegment.Chasing),
@@ -74,7 +74,7 @@ public class CensusController {
     }
     Gson gson = new Gson();
     SquirrelSegment squirrelSegment = gson.fromJson(jsonAsString, SquirrelSegment.class);
-    logger.info("Retrieved data for {} entities.", squirrelSegment._count);
+    logger.info("Retrieved data for {} entities.", squirrelSegment._counter);
     return squirrelSegment;
   }
 }

@@ -28,7 +28,7 @@ class SquirrelCensusDictionaryBuilderTest {
     SquirrelCensusDictionaryBuildResult result =
         SquirrelCensusDictionaryBuilder.buildFromRawCsvFile(csvFilePath);
     SquirrelSegment segment = result.dictionary.get("Gray/Adult/Above Ground");
-    Assertions.assertThat(segment._count).isEqualTo(561);
+    Assertions.assertThat(segment._counter).isEqualTo(561);
     Assertions.assertThat(segment.Running).isEqualTo(114);
     Assertions.assertThat(segment.Chasing).isEqualTo(63);
   }

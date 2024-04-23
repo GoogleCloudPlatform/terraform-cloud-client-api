@@ -80,7 +80,7 @@ public class SquirrelCensusDictionaryBuilder {
 
   private static void bumpSquirrelSegmentCountsForCsvRow(
       SquirrelSegment squirrelSegment, CSVRecord row) {
-    squirrelSegment._count++;
+    squirrelSegment._counter++;
     if (row.get("Chasing").equals("true")) {
       squirrelSegment.Chasing++;
     }

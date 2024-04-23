@@ -36,7 +36,7 @@ class CensusApplicationTest {
   @Autowired private MockMvc mockMvc;
 
   private final String VALID_SQUIRREL_SEGMENT_JSON =
-      "{\"_count\":561,\"Chasing\":63,\"Climbing\":361,\"Eating\":102,\"Foraging\":95,\"Running\":114}";
+      "{\"_counter\":561,\"Chasing\":63,\"Climbing\":361,\"Eating\":102,\"Foraging\":95,\"Running\":114}";
 
   @Test
   void homePageShouldSayNoDataAvailable() throws Exception {
