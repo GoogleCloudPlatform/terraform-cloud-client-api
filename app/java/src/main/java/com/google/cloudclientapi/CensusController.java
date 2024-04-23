@@ -43,7 +43,7 @@ public class CensusController {
 
     // Default values (which would be rendered as "No data available.").
     model.addAttribute("squirrel_count", 0);
-    model.addAttribute("data_points", Arrays.asList("0", "0", "0", "0", "0"));
+    model.addAttribute("data_points", Arrays.asList(0, 0, 0, 0, 0));
 
     SquirrelSegment squirrelSegment = retrieveData(fur, age, location);
     if (squirrelSegment == null) {
