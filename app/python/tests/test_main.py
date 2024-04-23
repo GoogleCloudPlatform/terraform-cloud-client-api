@@ -53,5 +53,5 @@ def test_mock_data(client, mocker):
 
     # Can't check the canvas, so check the javascript
     response_html = response.data.decode("UTF-8")
-    assert f"var count = {squirrel_count}" in response_html
-    assert f"var points = {data_points}" in response_html
+    assert f"var count = 20" in response_html
+    assert f"var points = [2,2,3,5,8]" in response_html
