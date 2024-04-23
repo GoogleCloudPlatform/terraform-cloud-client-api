@@ -30,7 +30,9 @@ import (
 	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/gcloud"
 	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/tft"
 	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/utils"
+	"github.com/gruntwork-io/terratest/modules/shell"
 	"github.com/stretchr/testify/assert"
+	"github.com/tidwall/gjson"
 )
 
 func AssertLanguageDeployment(t *testing.T) {
@@ -70,8 +72,34 @@ func AssertLanguageDeployment(t *testing.T) {
 		processed_bucket := process_job.Get("spec.template.spec.template.spec.containers.0.env.#(name==\"PROCESSED_DATA_BUCKET\").value")
 
 		// Use bucket name to assert objects state
-		object_list := gcloud.Run(t, fmt.Sprintf("storage objects list --exhaustive gs://%s/**/data.json --format json", processed_bucket)).Array()
+		object_list := gcloud.Run(t, fmt.Sprintf("storage objects list --exhaustive gs://%s/**", processed_bucket)).Array()
 		assert.Equal(t, len(object_list), 12, "expect twelve objects in bucket")
+
+		// Confirm contents of a bucket
+		// Uses terratest-shell directly due to space in file name
+		sample_file_name := "Cinnamon/Juvenile/Ground Plane/data.json"
+		args := []string{"storage", "cat", fmt.Sprintf("gs://%s/%s", processed_bucket, sample_file_name)}
+		gcloudCmd := shell.Command{
+			Command: "gcloud",
+			Args:    append(args),
+		}
+		result, _ := shell.RunCommandAndGetStdOutE(t, gcloudCmd)
+		sample_object := gjson.Parse(result)
+
+		// Check all keys value  in sample object
+		validationTests := map[string]struct {
+			value string
+		}{
+			"_counter": {value: "38"},
+			"Chasing":  {value: "3"},
+			"Climbing": {value: "4"},
+			"Eating":   {value: "16"},
+			"Foraging": {value: "14"},
+			"Running":  {value: "13"},
+		}
+		for facet, tc := range validationTests {
+			assert.Equal(t, sample_object.Get(facet).String(), tc.value, fmt.Sprintf("field %s must match expected value"))
+		}
 	})
 
 	cft.DefineTeardown(func(assert *assert.Assertions) {
