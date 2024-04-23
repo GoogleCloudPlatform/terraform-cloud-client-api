@@ -50,14 +50,14 @@ public class CensusController {
       return "index";
     }
 
-    model.addAttribute("squirrel_count", Integer.toString(squirrelSegment._counter));
-    List<String> dataPoints =
+    model.addAttribute("squirrel_count", squirrelSegment._counter);
+    List<Integer> dataPoints =
         Arrays.asList(
-            Integer.toString(squirrelSegment.Chasing),
-            Integer.toString(squirrelSegment.Climbing),
-            Integer.toString(squirrelSegment.Eating),
-            Integer.toString(squirrelSegment.Foraging),
-            Integer.toString(squirrelSegment.Running));
+            squirrelSegment.Chasing,
+            squirrelSegment.Climbing,
+            squirrelSegment.Eating,
+            squirrelSegment.Foraging,
+            squirrelSegment.Running);
     model.addAttribute("data_points", dataPoints);
     return "index";
   }
