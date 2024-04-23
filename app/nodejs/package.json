@@ -9,7 +9,7 @@
     "scripts": {
         "start": "node index.js",
         "dev": "npx nodemon index.js",
-        "test": "mocha test/app.test.js --check-leaks --timeout 10000",
+        "test": "mocha test/app.test.js --check-leaks",
         "lint": "eslint",
         "format": "eslint --fix"
     },
