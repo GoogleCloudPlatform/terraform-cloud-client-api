@@ -1,5 +1,5 @@
 /**
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-variable "project_id" {
-  description = "The Google Cloud project ID where resources will be deployed."
-}
 
-variable "region" {
-  description = "The Google Cloud region where resources will be deployed."
-}
-
-variable "language" {
-  description = "Programming language implementation to use (nodejs, java, python)"
+module "deployment" {
+  source     = "../../"
+  project_id = var.project_id
+  region     = var.region
+  language   = "nodejs"
 }

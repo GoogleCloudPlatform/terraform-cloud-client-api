@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-output "project_id" {
-  value = module.project.project_id
+
+variable "project_id" {
+  description = "The Google Cloud project ID where resources will be deployed."
+  type        = string
 }
 
-output "sa_key" {
-  value     = google_service_account_key.int_test.private_key
-  sensitive = true
+variable "region" {
+  description = "The Google Cloud region where resources will be deployed."
+  type        = string
 }
