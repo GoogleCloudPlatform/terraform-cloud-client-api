@@ -16,27 +16,55 @@ timeout: 36000s
 steps:
 - id: prepare
   dir: infra
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  name: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS
   args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && prepare_environment']
   env:
   - 'TF_VAR_org_id=$_ORG_ID'
   - 'TF_VAR_folder_id=$_FOLDER_ID'
   - 'TF_VAR_billing_account=$_LR_BILLING_ACCOUNT'
-- id: create
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestLanguageDeployment --stage init --verbose']
-- id: apply
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestLanguageDeployment --stage apply --verbose']
-- id: verify
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestLanguageDeployment --stage verify --verbose']
-- id: destroy
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestLanguageDeployment --stage destroy --verbose']
+
+# Initialize all tests, then run two parallel sets of tests
+- id: init-all
+  name: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS
+  args: ['/bin/bash', '-c', 'cft test run all --stage init --verbose']
+
+- id: python
+  name: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS
+  waitFor: ['init-all']
+  script: |
+    #!/bin/bash -e
+    cft test run TestPythonDeployment --stage init --verbose
+    cft test run TestPythonDeployment --stage apply --verbose
+    cft test run TestPythonDeployment --stage verify --verbose
+    cft test run TestPythonDeployment --stage destroy --verbose
+
+### Uncomment when implemented
+#- id: nodejs
+#  name: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS
+#  waitFor: ['init-all']
+#  script: |
+#    #!/bin/bash -e
+#    cft test run TestNodeJSDeployment --stage init --verbose
+#    cft test run TestNodeJSDeployment --stage apply --verbose
+#    cft test run TestNodeJSDeployment --stage verify --verbose
+#    cft test run TestNodeJSDeployment --stage destroy --verbose
+
+### Uncomment when implemented
+#- id: java
+#  name: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS
+#  waitFor: ['init-all']
+#  script: |
+#    #!/bin/bash -e
+#    cft test run TestJavaDeployment --stage init --verbose
+#    cft test run TestJavaDeployment --stage apply --verbose
+#    cft test run TestJavaDeployment --stage verify --verbose
+#    cft test run TestJavaDeployment --stage destroy --verbose
+
 tags:
 - 'ci'
 - 'integration'
+
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cft/developer-tools'
   _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '1.19'
+
