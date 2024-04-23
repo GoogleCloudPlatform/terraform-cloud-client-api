@@ -31,7 +31,7 @@ from config import (
     RAW_DATA_FILE,
     SEGMENTS,
     logging,
-    version
+    version,
 )
 
 

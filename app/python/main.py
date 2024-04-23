@@ -74,8 +74,8 @@ def home():
         fur=fur, age=age, location=location
     )
 
-    # for validation testing, make array have no whitespace (to match other languages)
-    data_points = str(data_points).replace(' ', "")
+    # for validation testing, make array have no whitespace
+    data_points = str(data_points).replace(" ", "")
 
     return render_template(
         "index.html", squirrel_count=squirrel_count, data_points=data_points
