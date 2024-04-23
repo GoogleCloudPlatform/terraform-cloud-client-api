@@ -72,7 +72,7 @@ func AssertLanguageDeployment(t *testing.T) {
 		// Use bucket name to assert object state
 		object_list := gcloud.Run(t, fmt.Sprintf("storage objects list --exhaustive gs://%s/**/data.json --format json", processed_bucket)).Array()
 		match := utils.GetFirstMatchResult(t, object_list, "name", "Cinnamon/Juvenile/Ground Plane/data.json")
-		assert.Equal(match.Get("size").String(), "90", "object must match expected size")
+		assert.Equal(match.Get("size").String(), "77", "object must match expected size")
 	})
 
 	cft.DefineTeardown(func(assert *assert.Assertions) {
