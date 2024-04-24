@@ -53,7 +53,7 @@ def download_raw_data():
     temp_datafile = f"{tempfile.mkdtemp()}/raw_data.csv"
     logging.info(
         "  download_raw_data: processing from "
-        f"{RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}"
+        f"{RAW_DATA_BUCKET}"
     )
 
     storage_client = google.cloud.storage.Client()
