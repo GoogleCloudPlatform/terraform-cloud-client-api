@@ -33,7 +33,7 @@ public class CensusController {
   private static final Logger logger = LoggerFactory.getLogger(CensusController.class);
 
   @GetMapping("/")
-  public String main(
+  public String index(
       @RequestParam(name = "fur", required = false, defaultValue = "Gray") String fur,
       @RequestParam(name = "age", required = false, defaultValue = "Adult") String age,
       @RequestParam(name = "location", required = false, defaultValue = "Above Ground")
