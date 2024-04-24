@@ -63,6 +63,11 @@ public class CensusController {
   }
 
   /**
+   * Retrieve the data about a specific segment of squirrels from Google Cloud Storage a bucket.
+   *
+   * @param fur The squirrel segment's fur.
+   * @param age The squirrel segment's age.
+   * @param location The squirrel segment's location.
    * @return A SquirrelSegment object representing the contents of the JSON file. Returns null if
    *     we're unable to find the file inside the Cloud Storage bucket.
    */
