@@ -65,8 +65,7 @@ public class ProcessingJob {
     // Create temporary folder and file
     Path tempDir = Files.createTempDirectory("rawData");
     File tempDataFile = new File(tempDir.toFile(), "raw_data.csv");
-    logger.info(
-        "downloadRawData: processing from " + RAW_DATA_BUCKET);
+    logger.info("downloadRawData: processing from " + RAW_DATA_BUCKET);
 
     // Read from Google Cloud Storage bucket
     GoogleCloudStorage.downloadFileToFilePath(
