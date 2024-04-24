@@ -28,7 +28,7 @@ import java.util.Enumeration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ProcessingJob {
+public final class ProcessingJob {
 
   private static String RAW_DATA_BUCKET = System.getenv().get("RAW_DATA_BUCKET");
   private static String PROCESSED_DATA_BUCKET = System.getenv().get("PROCESSED_DATA_BUCKET");
