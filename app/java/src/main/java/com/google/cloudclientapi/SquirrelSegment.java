@@ -21,9 +21,8 @@ package com.google.cloudclientapi;
  */
 class SquirrelSegment {
 
-  // Variables names may not follow Java conventions because these names need
-  // to match names used for the other versions/languages (e.g. Python)
-  // of this Jump Start Solution and the names originally used in the raw data file (CSV).
+  // Variables names match column names from original CSV file, 
+  // and may not confirm to language convention standards.
   public int _counter = 0;
   public int Chasing = 0;
   public int Climbing = 0;
