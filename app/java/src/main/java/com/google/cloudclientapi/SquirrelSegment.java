@@ -16,13 +16,17 @@
 
 package com.google.cloudclientapi;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+/*
+ * A "segment" is a unique combination of a specific fur, age, and location.
+ */
+class SquirrelSegment {
 
-@SpringBootApplication
-public class CensusApplication {
-
-  public static void main(String[] args) {
-    SpringApplication.run(CensusApplication.class, args);
-  }
+  // Variables names match column names from original CSV file,
+  // and may not confirm to language convention standards.
+  public int _counter = 0;
+  public int Chasing = 0;
+  public int Climbing = 0;
+  public int Eating = 0;
+  public int Foraging = 0;
+  public int Running = 0;
 }

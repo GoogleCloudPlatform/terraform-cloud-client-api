@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.google.cloudclientapi;
 
-
+import com.google.gson.Gson;
 import java.util.Arrays;
 import java.util.List;
 import org.slf4j.Logger;
@@ -24,20 +24,62 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CensusController {
+
+  private static final String PROCESSED_DATA_BUCKET = System.getenv().get("PROCESSED_DATA_BUCKET");
   private static final Logger logger = LoggerFactory.getLogger(CensusController.class);
 
   @GetMapping("/")
-  public String main(Model model) {
-    logger.info("Received request (TODO: data)");
+  public String main(
+      @RequestParam(name = "fur", required = false, defaultValue = "Gray") String fur,
+      @RequestParam(name = "age", required = false, defaultValue = "Adult") String age,
+      @RequestParam(name = "location", required = false, defaultValue = "Above Ground")
+          String location,
+      Model model) {
+    logger.info("Request received for fur: {}, age: {}, location: {}", fur, age, location);
 
-    // TODO: get real values from dataset.
-    model.addAttribute("squirrel_count", "5");
-    List<String> dataPoints = Arrays.asList("1", "2", "3", "4", "5");
+    // Default values (which would be rendered as "No data available.").
+    model.addAttribute("squirrel_count", 0);
+    model.addAttribute("data_points", Arrays.asList(0, 0, 0, 0, 0));
+
+    SquirrelSegment squirrelSegment = retrieveData(fur, age, location);
+    if (squirrelSegment == null) {
+      return "index";
+    }
+
+    model.addAttribute("squirrel_count", squirrelSegment._counter);
+    List<Integer> dataPoints =
+        Arrays.asList(
+            squirrelSegment.Chasing,
+            squirrelSegment.Climbing,
+            squirrelSegment.Eating,
+            squirrelSegment.Foraging,
+            squirrelSegment.Running);
     model.addAttribute("data_points", dataPoints);
-
     return "index";
+  }
+
+  /**
+   * Retrieve the data about a specific segment of squirrels from Google Cloud Storage a bucket.
+   *
+   * @param fur The squirrel segment's fur.
+   * @param age The squirrel segment's age.
+   * @param location The squirrel segment's location.
+   * @return A SquirrelSegment object representing the contents of the JSON file. Returns null if
+   *     we're unable to find the file inside the Cloud Storage bucket.
+   */
+  public SquirrelSegment retrieveData(String fur, String age, String location) {
+    String filePath = fur + "/" + age + "/" + location + "/data.json";
+    String jsonAsString = GoogleCloudStorage.downloadFileAsString(PROCESSED_DATA_BUCKET, filePath);
+    if (jsonAsString == null) {
+      return null;
+    }
+    Gson gson = new Gson();
+    SquirrelSegment squirrelSegment = gson.fromJson(jsonAsString, SquirrelSegment.class);
+    logger.info("Retrieved data for {} entities.", squirrelSegment._counter);
+    return squirrelSegment;
   }
 }
