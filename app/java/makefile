@@ -1,4 +1,3 @@
-#
 # Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,23 +11,29 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
+# If you're on Windows, use mvnw.cmd instead of ./mvnw.
+
+# Install dependencies
 install:
-	echo "noop"
+	./mvnw dependency:resolve
 
-# Start development server
+# Build the web app and processing job
+build:
+	./mvnw package
+
+# Start Spring Boot development server (web app)
 dev:
-	mvn spring-boot:run
+	./mvnw spring-boot:run
 
 # Run unit tests
 test:
-	mvn test
+	./mvnw test
 
 # Show outstanding linting issues
 lint:
-	mvn compile checkstyle:check
+	./mvnw com.spotify.fmt:fmt-maven-plugin:check
 
-# Fix outstanding linting issues
+# Fix some outstanding linting issues
 format:
-	echo "TODO: configure"
+	./mvnw com.spotify.fmt:fmt-maven-plugin:format

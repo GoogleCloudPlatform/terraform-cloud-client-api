@@ -31,7 +31,7 @@ from config import (
     RAW_DATA_FILE,
     SEGMENTS,
     logging,
-    version
+    version,
 )
 
 
@@ -51,10 +51,7 @@ def download_raw_data():
         raise ValueError("PROCESSED_DATA_BUCKET required")
 
     temp_datafile = f"{tempfile.mkdtemp()}/raw_data.csv"
-    logging.info(
-        "  download_raw_data: processing from "
-        f"{RAW_DATA_BUCKET} to {PROCESSED_DATA_BUCKET}"
-    )
+    logging.info("  download_raw_data: processing from " f"{RAW_DATA_BUCKET}")
 
     storage_client = google.cloud.storage.Client()
     raw_bucket = storage_client.get_bucket(RAW_DATA_BUCKET)
