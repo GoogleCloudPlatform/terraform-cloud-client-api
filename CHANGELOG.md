@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.3.2...v0.4.0) (2024-04-26)
+
+
+### Features
+
+* Implement Java web app & processing job ([#32](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/32)) ([8dea674](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/8dea674f93472794dbdb39bc8cc53dbe460c7b3a))
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.apache.commons:commons-csv to v1.10.0 ([#70](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/70)) ([e3021ea](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e3021ea5e4bdcbf607500e38ee3946a111fd6cc4))
+* **deps:** update dependency org.springframework.boot:spring-boot-starter-parent to v3.2.5 ([#62](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/62)) ([784dd00](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/784dd00027dca50911be0d48032dfef3e0642cd9))
+* extend validation of setup ([#35](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/35)) ([c5fa7ba](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/c5fa7ba95738018be4fb943ddc93185202b945f6))
+
 ## [0.3.2](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.3.1...v0.3.2) (2024-04-18)
 
 
