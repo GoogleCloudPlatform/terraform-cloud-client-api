@@ -20,8 +20,8 @@ app.js - application
 
 import express from 'express';
 import logger from './logger.js';
-import {engine} from 'express-handlebars';
-import {Storage} from '@google-cloud/storage';
+import { engine } from 'express-handlebars';
+import { Storage } from '@google-cloud/storage';
 
 const app = express();
 const storage = new Storage();
@@ -31,7 +31,7 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 /**
- * Retrieve data from Cloud Storage, based on querystrings
+ * Retrieve data from Cloud Storage, based on query strings
  * @param {string} fur Fur type (Gray, Black, Cinnamon)
  * @param {string} age Age (Adult, Juvenile)
  * @param {string} location Location (Above Ground, Ground Level)
@@ -65,7 +65,7 @@ async function retrieveData(fur, age, location) {
 
   // Get aggregate counter values, sorted by their respective key
   const dataValues = [];
-  Object.keys(data).sort().forEach(function(key) {
+  Object.keys(data).sort().forEach(function (key) {
     dataValues.push(data[key]);
   });
 
@@ -81,7 +81,7 @@ app.get('/', async (req, res) => {
     const location = req.query.location || 'Above Ground';
 
     logger.info(
-        `Request received for fur: ${fur}, age: ${age}, location: ${location}`,
+      `Request received for fur: ${fur}, age: ${age}, location: ${location}`,
     );
 
     const [squirrelCount, dataPoints] = await retrieveData(fur, age, location);
