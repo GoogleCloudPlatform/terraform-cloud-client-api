@@ -20,57 +20,14 @@ app.js - application
 
 import express from 'express';
 import logger from './logger.js';
+import utils from './utils.js';
 import { engine } from 'express-handlebars';
-import { Storage } from '@google-cloud/storage';
 
 const app = express();
-const storage = new Storage();
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
-
-/**
- * Retrieve data from Cloud Storage, based on query strings
- * @param {string} fur Fur type (Gray, Black, Cinnamon)
- * @param {string} age Age (Adult, Juvenile)
- * @param {string} location Location (Above Ground, Ground Level)
- */
-async function retrieveData(fur, age, location) {
-  const dataFilename = [fur, age, location].join('/') + '/data.json';
-  var dataFile = ""
-
-  try {
-    dataFile = await storage
-      .bucket(process.env.PROCESSED_DATA_BUCKET)
-      .file(dataFilename)
-      .download();
-
-  } catch (err) {
-    if (err.code == 404) {
-      logger.log('warn', `${process.env.PROCESSED_DATA_BUCKET} does not contain ${dataFilename}.` +
-        ` Has the job been run?`);
-    } else {
-      logger.log('error', err)
-    }
-    // Template knows to handle empty data as data not available.
-    return 0, [];
-  }
-
-  const data = JSON.parse(dataFile);
-  const squirrelCount = data._counter;
-  delete data._counter;
-
-  logger.info(`Retrieved data for ${squirrelCount} entities.`);
-
-  // Get aggregate counter values, sorted by their respective key
-  const dataValues = [];
-  Object.keys(data).sort().forEach(function (key) {
-    dataValues.push(data[key]);
-  });
-
-  return [squirrelCount, dataValues];
-}
 
 app.get('/', async (req, res) => {
   if (!process.env.PROCESSED_DATA_BUCKET) {
@@ -84,7 +41,7 @@ app.get('/', async (req, res) => {
       `Request received for fur: ${fur}, age: ${age}, location: ${location}`,
     );
 
-    const [squirrelCount, dataPoints] = await retrieveData(fur, age, location);
+    const [squirrelCount, dataPoints] = await utils.retrieveData(fur, age, location);
 
     res.render('index', {
       layout: false,
