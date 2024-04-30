@@ -47,7 +47,7 @@ async function retrieveData(fur, age, location) {
         logger.log('error', err)
       }
       // Template knows to handle empty data as data not available.
-      return 0, [];
+      return [0, []];
     }
 
     const data = JSON.parse(dataFile);
