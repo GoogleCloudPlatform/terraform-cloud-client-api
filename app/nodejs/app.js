@@ -38,19 +38,26 @@ app.set('views', './views');
  */
 async function retrieveData(fur, age, location) {
   const dataFilename = [fur, age, location].join('/') + '/data.json';
+  var dataFile = ""
 
-  const dataFile = storage
+  try {
+    dataFile = await storage
       .bucket(process.env.PROCESSED_DATA_BUCKET)
-      .file(dataFilename);
+      .file(dataFilename)
+      .download();
 
-  if (!dataFile.exists()) {
-    logger.warning(`${process.env.PROCESSED_DATA_BUCKET} does not contain ${dataFile}.` +
-      `Has the job been run?`);
+  } catch (err) {
+    if (err.code == 404) {
+      logger.log('warn', `${process.env.PROCESSED_DATA_BUCKET} does not contain ${dataFilename}.` +
+        ` Has the job been run?`);
+    } else {
+      logger.log('error', err)
+    }
+    // Template knows to handle empty data as data not available.
     return 0, [];
   }
-  const fragment = await dataFile.download();
 
-  const data = JSON.parse(fragment);
+  const data = JSON.parse(dataFile);
   const squirrelCount = data._counter;
   delete data._counter;
 
