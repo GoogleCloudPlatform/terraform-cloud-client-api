@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.4.0...v0.4.1) (2024-05-01)
+
+
+### Bug Fixes
+
+* add link to postdeploy neos ([#76](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/76)) ([d5db4ef](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/d5db4ef18d1e834986c1c59a478eb41d487bcf36))
+* **deps:** update dependency com.google.cloud:google-cloud-storage to v2.37.0 ([#71](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/71)) ([c69320c](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/c69320cfd738ff9f52b82acd9ec6262d66031251))
+
 ## [0.4.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.3.2...v0.4.0) (2024-04-26)
 
 
