@@ -1,4 +1,4 @@
-# Sample App illustrating Using a Google Cloud SDK
+# Use a Cloud SDK Client Library
 
 This sample app shows:
 
