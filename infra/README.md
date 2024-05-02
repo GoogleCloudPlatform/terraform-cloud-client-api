@@ -1,13 +1,11 @@
-
-% terraform-cloud-client-api
-
-# Tagline
+# Use a Cloud SDK Client Library
 
 Interact with Google Cloud using the Cloud SDK Client Libraries to transform and query information.
 
 ## Detailed
 
-This solution deploys a processing job, rendering service, and initial unprocessed data, which is then manipulated by the processing job to be viewed by the rendering service.
+This solution deploys a processing job, rendering service, and initial unprocessed data, which is then manipulated by the processing job to be viewed by the rendering service. This solution has been implemented in using Cloud SDK Client Libraries.
+
 
 ## Predeploy
 
@@ -15,7 +13,7 @@ To deploy this blueprint you must have an active billing account and billing per
 
 ## Documentation
 
-TODO
+[Jump Start Solution: Cloud SDK Client Library](https://cloud.google.com/architecture/application-development/cloud-client-api)
 
 ## Usage
 
