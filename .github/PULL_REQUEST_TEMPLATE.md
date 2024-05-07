@@ -4,6 +4,6 @@ Thank you for opening a Pull Request! Before submitting your PR, there are a few
 - [ ] Ensure the tests and linter pass
 - [ ] Communicate test infrastructure changes, i.e. API enablement, secrets
 - [ ] Appropriate docs were updated (if necessary)
-- [ ] If you're a Googler, familiarize yourself with [go/jss-up6-admin](http://go/jss-up6-admin)
+- [ ] If you work at Google, familiarize yourself with [go/jss-up6-admin](http://go/jss-up6-admin)
 
 🛠️ Fixes #<issue_number_goes_here>
