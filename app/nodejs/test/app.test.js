@@ -13,21 +13,83 @@
 // limitations under the License.
 
 
-
 'use strict';
 
 import app from '../app.js';
-import supertest from 'supertest';
+import utils from '../utils.js';
+import assert from 'assert';
+import supertest from 'supertest'
 
-let request;
+import sinon from 'sinon';
 
-describe('Unit Tests', () => {
-    before(async () => {
-        request = supertest(app);
-    });
+describe('No configuration set', () => {
+  let request;
 
-    // TODO: add correct tests here.
-    it('should return OK on GET /', async () => {
-        await request.get('/').expect(200);
-    });
+  before(async () => {
+    process.env.RAW_DATA_BUCKET = '';
+    process.env.PROCESSED_DATA_BUCKET = '';
+
+    request = supertest(app);
+  });
+
+  it('should return error on GET /', async () => {
+    const response = await request.get("/")
+    assert.equal(response.statusCode, 500)
+    assert.equal(response.text, 'Environment variable PROCESSED_DATA_BUCKET required');
+  });
 });
+
+
+describe("Incomplete setup", () => {
+  let stubUtils;
+  let request;
+
+  before(async () => {
+    request = supertest(app);
+    stubUtils = sinon.stub(utils, 'retrieveData').returns([0, []]);
+  })
+  after(async () => {
+    stubUtils.restore();
+  });
+
+  it('should display correct failure mode', (done) => {
+    process.env.PROCESSED_DATA_BUCKET = "faux-bucket-123";
+
+    request.get('/')
+      .then(response => {
+        assert.equal(response.status, 200);
+        assert.contains(response.text, /No data available/);
+      })
+      .finally(error => {
+        return error ? done(error) : done();
+      });
+  });
+})
+
+
+describe("Application with mock data", () => {
+  let stubUtils;
+  let request;
+
+  before(async () => {
+    request = supertest(app);
+    stubUtils = sinon.stub(utils, 'retrieveData').returns([20, [2, 2, 3, 5, 8]]);
+  })
+
+  after(async () => {
+    stubUtils.restore();
+  });
+
+  it('should display valid data', (done) => {
+    process.env.PROCESSED_DATA_BUCKET = "faux-bucket-123";
+
+    request.get('/')
+      .then(response => {
+        assert.equal(response.status, 200);
+        assert.contains(response.text, /var count = 20/);
+      })
+      .finally(error => {
+        return error ? done(error) : done();
+      });
+  });
+})

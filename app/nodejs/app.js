@@ -19,7 +19,8 @@ app.js - application
 'use strict';
 
 import express from 'express';
-import logger from './logger.js'
+import logger from './logger.js';
+import utils from './utils.js';
 import { engine } from 'express-handlebars';
 
 const app = express();
@@ -29,16 +30,24 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 app.get('/', async (req, res) => {
-    logger.info("Request received (TODO: data)")
+  if (!process.env.PROCESSED_DATA_BUCKET) {
+    res.status(500).send('Environment variable PROCESSED_DATA_BUCKET required');
+  } else {
+    const fur = req.query.fur || 'Gray';
+    const age = req.query.age || 'Adult';
+    const location = req.query.location || 'Above Ground';
 
-    // TODO: get real values from dataset.
-    var squirrel_count = 5
-    var data_points = [1, 2, 3, 4, 5]
+    logger.info(
+      `Request received for fur: ${fur}, age: ${age}, location: ${location}`,
+    );
 
-    res.render("index", {
-        layout: false,
-        squirrel_count: squirrel_count, data_points: data_points
-    })
+    const [squirrelCount, dataPoints] = await utils.retrieveData(fur, age, location);
+
+    res.render('index', {
+      layout: false,
+      squirrel_count: squirrelCount, data_points: dataPoints,
+    });
+  }
 });
 
 export default app;

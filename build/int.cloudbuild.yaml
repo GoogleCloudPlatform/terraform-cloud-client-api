@@ -38,16 +38,15 @@ steps:
     cft test run TestPythonDeployment --stage verify --verbose
     cft test run TestPythonDeployment --stage destroy --verbose
 
-### Uncomment when implemented
-#- id: nodejs
-#  name: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS
-#  waitFor: ['init-all']
-#  script: |
-#    #!/bin/bash -e
-#    cft test run TestNodeJSDeployment --stage init --verbose
-#    cft test run TestNodeJSDeployment --stage apply --verbose
-#    cft test run TestNodeJSDeployment --stage verify --verbose
-#    cft test run TestNodeJSDeployment --stage destroy --verbose
+- id: nodejs
+  name: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS
+  waitFor: ['init-all']
+  script: |
+    #!/bin/bash -e
+    cft test run TestNodeJSDeployment --stage init --verbose
+    cft test run TestNodeJSDeployment --stage apply --verbose
+    cft test run TestNodeJSDeployment --stage verify --verbose
+    cft test run TestNodeJSDeployment --stage destroy --verbose
 
 - id: java
   name: gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS
