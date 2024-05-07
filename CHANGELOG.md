@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.4.1...v0.5.0) (2024-05-07)
+
+
+### Features
+
+* nodejs application ([#30](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/30)) ([7463f0f](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/7463f0f01607bc79489e82be1fcfe61ace703836))
+
+
+### Bug Fixes
+
+* add ignore for maven-wrapper ([#79](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/79)) ([4b9633a](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/4b9633af285cb40b0805db54671082c94c3e9fb1))
+* **deps:** update dependency org.apache.commons:commons-csv to v1.11.0 ([#82](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/82)) ([7e7a1af](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/7e7a1af98100aee4949738ae9a5ad1cfdcea1461))
+
 ## [0.4.1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.4.0...v0.4.1) (2024-05-01)
 
 
