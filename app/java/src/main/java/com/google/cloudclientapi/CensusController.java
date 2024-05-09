@@ -21,10 +21,13 @@ import java.util.Arrays;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class CensusController {
@@ -40,6 +43,10 @@ public class CensusController {
           String location,
       Model model) {
     logger.info("Request received for fur: {}, age: {}, location: {}", fur, age, location);
+
+    if (PROCESSED_DATA_BUCKET == null || PROCESSED_DATA_BUCKET.isEmpty()) {
+      throw new UnspecifiedProcessedDataBucketException();
+    }
 
     // Default values (which would be rendered as "No data available.").
     model.addAttribute("squirrel_count", 0);
@@ -81,5 +88,11 @@ public class CensusController {
     SquirrelSegment squirrelSegment = gson.fromJson(jsonAsString, SquirrelSegment.class);
     logger.info("Retrieved data for {} entities.", squirrelSegment._counter);
     return squirrelSegment;
+  }
+
+  @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+  @ExceptionHandler({UnspecifiedProcessedDataBucketException.class})
+  public String handleUnspecifiedProcessedDataBucketException() {
+    return "error-unspecified-processed-data-bucket";
   }
 }
