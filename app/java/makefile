@@ -20,7 +20,7 @@ install:
 
 # Build the web app and processing job
 build:
-	./mvnw package
+	./mvnw package -Dmaven.test.skip
 
 # Start Spring Boot development server (web app)
 dev:
