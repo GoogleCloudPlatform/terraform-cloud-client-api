@@ -28,7 +28,7 @@ dev:
 
 # Run unit tests
 test:
-	./mvnw test -Dspring-boot.run.profiles=locallogging
+	./mvnw test
 
 # Show outstanding linting issues
 lint:
