@@ -24,11 +24,11 @@ build:
 
 # Start Spring Boot development server (web app)
 dev:
-	./mvnw spring-boot:run
+	./mvnw spring-boot:run -Dspring-boot.run.profiles=locallogging
 
 # Run unit tests
 test:
-	./mvnw test
+	./mvnw test -Dspring-boot.run.profiles=locallogging
 
 # Show outstanding linting issues
 lint:

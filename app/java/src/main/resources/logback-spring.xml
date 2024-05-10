@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2024 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!DOCTYPE configuration>
+<configuration>
+
+  <!-- Configure Logback to send logs to Google Cloud Logging. -->
+  <springProfile name="default">
+    <appender name="CLOUD" class="com.google.cloud.logging.logback.LoggingAppender">
+      <!-- Optional : filter logs at or above a level -->
+      <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>INFO</level>
+      </filter>
+      <log>application.log</log> <!-- Optional : default java.log -->
+      <resourceType>gae_app</resourceType> <!-- Optional : default: auto-detected, fallback: global -->
+      <flushLevel>WARN</flushLevel> <!-- Optional : default ERROR -->
+    </appender>
+    <root level="info">
+      <appender-ref ref="CLOUD" />
+    </root>
+  </springProfile>
+
+  <!-- For local development and unit tests (to see your logs on your local machine). -->
+  <springProfile name="locallogging">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+      </encoder>
+    </appender>
+    <root level="debug">
+      <appender-ref ref="STDOUT" />
+    </root>
+  </springProfile>
+
+</configuration>

@@ -87,7 +87,7 @@ the Spring "initialz": https://start.spring.io/
 
     <!-- Logging -->
     <!-- Logback is one of the most used Java logging frameworks and is a successor to Log4j. -->
-    <!-- Logback is configured inside logback.xml. -->
+    <!-- Logback is configured inside logback-spring.xml. -->
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
