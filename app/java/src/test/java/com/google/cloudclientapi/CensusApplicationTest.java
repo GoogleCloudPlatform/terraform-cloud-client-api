@@ -91,12 +91,12 @@ class CensusApplicationTest {
     }
   }
 
-  private void expectAHomePageResponseWith(ResultMatcher status, String substring)
+  private void expectAHomePageResponseWith(ResultMatcher httpResponseStatus, String substring)
       throws Exception {
     this.mockMvc
         .perform(get("/"))
         .andDo(print())
-        .andExpect(status)
+        .andExpect(httpResponseStatus)
         .andExpect(content().string(containsString(substring)));
   }
 }
