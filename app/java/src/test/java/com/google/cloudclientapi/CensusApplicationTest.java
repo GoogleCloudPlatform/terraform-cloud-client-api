@@ -29,14 +29,27 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 @WebMvcTest(CensusController.class)
 class CensusApplicationTest {
 
-  @Autowired
-  private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc;
 
-  private final String VALID_SQUIRREL_SEGMENT_JSON = "{\"_counter\":561,\"Chasing\":63,\"Climbing\":361,\"Eating\":102,\"Foraging\":95,\"Running\":114}";
+  private final String VALID_SQUIRREL_SEGMENT_JSON =
+      "{\"_counter\":561,\"Chasing\":63,\"Climbing\":361,\"Eating\":102,\"Foraging\":95,\"Running\":114}";
+
+  @Test
+  public void homePageShouldSayEnvVarRequired() throws Exception {
+    // Mock GoogleCloudStorage
+    try (MockedStatic<GoogleCloudStorage> mockedGcs =
+        Mockito.mockStatic(GoogleCloudStorage.class)) {
+      mockedGcs.when(() -> GoogleCloudStorage.downloadFileAsString(any(), any())).thenReturn(null);
+
+      this.expectAHomePageResponseWith(
+          status().isInternalServerError(), "Environment variable PROCESSED_DATA_BUCKET required");
+    }
+  }
 
   @Test
   public void homePageShouldSayNoDataAvailable() throws Exception {
@@ -47,12 +60,13 @@ class CensusApplicationTest {
           .thenReturn("Placeholder");
 
       // Mock GoogleCloudStorage
-      try (MockedStatic<GoogleCloudStorage> mockedGcs = Mockito.mockStatic(GoogleCloudStorage.class)) {
+      try (MockedStatic<GoogleCloudStorage> mockedGcs =
+          Mockito.mockStatic(GoogleCloudStorage.class)) {
         mockedGcs
             .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
             .thenReturn(null);
 
-        expectAResponseContaining("No data available.");
+        this.expectAHomePageResponseWith(status().isOk(), "No data available.");
       }
     }
   }
@@ -66,21 +80,23 @@ class CensusApplicationTest {
           .thenReturn("Placeholder");
 
       // Mock GoogleCloudStorage
-      try (MockedStatic<GoogleCloudStorage> mockedGcs = Mockito.mockStatic(GoogleCloudStorage.class)) {
+      try (MockedStatic<GoogleCloudStorage> mockedGcs =
+          Mockito.mockStatic(GoogleCloudStorage.class)) {
         mockedGcs
             .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
             .thenReturn(VALID_SQUIRREL_SEGMENT_JSON);
 
-        this.expectAResponseContaining("squirrels were observed");
+        this.expectAHomePageResponseWith(status().isOk(), "squirrels were observed");
       }
     }
   }
 
-  private void expectAResponseContaining(String substring) throws Exception {
+  private void expectAHomePageResponseWith(ResultMatcher status, String substring)
+      throws Exception {
     this.mockMvc
         .perform(get("/"))
         .andDo(print())
-        .andExpect(status().isOk())
+        .andExpect(status)
         .andExpect(content().string(containsString(substring)));
   }
 }
