@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class CensusController {
 
-  private static final String PROCESSED_DATA_BUCKET = System.getenv().get("PROCESSED_DATA_BUCKET");
   private static final Logger logger = LoggerFactory.getLogger(CensusController.class);
 
   @GetMapping("/")
@@ -44,7 +43,8 @@ public class CensusController {
       Model model) {
     logger.info("Request received for fur: {}, age: {}, location: {}", fur, age, location);
 
-    if (PROCESSED_DATA_BUCKET == null || PROCESSED_DATA_BUCKET.isEmpty()) {
+    if (EnvironmentVars.get("PROCESSED_DATA_BUCKET") == null
+        || EnvironmentVars.get("PROCESSED_DATA_BUCKET").isEmpty()) {
       throw new UnspecifiedProcessedDataBucketException();
     }
 
@@ -80,7 +80,9 @@ public class CensusController {
    */
   public SquirrelSegment retrieveData(String fur, String age, String location) {
     String filePath = fur + "/" + age + "/" + location + "/data.json";
-    String jsonAsString = GoogleCloudStorage.downloadFileAsString(PROCESSED_DATA_BUCKET, filePath);
+    String jsonAsString =
+        GoogleCloudStorage.downloadFileAsString(
+            EnvironmentVars.get("PROCESSED_DATA_BUCKET"), filePath);
     if (jsonAsString == null) {
       return null;
     }
