@@ -32,6 +32,10 @@ install: venv
 dev: venv
 	$(PYTHON) main.py
 
+# Run processing job locally
+process: venv
+	$(PYTHON) process.py
+
 # Run unit tests
 test: venv
 	$(PYTHON) -m pytest

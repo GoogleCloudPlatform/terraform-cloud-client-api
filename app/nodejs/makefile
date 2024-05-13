@@ -23,6 +23,10 @@ install:
 dev: install
 	npm run dev
 
+# Run processing job locally
+process: install
+	node process.js
+
 # Run unit tests
 test: install
 	npm run test

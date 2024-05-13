@@ -26,6 +26,10 @@ build:
 dev:
 	./mvnw spring-boot:run
 
+# Run processing job locally
+process: build
+	java -jar target/cloud-client-api-0.0.0-SNAPSHOT-processingjob.jar -Dspring-boot.run.profiles=locallogging
+
 # Run unit tests
 test:
 	./mvnw test

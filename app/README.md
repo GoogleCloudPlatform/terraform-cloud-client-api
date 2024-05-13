@@ -21,6 +21,7 @@ Each language includes a `makefile` file that includes common development steps:
 
  * `make install`: install the package dependencies
  * `make dev`: run a local development web server
+ * `make process`: run the processing job locally
  * `make test`: run unit tests
  * `make lint`: run linting checks
  * `make format`: apply linting fixes
@@ -33,3 +34,7 @@ Each implementation contains a custom [Procfile](https://devcenter.heroku.com/ar
  * `process`: a script to run the aggregate processing
 
 This image built using [Google Cloud's buildpacks](https://cloud.google.com/docs/buildpacks/overview) in [Cloud Build configurations](../build/images.cloudbuild.yaml), and deployed as both a Cloud Run service and a Cloud Run job using [Terraform](../infra/).
+
+## Language specifics
+
+For NodeJS, direct commands are encoded into the `package.json`, and referenced by both `makefile` and `Procfile`.

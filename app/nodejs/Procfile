@@ -1,2 +1,2 @@
 web: npm start
-process: node process.js
+process: npm run process
