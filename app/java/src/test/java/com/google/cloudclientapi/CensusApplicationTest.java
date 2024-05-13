@@ -29,6 +29,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 @WebMvcTest(CensusController.class)
 class CensusApplicationTest {
@@ -39,30 +40,63 @@ class CensusApplicationTest {
       "{\"_counter\":561,\"Chasing\":63,\"Climbing\":361,\"Eating\":102,\"Foraging\":95,\"Running\":114}";
 
   @Test
-  void homePageShouldSayNoDataAvailable() throws Exception {
+  public void homePageShouldSayEnvVarRequired() throws Exception {
+    // Mock GoogleCloudStorage
     try (MockedStatic<GoogleCloudStorage> mockedGcs =
         Mockito.mockStatic(GoogleCloudStorage.class)) {
       mockedGcs.when(() -> GoogleCloudStorage.downloadFileAsString(any(), any())).thenReturn(null);
-      this.mockMvc
-          .perform(get("/"))
-          .andDo(print())
-          .andExpect(status().isOk())
-          .andExpect(content().string(containsString("No data available.")));
+
+      this.expectAHomePageResponseWith(
+          status().isInternalServerError(), "Environment variable PROCESSED_DATA_BUCKET required");
     }
   }
 
   @Test
-  void homePageShouldSaySquirrelsWereObserved() throws Exception {
-    try (MockedStatic<GoogleCloudStorage> mockedGcs =
-        Mockito.mockStatic(GoogleCloudStorage.class)) {
-      mockedGcs
-          .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
-          .thenReturn(VALID_SQUIRREL_SEGMENT_JSON);
-      this.mockMvc
-          .perform(get("/"))
-          .andDo(print())
-          .andExpect(status().isOk())
-          .andExpect(content().string(containsString("squirrels were observed")));
+  public void homePageShouldSayNoDataAvailable() throws Exception {
+    // Mock environment variable(s)
+    try (MockedStatic<EnvironmentVars> mockedEnvVars = Mockito.mockStatic(EnvironmentVars.class)) {
+      mockedEnvVars
+          .when(() -> EnvironmentVars.get("PROCESSED_DATA_BUCKET"))
+          .thenReturn("Placeholder");
+
+      // Mock GoogleCloudStorage
+      try (MockedStatic<GoogleCloudStorage> mockedGcs =
+          Mockito.mockStatic(GoogleCloudStorage.class)) {
+        mockedGcs
+            .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
+            .thenReturn(null);
+
+        this.expectAHomePageResponseWith(status().isOk(), "No data available.");
+      }
     }
+  }
+
+  @Test
+  public void homePageShouldSaySquirrelsWereObserved() throws Exception {
+    // Mock environment variable(s)
+    try (MockedStatic<EnvironmentVars> mockedEnvVars = Mockito.mockStatic(EnvironmentVars.class)) {
+      mockedEnvVars
+          .when(() -> EnvironmentVars.get("PROCESSED_DATA_BUCKET"))
+          .thenReturn("Placeholder");
+
+      // Mock GoogleCloudStorage
+      try (MockedStatic<GoogleCloudStorage> mockedGcs =
+          Mockito.mockStatic(GoogleCloudStorage.class)) {
+        mockedGcs
+            .when(() -> GoogleCloudStorage.downloadFileAsString(any(), any()))
+            .thenReturn(VALID_SQUIRREL_SEGMENT_JSON);
+
+        this.expectAHomePageResponseWith(status().isOk(), "squirrels were observed");
+      }
+    }
+  }
+
+  private void expectAHomePageResponseWith(ResultMatcher httpResponseStatus, String substring)
+      throws Exception {
+    this.mockMvc
+        .perform(get("/"))
+        .andDo(print())
+        .andExpect(httpResponseStatus)
+        .andExpect(content().string(containsString(substring)));
   }
 }
