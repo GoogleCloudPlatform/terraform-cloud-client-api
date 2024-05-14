@@ -37,4 +37,5 @@ This image built using [Google Cloud's buildpacks](https://cloud.google.com/docs
 
 ## Language specifics
 
-For NodeJS, direct commands are encoded into the `package.json`, and referenced by both `makefile` and `Procfile`.
+* For Node.js, direct commands are encoded into the `package.json`, and referenced by both `makefile` and `Procfile`.
+* For Java, we leverage two different [Spring Boot Profiles](https://docs.spring.io/spring-boot/reference/features/profiles.html) — `default` and `locallogging`. The `default` Profile pushes logs to Cloud Logging while `locallogging` simply pushes logs to standard output. The `locallogging` Profile is used for local development and unit tests while `default` is used for production and integration tests.
