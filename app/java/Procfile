@@ -1,2 +1,2 @@
-web: java -jar target/cloud-client-api-0.0.0-SNAPSHOT.jar
-process: java -jar target/cloud-client-api-0.0.0-SNAPSHOT-processingjob.jar
+web: java -jar target/cloud-client-api-0.0.0-SNAPSHOT.jar -Dspring-boot.run.profiles=default
+process: java -jar target/cloud-client-api-0.0.0-SNAPSHOT-processingjob.jar -Dspring-boot.run.profiles=default
