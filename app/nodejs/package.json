@@ -9,6 +9,7 @@
     "scripts": {
         "start": "node index.js",
         "dev": "npx nodemon index.js",
+        "process": "node process.js",
         "test": "mocha test/app.test.js --check-leaks",
         "lint": "eslint",
         "format": "eslint --fix"
