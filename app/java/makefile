@@ -20,11 +20,11 @@ install:
 
 # Build the web app and processing job
 build:
-	./mvnw package
+	./mvnw package -Dmaven.test.skip
 
 # Start Spring Boot development server (web app)
 dev:
-	./mvnw spring-boot:run
+	./mvnw spring-boot:run -Dspring-boot.run.profiles=locallogging
 
 # Run processing job locally
 process: build

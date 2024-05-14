@@ -19,7 +19,9 @@ package com.google.cloudclientapi;
 import java.io.IOException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("locallogging") // Code being unit tested should log locally — not to Cloud Logging
 class SquirrelCensusDictionaryBuilderTest {
 
   @Test

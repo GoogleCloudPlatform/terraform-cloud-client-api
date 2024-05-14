@@ -28,10 +28,12 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 @WebMvcTest(CensusController.class)
+@ActiveProfiles("locallogging") // Code being unit tested should log locally — not to Cloud Logging
 class CensusApplicationTest {
 
   @Autowired private MockMvc mockMvc;
