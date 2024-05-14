@@ -86,21 +86,29 @@ the Spring "initialz": https://start.spring.io/
     </dependency>
 
     <!-- Logging -->
+    <!-- Logback is one of the most used Java logging frameworks and is a successor to Log4j. -->
+    <!-- Logback is configured inside logback-spring.xml. -->
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.23.1</version>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>1.3.5</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.23.1</version>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.3.5</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <!-- slf stands for "Simple Logging Facade" -->
-      <artifactId>log4j-slf4j-impl</artifactId>
-      <version>2.23.1</version>
+        <groupId>org.slf4j</groupId>
+        <!-- slf stands for "Simple Logging Facade" -->
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.4</version>
+    </dependency>
+    <!-- The Logback "appender" that directs logs to Google Cloud Logging. -->
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-logging-logback</artifactId>
+      <version>0.131.4-alpha</version>
     </dependency>
 
     <!-- Google Cloud Storage -->
