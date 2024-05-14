@@ -21,7 +21,7 @@ package com.google.cloudclientapi;
  */
 class SquirrelSegment {
 
-  // Variables names match column names from the original CSV file,
+  // Variable names match column names from the original CSV file,
   // and may not comply with Java naming conventions.
   public int _counter = 0;
   public int Chasing = 0;
