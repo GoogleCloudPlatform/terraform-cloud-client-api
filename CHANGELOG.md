@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.6.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.5.0...v0.6.0) (2024-05-23)
+
+
+### Features
+
+* Support Cloud Logging in Java via Logback ([#88](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/88)) ([4ca933f](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/4ca933f95c4ba8dcab942ab21f74e73ce18c4052))
+
+
+### Bug Fixes
+
+* Add 500 response for missing env var in Java ([#86](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/86)) ([f3bdc97](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/f3bdc97349f80b5b49bbfac5cf2500e6a41782ac))
+* add make process to assist with local development ([#92](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/92)) ([a1897d1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/a1897d1005ae78da22503a81c3ffe43eeeb3125a))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.5.6 ([#101](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/101)) ([616e9fb](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/616e9fb4fdd08eabdf2d3a074ae7573d67a08164))
+* **deps:** update dependency ch.qos.logback:logback-core to v1.5.6 ([#100](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/100)) ([7f0712f](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/7f0712f24a0ae19f0bf6231135e069f06330ba3c))
+* **deps:** update dependency com.google.cloud:google-cloud-storage to v2.38.0 ([#104](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/104)) ([d31b281](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/d31b281839600c0dba5def631ec40eb29faa7f04))
+* **deps:** update dependency com.google.code.gson:gson to v2.11.0 ([#106](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/106)) ([8ee9b47](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/8ee9b47213a22763ae87df1503dfe8ab48663f44))
+* **deps:** update dependency org.slf4j:slf4j-api to v2.0.13 ([#94](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/94)) ([07fd463](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/07fd463d379f49c935695daad34e98ed65e675f8))
+* Fix wording and typos in comment ([#103](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/103)) ([e1f827a](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e1f827ac4d2ce154088f2e4ceaad540410b9b556))
+* **python:** use download_as_text instead of as_string ([#105](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/105)) ([29fb97b](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/29fb97b2173780bce08830499081180285ece150))
+* Rename main in CensusController to index ([#93](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/93)) ([709eca3](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/709eca371589790a1a6eaa0c2c92f9f96323ee0e))
+* revert pinned PR version of image ([#91](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/91)) ([5fa3dc4](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/5fa3dc46c0892c4e25d6c3c5ea5094ff1848399e))
+
 ## [0.5.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.4.1...v0.5.0) (2024-05-07)
 
 
