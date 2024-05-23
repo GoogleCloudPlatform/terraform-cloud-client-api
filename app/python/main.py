@@ -45,7 +45,7 @@ def retrieve_data(fur, age, location):
         )
         return 0, []
 
-    fragment = blob.download_as_string()
+    fragment = blob.download_as_text()
     data = json.loads(fragment)
 
     squirrel_count = data.pop("_counter")
