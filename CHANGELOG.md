@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.1...v0.6.2) (2024-05-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.springframework.boot:spring-boot-starter-parent to v3.3.0 ([#111](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/111)) ([156551e](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/156551e52aca7d5fd5f283394651da00bc422c13))
+
 ## [0.6.1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.0...v0.6.1) (2024-05-23)
 
 
