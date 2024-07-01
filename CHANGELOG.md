@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.3](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.2...v0.6.3) (2024-07-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency com.google.cloud:google-cloud-storage to v2.40.0 ([#122](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/122)) ([38969d2](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/38969d24d2089cf682dfedc5965448092ed7f507))
+* **deps:** update dependency org.springframework.boot:spring-boot-starter-parent to v3.3.1 ([#131](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/131)) ([9d8a1c0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/9d8a1c0d083a02d0ca5c57b5363d1e950b0e95ad))
+
 ## [0.6.2](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.1...v0.6.2) (2024-05-27)
 
 
