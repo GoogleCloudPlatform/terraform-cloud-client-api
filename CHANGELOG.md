@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.4](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.3...v0.6.4) (2024-07-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency com.google.cloud:google-cloud-storage to v2.40.1 ([#132](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/132)) ([4039f48](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/4039f48bcaf5607c5e612d2cede185ef2be996dc))
+
 ## [0.6.3](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.2...v0.6.3) (2024-07-01)
 
 
