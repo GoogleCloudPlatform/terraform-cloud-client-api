@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.5](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.4...v0.6.5) (2024-08-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-cloud-logging to v3.11.0 ([1270062](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/127006235c09bc38638d0bbcf7b20418b2394cc9))
+* **deps:** update dependency org.springframework.boot:spring-boot-starter-parent to v3.3.2 ([#138](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/138)) ([34cfe96](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/34cfe963e83a5d0e644a4ec8c60d3e9479560067))
+
 ## [0.6.4](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.3...v0.6.4) (2024-07-11)
 
 

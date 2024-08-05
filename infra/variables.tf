@@ -18,7 +18,7 @@
 variable "image_version" {
   type        = string
   description = "Version of application image to use"
-  default     = "0.6.4" // x-release-please-version
+  default     = "0.6.5" // x-release-please-version
 }
 
 variable "project_id" {
