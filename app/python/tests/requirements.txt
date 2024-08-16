@@ -1,4 +1,4 @@
-flake8==7.1.0
+flake8==7.1.1
 black
 pytest
 pytest-mock
