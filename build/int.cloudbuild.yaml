@@ -33,7 +33,6 @@ steps:
   waitFor: ['init-all']
   script: |
     #!/bin/bash -e
-    cft test run TestPythonDeployment --stage init --verbose
     cft test run TestPythonDeployment --stage apply --verbose
     cft test run TestPythonDeployment --stage verify --verbose
     cft test run TestPythonDeployment --stage destroy --verbose
@@ -43,7 +42,6 @@ steps:
   waitFor: ['init-all']
   script: |
     #!/bin/bash -e
-    cft test run TestNodeJSDeployment --stage init --verbose
     cft test run TestNodeJSDeployment --stage apply --verbose
     cft test run TestNodeJSDeployment --stage verify --verbose
     cft test run TestNodeJSDeployment --stage destroy --verbose
@@ -53,7 +51,6 @@ steps:
   waitFor: ['init-all']
   script: |
     #!/bin/bash -e
-    cft test run TestJavaDeployment --stage init --verbose
     cft test run TestJavaDeployment --stage apply --verbose
     cft test run TestJavaDeployment --stage verify --verbose
     cft test run TestJavaDeployment --stage destroy --verbose
