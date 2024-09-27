@@ -76,6 +76,8 @@ resource "google_cloud_run_v2_service" "default" {
   name     = "chart-${local.unique}"
   location = var.region
 
+  deletion_protection = true
+
   labels = var.labels
 
   template {
@@ -110,6 +112,8 @@ resource "google_cloud_run_v2_job" "default" {
   location = var.region
 
   labels = var.labels
+
+  deletion_protection = true
 
   template {
     template {
