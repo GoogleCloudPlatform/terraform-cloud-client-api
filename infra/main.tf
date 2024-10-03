@@ -30,7 +30,7 @@ resource "random_id" "default" {
 
 module "project_services" {
   source                      = "terraform-google-modules/project-factory/google//modules/project_services"
-  version                     = "~> 16.0"
+  version                     = "~> 17.0"
   disable_services_on_destroy = false
   project_id                  = var.project_id
 
@@ -76,6 +76,8 @@ resource "google_cloud_run_v2_service" "default" {
   name     = "chart-${local.unique}"
   location = var.region
 
+  deletion_protection = false
+
   labels = var.labels
 
   template {
@@ -110,6 +112,8 @@ resource "google_cloud_run_v2_job" "default" {
   location = var.region
 
   labels = var.labels
+
+  deletion_protection = false
 
   template {
     template {
