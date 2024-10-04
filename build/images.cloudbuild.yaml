@@ -21,7 +21,7 @@ steps:
     args:
       - build
       - ${_IMAGE_LOCATION}/python:$TAG_NAME
-      - --builder=gcr.io/buildpacks/builder:v1
+      - --builder=gcr.io/buildpacks/builder
 
 
   - id: nodejs build
@@ -32,7 +32,7 @@ steps:
     args:
       - build
       - ${_IMAGE_LOCATION}/nodejs:$TAG_NAME
-      - --builder=gcr.io/buildpacks/builder:v1
+      - --builder=gcr.io/buildpacks/builder
 
 
   - id: java build
@@ -43,7 +43,7 @@ steps:
     args:
       - build
       - ${_IMAGE_LOCATION}/java:$TAG_NAME
-      - --builder=gcr.io/buildpacks/builder:v1
+      - --builder=gcr.io/buildpacks/builder
 
 
 images:
