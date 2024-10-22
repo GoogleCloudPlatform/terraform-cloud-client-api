@@ -1,5 +1,55 @@
 # Changelog
 
+## [1.0.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.5...v1.0.0) (2024-10-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** Update dependency sinon to v19 ([#182](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/182))
+* **deps:** Update dependency gunicorn to v23 ([#157](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/157))
+* **deps:** Update dependency express-handlebars to v8 ([#154](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/154))
+
+### Features
+
+* Update Terraform required_version to &gt;= 1.5 ([#169](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/169)) ([3fcdf35](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/3fcdf35e7c5b23c65ea7337b32df652f75edd01a))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency ch.qos.logback:logback-classic to v1.5.10 ([#193](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/193)) ([13e0d63](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/13e0d63a4682ecf14d227792d61cd1ef5aa2f43a))
+* **deps:** Update dependency ch.qos.logback:logback-classic to v1.5.11 ([#198](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/198)) ([96c7e6f](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/96c7e6ff8da24e656350324b1b5337fb49c38301))
+* **deps:** Update dependency ch.qos.logback:logback-classic to v1.5.7 ([#162](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/162)) ([d50c06f](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/d50c06f9b53c7f0858d2dc7955ee66239b25e4a6))
+* **deps:** Update dependency ch.qos.logback:logback-classic to v1.5.8 ([#173](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/173)) ([a1b5e46](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/a1b5e465e39e5d2e9cda510b94089df63bbfa1a9))
+* **deps:** Update dependency ch.qos.logback:logback-core to v1.5.10 ([#194](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/194)) ([256967d](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/256967d6c227d4668862ba52d32f61e1e81298d0))
+* **deps:** Update dependency ch.qos.logback:logback-core to v1.5.11 ([#199](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/199)) ([eee660a](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/eee660a2a34ad8bb88959edfee7ec2d3c6e7a38e))
+* **deps:** Update dependency ch.qos.logback:logback-core to v1.5.7 ([#163](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/163)) ([e3ada74](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e3ada7408b715bfac7e521e1dd390c00d7d61cb4))
+* **deps:** Update dependency ch.qos.logback:logback-core to v1.5.8 ([#174](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/174)) ([4fc1ea5](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/4fc1ea55356c4be5c3b1f71e2dd72f090a1bd9b5))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.41.0 ([#149](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/149)) ([bf43800](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/bf43800e42a4bb14a8e1648aae2c0cee7c55f63b))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.42.0 ([#165](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/165)) ([a9bf1d4](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/a9bf1d4d63fd53ce5379e2659923467af1027dc8))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.43.0 ([#176](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/176)) ([5f6f3ec](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/5f6f3ec98090239e574303a06e72536da3b95cb9))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.43.1 ([#186](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/186)) ([735e14b](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/735e14bb4963c4586993fed7b86f15e0f01218ba))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.43.2 ([#195](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/195)) ([28eabbd](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/28eabbd4b1a29831472125f364c8582bd382f9a4))
+* **deps:** Update dependency com.spotify.fmt:fmt-maven-plugin to v2.24 ([#158](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/158)) ([e84bafa](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e84bafaabd6629f791fa4d7194ffb944eb516bca))
+* **deps:** Update dependency com.spotify.fmt:fmt-maven-plugin to v2.25 ([#192](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/192)) ([ee58a70](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/ee58a7061dfed6e45e6577f642116a91b880a258))
+* **deps:** Update dependency express-handlebars to v8 ([#154](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/154)) ([58ecc9e](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/58ecc9eef201890fad1dd2fbe87de2b32bec5c29))
+* **deps:** Update dependency flake8 to v7.1.1 ([#148](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/148)) ([41efbec](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/41efbec13dedcaa9985856b0baefbadbf07594e7))
+* **deps:** Update dependency google-cloud-logging to v3.11.1 ([#152](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/152)) ([454972e](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/454972ea52549ddfef893b42fb71701aad8b83f8))
+* **deps:** Update dependency google-cloud-logging to v3.11.2 ([#166](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/166)) ([1a24fe6](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/1a24fe685662defd22f2a3a01256e63ebf70a452))
+* **deps:** Update dependency google-cloud-storage to v2.18.2 ([#153](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/153)) ([8e31661](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/8e3166142a601a0db41dc2c38bf45399930af8ac))
+* **deps:** Update dependency gunicorn to v23 ([#157](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/157)) ([b9acfc4](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/b9acfc40f39740cc6c2ee2bd30d26fba4f21994a))
+* **deps:** Update dependency maven to v3.9.9 ([#160](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/160)) ([3301b67](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/3301b677151c7f4bb6d65dac27ad5c15aafb563e))
+* **deps:** Update dependency org.apache.commons:commons-csv to v1.12.0 ([#185](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/185)) ([1e0bf4f](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/1e0bf4f5c9e7f0bba1bd3767761954a2e6844b79))
+* **deps:** Update dependency org.slf4j:slf4j-api to v2.0.15 ([#151](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/151)) ([f191a26](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/f191a26587baba4b636eb5f7961896bc1ecd051b))
+* **deps:** Update dependency org.slf4j:slf4j-api to v2.0.16 ([#156](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/156)) ([d389dab](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/d389dab84dbf616e57aabf4206f40be08aaeb863))
+* **deps:** Update dependency org.springframework.boot:spring-boot-starter-parent to v3.3.3 ([#167](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/167)) ([4e1bf22](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/4e1bf22655fd10b2013e348b91b90b4ca8013b6d))
+* **deps:** Update dependency org.springframework.boot:spring-boot-starter-parent to v3.3.4 ([#184](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/184)) ([cf8c7ac](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/cf8c7aca3dffa136332736cd7f8158c568db1a56))
+* **deps:** Update dependency sinon to v19 ([#182](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/182)) ([ed9f62c](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/ed9f62c919f4f8838df3345959294059034dfece))
+* **deps:** Update python Docker tag to v3.12 ([#159](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/159)) ([7f285a0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/7f285a0a40578df3ce205934480719dd4b104f39))
+* Remove language-specific "init"s in int.cloudbuild.yaml ([#175](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/175)) ([c5c20c7](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/c5c20c7f5ed316575a7b34af2fa7ae8d69a9d73b))
+* Set /infra/test/setup TF required_version to &gt;= 1.5 ([#170](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/170)) ([89cb790](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/89cb790483fd5d86d48c9bea9d431f58cffa0076))
+* untag pack builders (default google-22) ([#189](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/189)) ([e95e148](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e95e148b782b47f56914b2aff0e0e5c6165585d6))
+* update minimum provider, deletion_protection ([#187](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/187)) ([db68ff5](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/db68ff5eefeeaa794c901864fe5b32a42d20c7b4))
+
 ## [0.6.5](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.4...v0.6.5) (2024-08-05)
 
 
