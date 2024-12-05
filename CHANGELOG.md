@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v1.0.0...v2.0.0) (2024-12-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** Update dependency mocha to v11 ([#217](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/217))
+
+### Bug Fixes
+
+* **deps:** Update dependency ch.qos.logback:logback-classic to v1.5.12 ([#206](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/206)) ([e6bf2bf](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e6bf2bf2093cfc07e69dedd1894356c18c00f9c9))
+* **deps:** Update dependency ch.qos.logback:logback-core to v1.5.12 ([#207](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/207)) ([e2a63d4](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e2a63d4d3d1476089841b38b218ba453add4985d))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.44.0 ([#203](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/203)) ([3e7b52c](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/3e7b52cda145697cd8d314e9202a00d77dacab38))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.44.1 ([#208](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/208)) ([d73b7cd](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/d73b7cd22e93b4f9da426371ed0d3cd473a8d631))
+* **deps:** Update dependency Flask to v3.1.0 ([#212](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/212)) ([c45943d](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/c45943d9eff6382cfce20cadfee837ede968bf54))
+* **deps:** Update dependency google-cloud-logging to v3.11.3 ([#202](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/202)) ([6b4de02](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/6b4de02387a317dd555c16af231da28b411d6dac))
+* **deps:** Update dependency mocha to v11 ([#217](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/217)) ([63f62a5](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/63f62a5c40ba0f42bd4b7bbe3d4c09274dcc2310))
+* **deps:** Update dependency org.springframework.boot:spring-boot-starter-parent to v3.3.5 ([#205](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/205)) ([26654ed](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/26654ed70b8297a37d4a063a44afe5b46c908dc6))
+
 ## [1.0.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.5...v1.0.0) (2024-10-16)
 
 
