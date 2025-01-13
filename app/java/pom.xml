@@ -85,7 +85,7 @@ the Spring "initialz": https://start.spring.io/
       <scope>test</scope>
     </dependency>
 
-    <!-- Logging - config logback-spring.xml -->
+    <!-- Logging - configured in logback-spring.xml -->
     <!-- Logback "appender" that directs logs to Google Cloud Logging. -->
     <!-- google-cloud-logging-logback declares logback/slf4j dependencies -->
     <dependency>
