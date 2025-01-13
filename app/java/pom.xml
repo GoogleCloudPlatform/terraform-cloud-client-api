@@ -91,12 +91,12 @@ the Spring "initialz": https://start.spring.io/
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
-        <version>1.5.13</version>
+        <version>1.5.16</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.5.12</version>
+      <version>1.5.16</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
@@ -108,7 +108,7 @@ the Spring "initialz": https://start.spring.io/
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-logging-logback</artifactId>
-      <version>0.131.4-alpha</version>
+      <version>0.132.0-alpha</version>
     </dependency>
 
     <!-- Google Cloud Storage -->
