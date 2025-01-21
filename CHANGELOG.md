@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.0.1](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v1.0.0...v1.0.1) (2025-01-21)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency ch.qos.logback:logback-classic to v1.5.12 ([#206](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/206)) ([e6bf2bf](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e6bf2bf2093cfc07e69dedd1894356c18c00f9c9))
+* **deps:** Update dependency ch.qos.logback:logback-core to v1.5.12 ([#207](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/207)) ([e2a63d4](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/e2a63d4d3d1476089841b38b218ba453add4985d))
+* **deps:** Update dependency ch.qos.logback:logback-core to v1.5.13 [SECURITY] ([#235](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/235)) ([979a772](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/979a772d069bccb4f2e6c9fdd15db7529a8e2d24))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.44.0 ([#203](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/203)) ([3e7b52c](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/3e7b52cda145697cd8d314e9202a00d77dacab38))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.44.1 ([#208](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/208)) ([d73b7cd](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/d73b7cd22e93b4f9da426371ed0d3cd473a8d631))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.45.0 ([#216](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/216)) ([cd3fc40](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/cd3fc403686b1cd7766c82382211e69d25b5bfad))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.46.0 ([#222](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/222)) ([91ad574](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/91ad574c92fa86678e55706561b030bf4c40752e))
+* **deps:** Update dependency com.google.cloud:google-cloud-storage to v2.47.0 ([#245](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/245)) ([9e27956](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/9e27956dc9473e24039f91e70a2b30520eb72016))
+* **deps:** Update dependency Flask to v3.1.0 ([#212](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/212)) ([c45943d](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/c45943d9eff6382cfce20cadfee837ede968bf54))
+* **deps:** Update dependency google-cloud-logging to v3.11.3 ([#202](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/202)) ([6b4de02](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/6b4de02387a317dd555c16af231da28b411d6dac))
+* **deps:** Update dependency google-cloud-storage to v2.19.0 ([#218](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/218)) ([eb85257](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/eb85257036e8f4cfae5424618d1cf0ee78b64792))
+* **deps:** Update dependency mocha to v11 ([63f62a5](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/63f62a5c40ba0f42bd4b7bbe3d4c09274dcc2310))
+* **deps:** Update dependency org.apache.commons:commons-csv to v1.13.0 ([#242](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/242)) ([dcecc39](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/dcecc39d4b517ec702287b80d1ca0d00214b7d70))
+* **deps:** Update dependency org.assertj:assertj-core to v3.27.0 ([#229](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/229)) ([c067551](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/c067551b32ec427aa03e14752ff3a0f65226fa14))
+* **deps:** Update dependency org.assertj:assertj-core to v3.27.1 ([#230](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/230)) ([5d2ce36](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/5d2ce36ee6f2fe6220cf6402bbf3c0df81672ec4))
+* **deps:** Update dependency org.assertj:assertj-core to v3.27.2 ([#233](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/233)) ([74dcaff](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/74dcaff38bfd553f688859d01d7ade7fb0ff9d0c))
+* **deps:** Update dependency org.springframework.boot:spring-boot-starter-parent to v3.3.5 ([#205](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/205)) ([26654ed](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/26654ed70b8297a37d4a063a44afe5b46c908dc6))
+* **deps:** Update dependency org.springframework.boot:spring-boot-starter-parent to v3.4.1 ([#234](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/issues/234)) ([2728e74](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/commit/2728e742f07889fb9cd52a7470a253d59d30d952))
+
 ## [1.0.0](https://github.com/GoogleCloudPlatform/terraform-cloud-client-api/compare/v0.6.5...v1.0.0) (2024-10-16)
 
 
