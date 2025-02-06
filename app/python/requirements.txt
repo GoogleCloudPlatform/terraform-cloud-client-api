@@ -1,4 +1,4 @@
 Flask==3.1.0
 gunicorn==23.0.0
 google-cloud-storage==2.19.0
-google-cloud-logging==3.11.3
+google-cloud-logging==3.11.4
