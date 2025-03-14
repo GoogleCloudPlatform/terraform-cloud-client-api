@@ -41,7 +41,7 @@ the Spring "initialz": https://start.spring.io/
   <description>Terraform Cloud Client API</description>
 
   <properties>
-    <java.version>22</java.version>
+    <java.version>21</java.version>
   </properties>
 
   <dependencies>
