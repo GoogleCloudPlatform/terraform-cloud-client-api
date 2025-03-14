@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11" # matches /app/python/.python-version
+          python-version: "3.12" # matches /app/python/.python-version
       - run: make install
       - run: make test
       - run: make lint
@@ -59,7 +59,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20" # matches /app/nodejs/package.json:engines.node
+          node-version: "22" # matches /app/nodejs/package.json:engines.node
       - run: make install
       - run: make test
       - run: make lint
@@ -76,7 +76,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: "17" # matches /app/java/pom.xml:properties/java.version
+          java-version: "21" # matches /app/java/pom.xml:properties/java.version
       - run: make build # Not needed but leads to well-sectioned (easy to browse) logs.
       - run: make lint
       - run: make test
