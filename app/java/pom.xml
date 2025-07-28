@@ -30,7 +30,7 @@ the Spring "initialz": https://start.spring.io/
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.4.6</version>
+    <version>3.5.4</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
@@ -81,7 +81,7 @@ the Spring "initialz": https://start.spring.io/
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.11.4</version>
+      <version>5.13.4</version>
       <scope>test</scope>
     </dependency>
 
@@ -91,7 +91,7 @@ the Spring "initialz": https://start.spring.io/
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-logging-logback</artifactId>
-      <version>0.132.0-alpha</version>
+      <version>0.132.11-alpha</version>
     </dependency>
 
     <!-- Google Cloud Storage -->
