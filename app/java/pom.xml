@@ -98,7 +98,7 @@ the Spring "initialz": https://start.spring.io/
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-storage</artifactId>
-      <version>2.55.0</version>
+      <version>2.56.0</version>
     </dependency>
 
     <!-- Gson is used to convert objects to/from JSON strings. -->
