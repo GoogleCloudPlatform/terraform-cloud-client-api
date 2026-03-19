@@ -18,7 +18,7 @@
     "license": "Apache-2.0",
     "dependencies": {
         "@google-cloud/logging-winston": "^6.0.0",
-        "@google-cloud/storage": "^7.9.0",
+        "@google-cloud/storage": "^7.19.0",
         "csv-parser": "^3.0.0",
         "express": "^5.0.0",
         "express-handlebars": "^8.0.0",
