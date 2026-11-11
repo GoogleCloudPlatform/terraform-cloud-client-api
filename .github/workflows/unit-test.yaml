@@ -28,8 +28,8 @@ jobs:
     name: "Template Validation"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.11" # matches /app/python/.python-version
       - run: make validate_generate
@@ -41,8 +41,8 @@ jobs:
       run:
         working-directory: app/python
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12" # matches /app/python/.python-version
       - run: make install
@@ -56,10 +56,10 @@ jobs:
       run:
         working-directory: app/nodejs
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: "22" # matches /app/nodejs/package.json:engines.node
+          node-version: "26" # matches /app/nodejs/package.json:engines.node
       - run: make install
       - run: make test
       - run: make lint
@@ -71,9 +71,9 @@ jobs:
       run:
         working-directory: app/java
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: setup java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           distribution: "temurin"
           java-version: "21" # matches /app/java/pom.xml:properties/java.version
