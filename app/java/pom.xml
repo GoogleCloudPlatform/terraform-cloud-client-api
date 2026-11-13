@@ -30,7 +30,7 @@ the Spring "initialz": https://start.spring.io/
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.4.6</version>
+    <version>3.5.16</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
@@ -81,7 +81,7 @@ the Spring "initialz": https://start.spring.io/
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.11.4</version>
+      <version>5.14.4</version>
       <scope>test</scope>
     </dependency>
 
@@ -98,14 +98,14 @@ the Spring "initialz": https://start.spring.io/
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-storage</artifactId>
-      <version>2.56.0</version>
+      <version>2.78.0</version>
     </dependency>
 
     <!-- Gson is used to convert objects to/from JSON strings. -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>2.13.1</version>
+      <version>2.15.0</version>
     </dependency>
 
     <!-- Apache Commons CSV is used for parsing CSV. -->
@@ -130,7 +130,7 @@ the Spring "initialz": https://start.spring.io/
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.4.2</version>
+        <version>3.5.1</version>
         <executions>
           <execution>
             <id>ProcessingJob</id>
@@ -175,7 +175,7 @@ the Spring "initialz": https://start.spring.io/
       <plugin>
         <groupId>com.spotify.fmt</groupId>
         <artifactId>fmt-maven-plugin</artifactId>
-        <version>2.27</version>
+        <version>2.29</version>
         <configuration>
           <style>google</style>
           <verbose>true</verbose>
